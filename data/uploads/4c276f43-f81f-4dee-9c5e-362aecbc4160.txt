@@ -1,0 +1,122 @@
+REQUEST FOR INFORMATION
+
+================================================================
+MERIDIAN CONSTRUCTION GROUP, LLC
+Project: Bayshore Tower Condominium
+Project No.: MCG-2021-044
+================================================================
+
+RFI No.:             047
+Date Issued:         June 3, 2022
+Response Required:   June 17, 2022
+Priority:            Normal
+Originator:          Raymond Castillo, Superintendent
+To:                  Harlan Architecture + Design
+Attn:                Margaret Harlan, AIA, Principal
+CC:                  Thomas Brennan (Meridian PM)
+                     Bayshore Tower Condominium Association
+                     Coastal Waterproofing Systems (for reference)
+
+Subject:             Waterproofing Detail Conflict - Balcony to
+                     Wall Transition, Floors 11-18
+
+Reference Documents: Architectural Detail A-501, Sheet A8.02
+                     Manufacturer Product Data: Tremco TREMproof
+                     250GC Installation Guidelines, Rev 4
+                     Specification Section 07 14 16
+
+================================================================
+QUESTION:
+================================================================
+
+There is a conflict between the architectural detail shown on
+Sheet A8.02 (Detail A-501) and the waterproofing manufacturer's
+published installation requirements for the balcony-to-wall
+transition at the typical unit balconies on floors 11 through 18.
+
+Specifically:
+
+1. Detail A-501 shows the waterproofing membrane terminating at
+   the face of the CMU backup wall with a 4-inch upturn and
+   sealed with a termination bar.
+
+2. The manufacturer's published installation guide requires
+   the membrane to be installed over a minimum 6-inch upturn
+   onto the wall substrate, with the substrate prepared and
+   primed per the manufacturer's specifications, and the
+   termination to be covered by the subsequent exterior finish
+   system with no exposed termination bar.
+
+3. Additionally, the manufacturer requires concrete substrates
+   to achieve a minimum 28-day cure OR verified 75% of design
+   compressive strength, whichever occurs first, prior to
+   membrane application. The architectural specifications do
+   not address substrate cure requirements.
+
+Please provide direction on:
+
+(a) Which detail should govern the installation - the
+    architectural detail or the manufacturer's requirement?
+
+(b) Confirmation of the required substrate cure time prior to
+    membrane application.
+
+(c) If the manufacturer's detail governs, please issue a
+    revised detail so we can update our installation sequence
+    and coordinate with Coastal Waterproofing Systems.
+
+We are currently proceeding with balcony slab pours on the
+lower floors of this sequence and will need a response before
+waterproofing work begins on floors 11-14, currently scheduled
+to start the week of August 8, 2022.
+
+Signed: Raymond Castillo
+        Superintendent, Meridian Construction Group
+
+================================================================
+ARCHITECT'S RESPONSE:
+================================================================
+
+Response Date:  June 13, 2022
+Respondent:     Margaret Harlan, AIA, Harlan Architecture + Design
+
+Response:
+
+The manufacturer's installation requirements shall govern where
+they conflict with or exceed the architectural details. This is
+consistent with Specification Section 07 14 16, Paragraph 1.4,
+which states that manufacturer's written installation
+instructions are part of the contract documents and shall be
+followed.
+
+Specifically:
+
+(a) The manufacturer's detail (6-inch minimum upturn with
+    concealed termination) shall govern. Detail A-501 is
+    superseded as to the termination method. A revised detail
+    will be issued as part of the next drawing package; in the
+    interim, the contractor shall proceed in accordance with
+    the manufacturer's published installation guide.
+
+(b) Concrete substrate cure requirement is confirmed: minimum
+    28-day cure OR verified 75% of design compressive strength,
+    whichever occurs first, shall be achieved prior to membrane
+    application. Verification by cylinder break results shall
+    be documented and retained in the project quality records.
+
+(c) Revised detail will be issued under separate cover. Do not
+    delay balcony waterproofing work pending the revised detail;
+    proceed per manufacturer's guidelines.
+
+Contractor is directed to coordinate with Coastal Waterproofing
+Systems to confirm their installation procedures are consistent
+with the manufacturer's requirements before commencing work on
+floors 11 and above.
+
+Signed: Margaret Harlan, AIA, Principal
+        Harlan Architecture + Design
+
+================================================================
+RFI CLOSED
+Distribution: Meridian PM, Owner, Coastal Waterproofing, Project File
+================================================================

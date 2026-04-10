@@ -1,0 +1,161 @@
+                    MONTHLY SCHEDULE UPDATE NARRATIVE
+                    Schedule Update No. 11
+
+PROJECT:        Palmetto Ridge Medical Office Building
+PROJECT NO.:    PRM-2022-017
+DATA DATE:      February 29, 2024
+PREPARED BY:    Jorge Medina, PM, Keystone Building Group
+REVIEWED BY:    Sarah Kim, Project Executive, Keystone Building Group
+DISTRIBUTION:   Owner, Architect, Project File
+
+
+================================================================
+EXECUTIVE SUMMARY
+================================================================
+
+The project is currently 94 calendar days behind the baseline
+schedule as of the February 29, 2024 data date. The projected
+substantial completion date has moved from August 15, 2024
+(baseline) to November 17, 2024 (current forecast).
+
+The primary drivers of schedule slippage are: (1) delayed
+responses to critical-path RFIs by the design team, (2) owner-
+directed design changes to the Level 3 mechanical layout, and
+(3) late delivery of owner-furnished medical imaging equipment
+that impacts interior finishes sequencing.
+
+Keystone Building Group reserves all rights under the Contract,
+including rights to additional time and compensation for
+owner-caused delays, subject to compliance with the notice
+provisions of Contract Section 8.2.
+
+
+================================================================
+SCHEDULE STATUS - KEY MILESTONES
+================================================================
+
+                              BASELINE         CURRENT FORECAST   SLIP
+                              ------------     ----------------   ----
+Notice to Proceed             May 1, 2023      May 1, 2023        0
+Foundations Complete          Jul 28, 2023     Aug 14, 2023       17 days
+Structural Complete Level 5   Oct 6, 2023      Nov 3, 2023        28 days
+Structural Complete           Jan 12, 2024     Feb 28, 2024       47 days
+Building Dry-In               Mar 22, 2024     May 17, 2024       56 days
+Interior Rough-In Complete    May 24, 2024     Aug 2, 2024        70 days
+Mechanical Systems Start-Up   Jun 28, 2024     Sep 13, 2024       77 days
+Substantial Completion        Aug 15, 2024     Nov 17, 2024       94 days
+
+Critical path currently runs through: Interior finishes on
+Levels 2-4, tied to Mechanical Systems commissioning.
+
+
+================================================================
+PRIMARY DELAY DRIVERS THIS PERIOD
+================================================================
+
+1. RFI RESPONSE DELAYS
+
+During the January-February 2024 period, the project received
+responses to 6 critical-path RFIs. Average response time was
+23 calendar days, against the contractual 7-day requirement
+(see Contract Section 8.2).
+
+The most significant individual impact was RFI-089 (Level 3
+Mechanical Room structural conflict), which received a response
+28 days after the required date. Steel erection on Level 3 was
+suspended from October 20, 2023 through November 16, 2023
+pending direction. Follow-on trades were delayed through
+December.
+
+Cumulative impact from RFI delays during this update period:
+approximately 34 calendar days of critical path delay.
+
+2. OWNER-DIRECTED DESIGN CHANGES
+
+The owner issued three significant design change directives
+during this period:
+
+  - December 4, 2023: Conversion of Level 2 shell space to
+    imaging suite (added scope, required MEP redesign)
+  - January 8, 2024: Revised elevator specifications from
+    hydraulic to traction (impacted shaft construction)
+  - January 22, 2024: Relocation of primary electrical service
+    entrance (impacted site utilities sequencing)
+
+Cumulative impact from owner-directed changes during this
+period: approximately 42 calendar days of critical path delay.
+
+Change Order proposals for these changes are in various stages
+of negotiation. COP-017, COP-019, and COP-021 remain unresolved
+as of this data date.
+
+3. OWNER-FURNISHED EQUIPMENT DELAYS
+
+The Owner has not yet finalized procurement of the following
+owner-furnished equipment that must be in place prior to
+adjacent finish work:
+
+  - MRI machine (Level 1 imaging suite)
+  - CT scanner (Level 1 imaging suite)
+  - Two ultrasound units (Level 2 imaging suite)
+
+Current vendor estimates indicate delivery in June-July 2024,
+approximately 8-10 weeks later than the baseline assumed.
+
+Cumulative impact: approximately 18 calendar days (estimated,
+pending confirmation of delivery dates).
+
+
+================================================================
+RECOVERY EFFORTS
+================================================================
+
+Keystone has implemented the following acceleration measures at
+its own cost to mitigate schedule slippage:
+
+  - Extended crew shifts (6x10 schedule) for steel and concrete
+    trades beginning November 13, 2023
+  - Additional concrete pump mobilized to allow two simultaneous
+    pour locations
+  - Added second tower crane operator to extend hoisting hours
+  - Subcontractor overtime authorized for MEP rough-in trades
+
+Despite these efforts, the recovered time (approximately 22
+days) is insufficient to offset the cumulative delay impacts
+identified above.
+
+
+================================================================
+RESERVATION OF RIGHTS
+================================================================
+
+This schedule update documents schedule impacts attributable to
+causes beyond Keystone's control. Keystone specifically reserves
+all rights under the Contract, including:
+
+  - Right to additional Contract Time pursuant to Article 9
+  - Right to additional compensation for owner-caused delays,
+    including active interference and bad faith failures, to
+    the extent the no-damages-for-delay provision of Section
+    9.2 does not apply
+  - Right to recover acceleration costs incurred in recovery
+    efforts
+  - Right to challenge the assessment of liquidated damages
+    for delays not caused by Keystone
+
+A formal Notice of Claim covering these matters will be
+submitted under separate cover in accordance with Contract
+Section 8.2.
+
+
+================================================================
+NEXT UPDATE
+================================================================
+
+The next monthly schedule update will be submitted on or before
+April 5, 2024, with a data date of March 31, 2024.
+
+
+Prepared: March 6, 2024
+Jorge Medina, Project Manager
+Keystone Building Group, Inc.

@@ -1,0 +1,1010 @@
+[
+  {
+    "id": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
+    "name": "Maria Gonzalez V Thomas",
+    "clientName": "Maria",
+    "matterType": "personal_injury",
+    "firmId": "default",
+    "status": "on_hold",
+    "notes": "",
+    "createdAt": "2026-04-09T12:04:23.344Z",
+    "updatedAt": "2026-04-10T11:41:36.818Z"
+  },
+  {
+    "id": "66079567-0951-44e7-8bfb-df5ebeed978b",
+    "name": "Acme Construction V bayside school district",
+    "clientName": "Acme Construction",
+    "matterType": "construction",
+    "caseType": "construction_delay",
+    "firmId": "default",
+    "status": "closed",
+    "notes": "",
+    "createdAt": "2026-04-09T13:40:37.211Z",
+    "updatedAt": "2026-04-10T11:41:39.982Z"
+  },
+  {
+    "id": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "name": "Bayshore Tower V meridian Construction",
+    "clientName": "Bayshore",
+    "matterType": "construction",
+    "caseType": "construction_general",
+    "firmId": "default",
+    "status": "active",
+    "notes": "",
+    "createdAt": "2026-04-09T15:03:18.266Z",
+    "updatedAt": "2026-04-09T15:58:37.228Z",
+    "caseIntelligence": {
+      "caseOverview": "The matter concerns the Bayshore Tower Condominium project involving Meridian Construction Group, LLC, addressing a dispute over balcony slab waterproofing issues. The dispute centers on non-compliance with the manufacturer's waterproofing guidelines, acknowledged by a superintendent, and identified by Change Order No. 11, resulting in additional costs of $86,930 but no schedule impact. The project encountered premature application of waterproofing due to schedule pressures, with inconsistencies in documentation and defect reporting. The current posture appears to focus on resolving these specification and compliance concerns.",
+      "unifiedTimeline": [
+        {
+          "date": "2022-06-03",
+          "description": "RFI No. 047 issued regarding waterproofing detail conflict.",
+          "source": "RFI_047_Waterproofing_Detail.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2022-06-13",
+          "description": "Architect responded confirming manufacturer's requirements should govern regarding waterproofing.",
+          "source": "RFI_047_Waterproofing_Detail.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2022-07-22",
+          "description": "Concrete pour completed on floor 12.",
+          "source": "Daily_Log_2022-08-12.txt",
+          "significance": "contextual"
+        },
+        {
+          "date": "2022-08-08",
+          "description": "Scheduled start of waterproofing work on floors 11-14.",
+          "source": "RFI_047_Waterproofing_Detail.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2022-08-12",
+          "description": "Concrete pour completed on floor 13.",
+          "source": "Daily_Log_2022-08-12.txt",
+          "significance": "contextual"
+        },
+        {
+          "date": "2022-08-12",
+          "description": "Daily log report for August 12, 2022, documenting construction activity and premature waterproofing.",
+          "source": "Daily_Log_2022-08-12.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2022-09-28",
+          "description": "Installation issue identified by superintendent.",
+          "source": "Change_Order_011.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2022-10-04",
+          "description": "Change Order 11 issued for additional waterproofing work due to compliance issues.",
+          "source": "Change_Order_011.txt",
+          "significance": "critical"
+        }
+      ],
+      "factConsistency": [
+        {
+          "topic": "Date of Discovering Waterproofing Issue",
+          "documentA": {
+            "id": "Change_Order_011.txt",
+            "statement": "Installation issue identified by superintendent on September 28, 2022."
+          },
+          "documentB": {
+            "id": "Deposition_of_Raymond_Castillo.txt",
+            "statement": "Aware of membrane application problems by August 2022."
+          },
+          "severity": "high",
+          "explanation": "The deposition states awareness of issues in August 2022, contradicting the Change Order identifying the issue in late September 2022."
+        },
+        {
+          "topic": "Schedule Impact of Waterproofing Issue",
+          "documentA": {
+            "id": "Change_Order_011.txt",
+            "statement": "The Change Order extends the substantial completion date by zero days, indicating no impact on the critical path schedule."
+          },
+          "documentB": {
+            "id": "Daily_Log_2022-08-12.txt",
+            "statement": "The project is tracking approximately three weeks behind the baseline schedule."
+          },
+          "severity": "medium",
+          "explanation": "The Change Order suggests no schedule impact, whereas the daily log indicates the project was behind schedule."
+        }
+      ],
+      "checklist": [
+        {
+          "item": {
+            "id": "prime_contract",
+            "label": "Prime contract (owner-GC agreement)",
+            "description": "The primary agreement between owner and general contractor",
+            "keywords": [
+              "prime contract",
+              "owner-contractor agreement",
+              "owner-gc agreement",
+              "general contract",
+              "construction agreement",
+              "AIA A101",
+              "AIA A102",
+              "stipulated sum"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "subcontracts",
+            "label": "Subcontracts",
+            "description": "Subcontract agreements with key subcontractors",
+            "keywords": [
+              "subcontract",
+              "subcontractor agreement",
+              "sub-tier contract",
+              "subcontract agreement"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "dce6ae3d-54d7-4d7e-827e-00b57fde503c"
+          ]
+        },
+        {
+          "item": {
+            "id": "general_conditions",
+            "label": "General conditions and special conditions",
+            "description": "Contract general conditions and any supplementary or special conditions",
+            "keywords": [
+              "general conditions",
+              "special conditions",
+              "supplementary conditions",
+              "AIA A201",
+              "contract conditions",
+              "general requirements"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "specifications",
+            "label": "Technical specifications",
+            "description": "Project technical specifications by division or section",
+            "keywords": [
+              "specification",
+              "technical specification",
+              "spec section",
+              "division",
+              "project manual",
+              "CSI division"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "drawings",
+            "label": "Drawings / plans",
+            "description": "Construction drawings including architectural, structural, and MEP",
+            "keywords": [
+              "drawing",
+              "plans",
+              "blueprint",
+              "architectural",
+              "structural",
+              "sheet",
+              "floor plan",
+              "site plan",
+              "construction drawing"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "4c276f43-f81f-4dee-9c5e-362aecbc4160"
+          ]
+        },
+        {
+          "item": {
+            "id": "schedule_of_values",
+            "label": "Schedule of values",
+            "description": "Cost breakdown of work items used to support pay applications",
+            "keywords": [
+              "schedule of values",
+              "SOV",
+              "cost breakdown",
+              "line item budget",
+              "AIA G703"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "baseline_schedule",
+            "label": "Baseline schedule",
+            "description": "The approved as-planned project schedule",
+            "keywords": [
+              "baseline schedule",
+              "original schedule",
+              "as-planned schedule",
+              "project schedule",
+              "CPM schedule",
+              "Primavera",
+              "MS Project",
+              "master schedule"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "pay_applications",
+            "label": "Pay applications",
+            "description": "Contractor applications for payment submitted to the owner",
+            "keywords": [
+              "pay application",
+              "payment application",
+              "AIA G702",
+              "G703",
+              "application for payment",
+              "pay app",
+              "progress payment"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "change_order_log",
+            "label": "Change order log",
+            "description": "Log of all change orders, potential change orders, and change directives",
+            "keywords": [
+              "change order",
+              "CO log",
+              "change order log",
+              "PCO",
+              "potential change order",
+              "construction change directive",
+              "CCD",
+              "change order register"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32",
+            "dce6ae3d-54d7-4d7e-827e-00b57fde503c"
+          ]
+        },
+        {
+          "item": {
+            "id": "rfi_log",
+            "label": "RFI log",
+            "description": "Log of all requests for information submitted during the project",
+            "keywords": [
+              "RFI",
+              "request for information",
+              "RFI log",
+              "RFI register",
+              "RFI response"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+            "4c276f43-f81f-4dee-9c5e-362aecbc4160"
+          ]
+        },
+        {
+          "item": {
+            "id": "daily_logs",
+            "label": "Daily logs / superintendent reports",
+            "description": "Field superintendent daily reports documenting site conditions and progress",
+            "keywords": [
+              "daily log",
+              "daily report",
+              "superintendent report",
+              "field report",
+              "construction diary",
+              "daily field report",
+              "job log"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "dce6ae3d-54d7-4d7e-827e-00b57fde503c"
+          ]
+        },
+        {
+          "item": {
+            "id": "meeting_minutes",
+            "label": "Meeting minutes (OAC meetings)",
+            "description": "Minutes from owner-architect-contractor progress meetings",
+            "keywords": [
+              "meeting minutes",
+              "OAC meeting",
+              "owner architect contractor",
+              "project meeting",
+              "progress meeting",
+              "job meeting",
+              "site meeting"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "notice_letters",
+            "label": "Notice letters / claim letters",
+            "description": "Formal notice letters, claim notices, and reservation of rights letters",
+            "keywords": [
+              "notice",
+              "claim letter",
+              "notice of claim",
+              "reservation of rights",
+              "formal notice",
+              "letter of intent",
+              "default notice",
+              "notice to cure"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "correspondence",
+            "label": "Correspondence (email archive)",
+            "description": "Project correspondence including emails and letters",
+            "keywords": [
+              "correspondence",
+              "email",
+              "letter",
+              "communication",
+              "project email"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "photos",
+            "label": "Photographs / progress photos",
+            "description": "Site photographs documenting progress and conditions",
+            "keywords": [
+              "photo",
+              "photograph",
+              "progress photo",
+              "site photo",
+              "image",
+              "picture",
+              "documentation photo"
+            ],
+            "required": false
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "dce6ae3d-54d7-4d7e-827e-00b57fde503c"
+          ]
+        },
+        {
+          "item": {
+            "id": "inspection_reports",
+            "label": "Inspection reports",
+            "description": "Third-party or owner inspection reports",
+            "keywords": [
+              "inspection",
+              "inspection report",
+              "special inspection",
+              "third-party inspection",
+              "commissioning",
+              "testing report"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "punch_list",
+            "label": "Punch list",
+            "description": "List of incomplete or non-conforming work items at project completion",
+            "keywords": [
+              "punch list",
+              "deficiency list",
+              "punchlist",
+              "incomplete work",
+              "final inspection list",
+              "correction list"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "cert_substantial_completion",
+            "label": "Certificate of substantial completion",
+            "description": "Official certificate establishing the date of substantial completion",
+            "keywords": [
+              "certificate of substantial completion",
+              "substantial completion",
+              "AIA G704",
+              "substantial completion date",
+              "beneficial occupancy"
+            ],
+            "required": false
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32"
+          ]
+        },
+        {
+          "item": {
+            "id": "cert_occupancy",
+            "label": "Certificate of occupancy",
+            "description": "Certificate of occupancy issued by the authority having jurisdiction",
+            "keywords": [
+              "certificate of occupancy",
+              "temporary certificate",
+              "occupancy permit",
+              "TCO",
+              "final inspection approval"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        }
+      ],
+      "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+      "builtAt": "2026-04-09T15:58:37.228Z"
+    }
+  },
+  {
+    "id": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "name": "Palmetto Ridge v. Keystone",
+    "clientName": "Delay Claim demo",
+    "matterType": "construction",
+    "caseType": "construction_general",
+    "firmId": "default",
+    "status": "active",
+    "notes": "",
+    "createdAt": "2026-04-10T03:04:05.585Z",
+    "updatedAt": "2026-04-10T03:08:11.009Z",
+    "caseIntelligence": {
+      "caseOverview": "The dispute involves the construction of the Palmetto Ridge Medical Office Building between Palmetto Ridge Development, LLC (Owner) and Keystone Building Group, Inc. (Contractor). The conflict centers around delays allegedly caused by late RFI responses, owner-directed design changes, and delayed owner-furnished equipment deliveries. Keystone is claiming an extension of 94 days and additional compensation of $1,847,000, which the Owner disputes, citing contractual notice periods and clauses precluding damages for delays. The current posture includes an Owner's formal letter denying the Contractor's claim.",
+      "unifiedTimeline": [
+        {
+          "date": "2023-04-12",
+          "description": "Contract executed by Owner and Contractor.",
+          "source": "01_Prime_Contract_Extract.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2023-05-01",
+          "description": "Notice to proceed issued, commencement of work.",
+          "source": "01_Prime_Contract_Extract.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2023-07-2023",
+          "description": "Start of events referenced in the claim as per August 2023 RFI response delays.",
+          "source": "05_Owner_Denial_Letter.txt",
+          "significance": "contextual"
+        },
+        {
+          "date": "2023-10-17",
+          "description": "RFI-089 issued regarding structural conflict on Level 3.",
+          "source": "02_RFI_089_and_Log.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2023-10-24",
+          "description": "Response to RFI-089 required by this date.",
+          "source": "02_RFI_089_and_Log.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2023-11-14",
+          "description": "Architect's response to RFI-089 received.",
+          "source": "02_RFI_089_and_Log.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2023-11-16",
+          "description": "RFI-089 closed.",
+          "source": "02_RFI_089_and_Log.txt",
+          "significance": "contextual"
+        },
+        {
+          "date": "2023-12-04",
+          "description": "Level 2 shell space conversion to imaging suite directive issued.",
+          "source": "03_Schedule_Update_11_Narrative.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2024-01-08",
+          "description": "Revised elevator specifications issued impacting construction.",
+          "source": "03_Schedule_Update_11_Narrative.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2024-01-22",
+          "description": "Relocation of primary electrical service entrance directive issued.",
+          "source": "03_Schedule_Update_11_Narrative.txt",
+          "significance": "important"
+        },
+        {
+          "date": "2024-02-29",
+          "description": "Project is 94 days behind schedule.",
+          "source": "03_Schedule_Update_11_Narrative.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2024-03-22",
+          "description": "Notice of Claim letter dated.",
+          "source": "04_Notice_of_Claim_Letter.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2024-04-15",
+          "description": "Owner's Denial Letter issued.",
+          "source": "05_Owner_Denial_Letter.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2024-08-15",
+          "description": "Original Substantial Completion date per Contract.",
+          "source": "04_Notice_of_Claim_Letter.txt",
+          "significance": "critical"
+        },
+        {
+          "date": "2024-11-17",
+          "description": "Forecast Substantial Completion date as reported.",
+          "source": "04_Notice_of_Claim_Letter.txt",
+          "significance": "critical"
+        }
+      ],
+      "factConsistency": [
+        {
+          "topic": "Notice of Claim Timeliness",
+          "documentA": {
+            "id": "04_Notice_of_Claim_Letter.txt",
+            "statement": "Notice of Claim letter dated March 22, 2024."
+          },
+          "documentB": {
+            "id": "05_Owner_Denial_Letter.txt",
+            "statement": "The claim was submitted past the contractual 14-day notice period."
+          },
+          "severity": "high",
+          "explanation": "The Owner denies the claim as untimely, yet the Notice of Claim was sent following the event reporting date in Schedule Update No. 11."
+        },
+        {
+          "topic": "RFI Response Delay Impact",
+          "documentA": {
+            "id": "03_Schedule_Update_11_Narrative.txt",
+            "statement": "RFI-089 response delay affected the critical path, contributing to a 94-day delay."
+          },
+          "documentB": {
+            "id": "05_Owner_Denial_Letter.txt",
+            "statement": "Owner denies claims for RFI delay impact, attributing delays to Keystone's errors."
+          },
+          "severity": "medium",
+          "explanation": "Two documents attribute different causes to the project delays related to RFI responses."
+        },
+        {
+          "topic": "Substantial Completion Forecast",
+          "documentA": {
+            "id": "03_Schedule_Update_11_Narrative.txt",
+            "statement": "Forecast Substantial Completion moved to November 17, 2024."
+          },
+          "documentB": {
+            "id": "04_Notice_of_Claim_Letter.txt",
+            "statement": "Forecast Substantial Completion date: November 17, 2024."
+          },
+          "severity": "low",
+          "explanation": "Both documents agree on the substantial completion forecast date but check consistency across all context for reference."
+        }
+      ],
+      "checklist": [
+        {
+          "item": {
+            "id": "prime_contract",
+            "label": "Prime contract (owner-GC agreement)",
+            "description": "The primary agreement between owner and general contractor",
+            "keywords": [
+              "prime contract",
+              "owner-contractor agreement",
+              "owner-gc agreement",
+              "general contract",
+              "construction agreement",
+              "AIA A101",
+              "AIA A102",
+              "stipulated sum"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "subcontracts",
+            "label": "Subcontracts",
+            "description": "Subcontract agreements with key subcontractors",
+            "keywords": [
+              "subcontract",
+              "subcontractor agreement",
+              "sub-tier contract",
+              "subcontract agreement"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "general_conditions",
+            "label": "General conditions and special conditions",
+            "description": "Contract general conditions and any supplementary or special conditions",
+            "keywords": [
+              "general conditions",
+              "special conditions",
+              "supplementary conditions",
+              "AIA A201",
+              "contract conditions",
+              "general requirements"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "specifications",
+            "label": "Technical specifications",
+            "description": "Project technical specifications by division or section",
+            "keywords": [
+              "specification",
+              "technical specification",
+              "spec section",
+              "division",
+              "project manual",
+              "CSI division"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "drawings",
+            "label": "Drawings / plans",
+            "description": "Construction drawings including architectural, structural, and MEP",
+            "keywords": [
+              "drawing",
+              "plans",
+              "blueprint",
+              "architectural",
+              "structural",
+              "sheet",
+              "floor plan",
+              "site plan",
+              "construction drawing"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "657488e8-8187-4ff0-9b99-3aff646e2d0d"
+          ]
+        },
+        {
+          "item": {
+            "id": "schedule_of_values",
+            "label": "Schedule of values",
+            "description": "Cost breakdown of work items used to support pay applications",
+            "keywords": [
+              "schedule of values",
+              "SOV",
+              "cost breakdown",
+              "line item budget",
+              "AIA G703"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "baseline_schedule",
+            "label": "Baseline schedule",
+            "description": "The approved as-planned project schedule",
+            "keywords": [
+              "baseline schedule",
+              "original schedule",
+              "as-planned schedule",
+              "project schedule",
+              "CPM schedule",
+              "Primavera",
+              "MS Project",
+              "master schedule"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "pay_applications",
+            "label": "Pay applications",
+            "description": "Contractor applications for payment submitted to the owner",
+            "keywords": [
+              "pay application",
+              "payment application",
+              "AIA G702",
+              "G703",
+              "application for payment",
+              "pay app",
+              "progress payment"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "change_order_log",
+            "label": "Change order log",
+            "description": "Log of all change orders, potential change orders, and change directives",
+            "keywords": [
+              "change order",
+              "CO log",
+              "change order log",
+              "PCO",
+              "potential change order",
+              "construction change directive",
+              "CCD",
+              "change order register"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1"
+          ]
+        },
+        {
+          "item": {
+            "id": "rfi_log",
+            "label": "RFI log",
+            "description": "Log of all requests for information submitted during the project",
+            "keywords": [
+              "RFI",
+              "request for information",
+              "RFI log",
+              "RFI register",
+              "RFI response"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "657488e8-8187-4ff0-9b99-3aff646e2d0d",
+            "39e80f45-f3f1-4eec-936a-c786f85c6367"
+          ]
+        },
+        {
+          "item": {
+            "id": "daily_logs",
+            "label": "Daily logs / superintendent reports",
+            "description": "Field superintendent daily reports documenting site conditions and progress",
+            "keywords": [
+              "daily log",
+              "daily report",
+              "superintendent report",
+              "field report",
+              "construction diary",
+              "daily field report",
+              "job log"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "meeting_minutes",
+            "label": "Meeting minutes (OAC meetings)",
+            "description": "Minutes from owner-architect-contractor progress meetings",
+            "keywords": [
+              "meeting minutes",
+              "OAC meeting",
+              "owner architect contractor",
+              "project meeting",
+              "progress meeting",
+              "job meeting",
+              "site meeting"
+            ],
+            "required": true
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "notice_letters",
+            "label": "Notice letters / claim letters",
+            "description": "Formal notice letters, claim notices, and reservation of rights letters",
+            "keywords": [
+              "notice",
+              "claim letter",
+              "notice of claim",
+              "reservation of rights",
+              "formal notice",
+              "letter of intent",
+              "default notice",
+              "notice to cure"
+            ],
+            "required": true
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1",
+            "39e80f45-f3f1-4eec-936a-c786f85c6367",
+            "c4eeef61-448d-4952-8526-51fe245b9943",
+            "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e"
+          ]
+        },
+        {
+          "item": {
+            "id": "correspondence",
+            "label": "Correspondence (email archive)",
+            "description": "Project correspondence including emails and letters",
+            "keywords": [
+              "correspondence",
+              "email",
+              "letter",
+              "communication",
+              "project email"
+            ],
+            "required": false
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "c4eeef61-448d-4952-8526-51fe245b9943",
+            "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e"
+          ]
+        },
+        {
+          "item": {
+            "id": "photos",
+            "label": "Photographs / progress photos",
+            "description": "Site photographs documenting progress and conditions",
+            "keywords": [
+              "photo",
+              "photograph",
+              "progress photo",
+              "site photo",
+              "image",
+              "picture",
+              "documentation photo"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "inspection_reports",
+            "label": "Inspection reports",
+            "description": "Third-party or owner inspection reports",
+            "keywords": [
+              "inspection",
+              "inspection report",
+              "special inspection",
+              "third-party inspection",
+              "commissioning",
+              "testing report"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "punch_list",
+            "label": "Punch list",
+            "description": "List of incomplete or non-conforming work items at project completion",
+            "keywords": [
+              "punch list",
+              "deficiency list",
+              "punchlist",
+              "incomplete work",
+              "final inspection list",
+              "correction list"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        },
+        {
+          "item": {
+            "id": "cert_substantial_completion",
+            "label": "Certificate of substantial completion",
+            "description": "Official certificate establishing the date of substantial completion",
+            "keywords": [
+              "certificate of substantial completion",
+              "substantial completion",
+              "AIA G704",
+              "substantial completion date",
+              "beneficial occupancy"
+            ],
+            "required": false
+          },
+          "status": "present",
+          "matchedDocuments": [
+            "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1",
+            "39e80f45-f3f1-4eec-936a-c786f85c6367",
+            "c4eeef61-448d-4952-8526-51fe245b9943",
+            "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e"
+          ]
+        },
+        {
+          "item": {
+            "id": "cert_occupancy",
+            "label": "Certificate of occupancy",
+            "description": "Certificate of occupancy issued by the authority having jurisdiction",
+            "keywords": [
+              "certificate of occupancy",
+              "temporary certificate",
+              "occupancy permit",
+              "TCO",
+              "final inspection approval"
+            ],
+            "required": false
+          },
+          "status": "missing",
+          "matchedDocuments": []
+        }
+      ],
+      "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+      "builtAt": "2026-04-10T03:08:11.008Z"
+    }
+  }
+]

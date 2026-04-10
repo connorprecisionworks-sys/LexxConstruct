@@ -1,0 +1,131 @@
+CHANGE ORDER
+
+================================================================
+PROJECT:         Bayshore Tower Condominium
+OWNER:           Bayshore Tower Condominium Association, Inc.
+CONTRACTOR:      Meridian Construction Group, LLC
+CONTRACT DATE:   January 14, 2021
+CONTRACT NO.:    BT-GMP-2021-001
+================================================================
+
+CHANGE ORDER NUMBER:  11
+DATE ISSUED:          October 4, 2022
+EFFECTIVE DATE:       October 4, 2022
+
+================================================================
+DESCRIPTION OF CHANGE:
+================================================================
+
+Additional waterproofing scope and associated remediation work
+at the balcony assemblies on floors 11 through 14, north and
+south elevations. Work includes:
+
+1. Removal of previously installed waterproofing membrane on
+   affected balcony areas where substrate cure requirements
+   were not verified at time of original installation.
+
+2. Surface preparation and re-priming of concrete substrate
+   in accordance with manufacturer's requirements, including
+   moisture vapor emission testing prior to re-application.
+
+3. Re-application of Tremco TREMproof 250GC waterproofing
+   membrane per manufacturer's published installation
+   requirements and the architect's response to RFI No. 47
+   dated June 13, 2022.
+
+4. Field quality assurance testing (electronic leak detection)
+   of re-installed membrane prior to topping slab placement.
+
+5. Coordination with Coastal Waterproofing Systems, Inc. for
+   re-installation work. Coastal shall perform the removal
+   and re-installation under its original subcontract scope
+   at no additional cost to Meridian; the costs reflected in
+   this Change Order represent additional work beyond the
+   Coastal subcontract, including substrate remediation,
+   testing, and extended general conditions.
+
+================================================================
+REASON FOR CHANGE:
+================================================================
+
+During the course of the balcony waterproofing sequence on
+floors 11 through 14 in July and August 2022, it was determined
+that certain areas of the membrane installation did not fully
+conform to the manufacturer's published installation
+requirements as clarified in the architect's RFI No. 47
+response. Specifically, portions of the installation proceeded
+prior to verification of substrate cure criteria.
+
+To ensure long-term performance of the balcony waterproofing
+system and to protect the Owner's interest in a durable
+installation, Meridian recommends removal and re-installation
+of the affected areas. This Change Order provides for the
+additional scope and associated costs.
+
+Note: The original installation issue was identified by
+Meridian's superintendent on September 28, 2022, during a
+routine quality walkthrough of the balcony assemblies.
+Corrective action was initiated immediately upon discovery.
+
+================================================================
+COST BREAKDOWN:
+================================================================
+
+Substrate preparation and moisture testing:      $ 18,400.00
+Electronic leak detection testing:                $  9,200.00
+Extended general conditions (14 days):            $ 31,500.00
+Project management and supervision:               $ 12,800.00
+Contingency (10%):                                $  7,190.00
+Bond and insurance:                               $  2,160.00
+Overhead and profit (7%):                         $  5,680.00
+                                                  -----------
+TOTAL CHANGE ORDER AMOUNT:                        $ 86,930.00
+
+================================================================
+TIME IMPACT:
+================================================================
+
+This Change Order extends the contract substantial completion
+date by zero (0) calendar days. Remediation work will be
+performed concurrently with other ongoing work and is not
+anticipated to impact the critical path.
+
+================================================================
+CONTRACT SUMMARY:
+================================================================
+
+Original Contract Sum:                      $ 48,750,000.00
+Net change by previous Change Orders:       $  1,247,000.00
+Contract Sum prior to this Change Order:    $ 49,997,000.00
+This Change Order:                          $     86,930.00
+New Contract Sum:                           $ 50,083,930.00
+
+Original Substantial Completion Date:        October 15, 2023
+Current Substantial Completion Date:         October 15, 2023
+
+================================================================
+APPROVALS:
+================================================================
+
+Requested by:
+
+___________________________________    Date: ________________
+Thomas Brennan, Project Manager
+Meridian Construction Group, LLC
+
+Recommended by:
+
+___________________________________    Date: ________________
+Margaret Harlan, AIA
+Harlan Architecture + Design
+
+Approved by:
+
+___________________________________    Date: ________________
+Bayshore Tower Condominium Association, Inc.
+By: _______________________________
+Title: ____________________________
+
+================================================================
+Distribution: Owner, Architect, Contractor, Project File
+================================================================

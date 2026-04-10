@@ -1,0 +1,1853 @@
+[
+  {
+    "id": "4cc3ea03-98b5-4412-bd17-09aace065412",
+    "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
+    "summary": "Maria Gonzalez's legal counsel demands $250,000 settlement from State Farm Insurance for a traffic accident involving their insured, Thomas Whitfield. The accident resulted in significant injuries, medical expenses, and lost wages for Ms. Gonzalez, who was struck when Mr. Whitfield ran a red light.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Failure to yield",
+        "description": "Thomas Whitfield failed to yield at a red traffic signal, causing a collision with Maria Gonzalez's vehicle.",
+        "severity": "high",
+        "pageRef": "1"
+      },
+      {
+        "id": "issue_2",
+        "title": "Medical expenses",
+        "description": "Maria Gonzalez incurred significant medical expenses totaling $76,380 as a result of the accident.",
+        "severity": "high",
+        "pageRef": "1"
+      },
+      {
+        "id": "issue_3",
+        "title": "Lost wages",
+        "description": "Maria Gonzalez lost wages totaling $13,398 due to inability to work following the accident.",
+        "severity": "medium",
+        "pageRef": "1"
+      },
+      {
+        "id": "issue_4",
+        "title": "Pain and suffering",
+        "description": "Maria Gonzalez has experienced significant ongoing pain and suffering impacting her daily life and professional duties.",
+        "severity": "high",
+        "pageRef": "1"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Maria Gonzalez was injured in a car accident.",
+        "category": "event",
+        "pageRef": "1",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Accident occurred on November 3, 2023.",
+        "category": "date",
+        "pageRef": "1",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Demand for settlement is $250,000.",
+        "category": "amount",
+        "pageRef": "1",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Mr. Whitfield cited for traffic violation.",
+        "category": "event",
+        "pageRef": "1",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_4",
+        "date": "March 15, 2024",
+        "description": "Demand letter sent to State Farm Insurance.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_3",
+        "date": "November 18, 2023",
+        "description": "MRI confirmed herniated disc at L4-L5.",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "November 3, 2023",
+        "description": "Maria Gonzalez was involved in a car accident and sustained injuries.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "November 4, 2023",
+        "description": "Maria Gonzalez was discharged from the hospital.",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Definitive acceptance or response from State Farm Insurance.",
+        "importance": "required"
+      }
+    ],
+    "flags": [
+      {
+        "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
+        "type": "contradiction",
+        "source": "manual",
+        "text": "Failure to yield",
+        "location": "issue_1",
+        "resolved": true,
+        "id": "416a07e6-78ba-42ca-b7c3-9a5fa2c08f4e",
+        "createdAt": "2026-04-09T12:05:26.296Z",
+        "resolvedAt": "2026-04-09T12:06:02.332Z"
+      },
+      {
+        "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
+        "type": "contradiction",
+        "source": "manual",
+        "text": "Pain and suffering",
+        "location": "issue_4",
+        "resolved": true,
+        "id": "11b42052-44f8-4000-a599-9100da4d0462",
+        "createdAt": "2026-04-09T12:06:10.235Z",
+        "resolvedAt": "2026-04-09T12:06:22.367Z"
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T12:04:45.291Z"
+  },
+  {
+    "id": "3fa36171-4420-4d49-bb09-383feb35edfc",
+    "documentId": "6281476c-6f34-476e-894c-28837c1e91bb",
+    "summary": "The document is a demand letter from Castillo & Associates, P.A., representing Maria Gonzalez in a personal injury claim against Thomas Whitfield following a vehicle collision. It details the incident, injuries, medical treatments, and resulting damages, demanding $250,000 for settlement.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Personal Injury Claim",
+        "description": "The letter asserts a claim for damages resulting from a vehicle collision caused by Thomas Whitfield's failure to yield at a red light, resulting in significant injuries and damages to Maria Gonzalez.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Demand for Settlement",
+        "description": "The document includes a demand for $250,000 to settle the claim, with a 30-day response requirement before filing a lawsuit.",
+        "severity": "high"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Claimant: Maria Gonzalez",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Insured: Thomas Whitfield",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Incident Date: November 3, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Location of Incident: Intersection of SW 8th Street and Brickell Avenue, Miami, Florida",
+        "category": "event",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Police Report: Crash Report No. 2023-MIA-88234",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Total Medical Special Damages: $76,380.00",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Demand Amount: $250,000.00",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Reported ongoing chronic pain and physical limitations",
+        "category": "event",
+        "confidence": "medium"
+      },
+      {
+        "id": "fact_9",
+        "fact": "Attorney: David R. Castillo, Esq.",
+        "category": "party",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_5",
+        "date": "March 15, 2024",
+        "description": "Date of Demand Letter.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_3",
+        "date": "November 18, 2023",
+        "description": "MRI confirmed a herniated disc at L4-L5 for Maria Gonzalez.",
+        "significance": "important"
+      },
+      {
+        "id": "event_4",
+        "date": "November 20, 2023 - February 28, 2024",
+        "description": "Maria Gonzalez attended 24 physical therapy sessions.",
+        "significance": "important"
+      },
+      {
+        "id": "event_2",
+        "date": "November 3-4, 2023",
+        "description": "Maria Gonzalez was hospitalized at Jackson Memorial Hospital for initial treatment.",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "November 3, 2023",
+        "description": "Date of Loss - Vehicle collision between Maria Gonzalez and Thomas Whitfield.",
+        "significance": "critical"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific breakdown or justification of the pain and suffering damages.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Evidence or documentation of lost wages from the employer.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_3",
+        "description": "Response from State Farm Insurance Company or acknowledgment of receiving the demand.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "cd622c15-b17b-458e-88cc-e020a05f0a5e",
+        "documentId": "6281476c-6f34-476e-894c-28837c1e91bb",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific breakdown or justification of the pain and suffering damages.",
+        "location": "missing_1",
+        "createdAt": "2026-04-09T13:41:09.517Z",
+        "resolved": false
+      },
+      {
+        "id": "1d140343-2500-4f0a-87a6-c8e83bf96e98",
+        "documentId": "6281476c-6f34-476e-894c-28837c1e91bb",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Evidence or documentation of lost wages from the employer.",
+        "location": "missing_2",
+        "createdAt": "2026-04-09T13:41:09.517Z",
+        "resolved": false
+      },
+      {
+        "id": "f5f72381-3df2-4c16-a0d1-7c7986e554a0",
+        "documentId": "6281476c-6f34-476e-894c-28837c1e91bb",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Response from State Farm Insurance Company or acknowledgment of receiving the demand.",
+        "location": "missing_3",
+        "createdAt": "2026-04-09T13:41:09.517Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T13:41:09.517Z"
+  },
+  {
+    "id": "c0452e18-1c40-40b5-9e3a-f8243c7aa294",
+    "documentId": "7fa4fd2e-84d0-43d3-9d27-7586747a9651",
+    "summary": "The document is a demand letter related to a personal injury claim following a vehicular accident involving Maria Gonzalez and Thomas Whitfield. It outlines the facts of the accident, injuries sustained by Gonzalez, medical expenses incurred, and demands a settlement of $250,000 from State Farm Insurance Company.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Demand for Settlement",
+        "description": "The letter demands a settlement of $250,000 and states that failure to respond within 30 days will lead to a civil action.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Claim of Negligence",
+        "description": "Thomas Whitfield is accused of negligence for failing to yield at a red light, resulting in an accident with Maria Gonzalez.",
+        "severity": "high"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Date of Loss: November 3, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Claim No.: SF-2024-00847",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Accident Location: Intersection of Brickell Avenue and SW 8th Street, Miami, Florida",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Maria Gonzalez's vehicle: 2019 Honda Civic",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Thomas Whitfield's vehicle: 2021 Ford F-150",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Total Medical Special Damages: $76,380.00",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Lost wages amounting to $13,398.00",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Settlement Demand: $250,000",
+        "category": "amount",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_4",
+        "date": "February 28, 2024",
+        "description": "Completion of physical therapy sessions.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_5",
+        "date": "March 15, 2024",
+        "description": "Date of demand letter.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_3",
+        "date": "November 18, 2023",
+        "description": "MRI confirms herniated disc at L4-L5 with moderate nerve root compression.",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "November 3, 2023",
+        "description": "Date of the accident.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "November 4, 2023",
+        "description": "Maria Gonzalez discharged from Jackson Memorial Hospital.",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific reference to any contract or insurance policy provisions under which the demand is made.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Detailed justification for the total settlement demand beyond medical expenses and lost wages.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "e51272f6-8a30-4e81-9e8b-8aca720fcf19",
+        "documentId": "7fa4fd2e-84d0-43d3-9d27-7586747a9651",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific reference to any contract or insurance policy provisions under which the demand is made.",
+        "location": "missing_1",
+        "createdAt": "2026-04-09T13:43:02.256Z",
+        "resolved": false
+      },
+      {
+        "id": "6a0c8ddd-3b71-43a8-84b2-7b7fe1e7eead",
+        "documentId": "7fa4fd2e-84d0-43d3-9d27-7586747a9651",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Detailed justification for the total settlement demand beyond medical expenses and lost wages.",
+        "location": "missing_2",
+        "createdAt": "2026-04-09T13:43:02.256Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T13:43:02.256Z"
+  },
+  {
+    "id": "67cdae09-dcc0-4c5e-8f0b-4644dbb34658",
+    "documentId": "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32",
+    "summary": "The document is Change Order Number 11 for the Bayshore Tower Condominium project, issued by Meridian Construction Group, LLC. It details additional waterproofing work on balconies due to initial installation issues not meeting manufacturer requirements, with a total change order cost of $86,930. The Change Order does not affect the project's substantial completion date.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Work Non-compliance",
+        "description": "Initial waterproofing membrane installation did not comply with manufacturer's instructions, necessitating removal and reinstallation.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Additional Costs",
+        "description": "$86,930 in additional costs incurred due to modifications needed for compliance with installation standards.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_3",
+        "title": "No Schedule Impact",
+        "description": "The Change Order extends the substantial completion date by zero days, indicating no impact on the critical path schedule.",
+        "severity": "low"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Bayshore Tower Condominium is the project.",
+        "category": "project",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Change Order Number is 11.",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Change Order date is October 4, 2022.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Contractor is Meridian Construction Group, LLC.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Total Change Order Amount: $86,930.00.",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Original Contract Sum: $48,750,000.00.",
+        "category": "amount",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_2",
+        "date": "June 13, 2022",
+        "description": "Architect's response to RFI No. 47.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_1",
+        "date": "October 4, 2022",
+        "description": "Change Order 11 issued.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_3",
+        "date": "September 28, 2022",
+        "description": "Installation issue identified by superintendent.",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific approval dates by each party for the Change Order.",
+        "importance": "required"
+      }
+    ],
+    "flags": [
+      {
+        "id": "b3cd5c4a-e1da-4dcb-8f79-d79685d6d170",
+        "documentId": "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific approval dates by each party for the Change Order.",
+        "location": "missing_1",
+        "createdAt": "2026-04-09T15:08:22.280Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T15:08:22.280Z"
+  },
+  {
+    "id": "558d3830-f68d-4482-aa8c-7b387cf65e72",
+    "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+    "summary": "Raymond Castillo, a Senior Superintendent with Meridian Construction Group, testified regarding balcony slab waterproofing issues encountered during a construction project. He acknowledged being aware of the membrane application problems by August 2022 but did not document the defects properly, as required by his role. Despite admitting that schedule pressures led to early application of waterproofing, Mr. Castillo failed to file a non-conformance report and verify the corrective actions. He also noted discrepancies regarding his awareness and reporting of the issues, with conflicting statements about the timeline and verification of remediation work. Furthermore, he did not agree with characterizations implying defective subcontractor installation.",
+    "keyIssues": [
+      {
+        "id": "admission_1",
+        "title": "Balcony slab waterproofing issues",
+        "description": "Witness was aware of problems around August 2022 regarding membrane application before concrete cured.",
+        "severity": "high",
+        "pageRef": "5:17"
+      },
+      {
+        "id": "admission_2",
+        "title": "Responsibilities of Superintendent",
+        "description": "It was part of his duties to verify that identified defects were corrected.",
+        "severity": "high",
+        "pageRef": "6"
+      },
+      {
+        "id": "admission_3",
+        "title": "Awareness of Waterproofing Issue",
+        "description": "He observed an installation issue with waterproofing in August 2022.",
+        "severity": "high",
+        "pageRef": "7"
+      },
+      {
+        "id": "admission_4",
+        "title": "Schedule Pressure",
+        "description": "Schedule pressure was a factor in the early application of waterproofing.",
+        "severity": "medium",
+        "pageRef": "10"
+      },
+      {
+        "id": "admission_5",
+        "title": "Remediation Work Performed",
+        "description": "The work was necessary and was performed.",
+        "severity": "high",
+        "pageRef": "Page 12"
+      },
+      {
+        "id": "admission_6",
+        "title": "Deficient Documentation",
+        "description": "Did not write a non-conformance report or verify remediation.",
+        "severity": "high",
+        "pageRef": "Page 12"
+      },
+      {
+        "id": "admission_7",
+        "title": "Failure to Document Known Installation Defect",
+        "description": "Did not document a known installation defect with a non-conformance report for the first time.",
+        "severity": "high",
+        "pageRef": "Page 13"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "exhibit_1",
+        "fact": "1: Meridian Daily Log dated August 12, 2022",
+        "category": "other",
+        "pageRef": "9",
+        "confidence": "high"
+      },
+      {
+        "id": "exhibit_2",
+        "fact": "2: RFI No. 47 and Response",
+        "category": "other",
+        "pageRef": "12",
+        "confidence": "high"
+      },
+      {
+        "id": "exhibit_3",
+        "fact": "3: Photographs of balcony slab, Unit 1204",
+        "category": "other",
+        "pageRef": "14",
+        "confidence": "high"
+      },
+      {
+        "id": "exhibit_4",
+        "fact": "4: Change Order No. 11",
+        "category": "other",
+        "pageRef": "16",
+        "confidence": "high"
+      },
+      {
+        "id": "exhibit_5",
+        "fact": "5: Castillo resume",
+        "category": "other",
+        "pageRef": "17",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [],
+    "missingInformation": [
+      {
+        "id": "followup_1",
+        "description": "Mr. Castillo, can you clarify the procedure Meridian Construction Group follows for documenting and reporting construction defects, particularly involving waterproofing issues?",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_2",
+        "description": "Why was there a delay between June 2022 when the RFI was issued and August 2022 when you acknowledged awareness of the issue?",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_3",
+        "description": "What specific schedule pressures influenced the decision to apply waterproofing prematurely, and how were these pressures communicated to the team?",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_4",
+        "description": "Can you provide more detail on why no non-conformance report was filed despite recognizing the waterproofing defect as required by your responsibility?",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_5",
+        "description": "Describe the decision process for validating that remediation work was completed if you did not personally verify it.",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_6",
+        "description": "To what extent did payment records influence your conclusion that the remediation work was carried out correctly?",
+        "importance": "helpful"
+      },
+      {
+        "id": "followup_7",
+        "description": "Please elaborate on the communication between you and Project Manager Tom Brennan regarding the initial observation and reporting of the waterproofing defect.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "382733b4-01fe-4fca-9c42-1725555ebba9",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: Witness was aware of problems around August 2022 regarding membrane application before concrete cured.",
+        "location": "5:17",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      },
+      {
+        "id": "427e8963-6549-4e1f-8093-6dd51232133a",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: It was part of his duties to verify that identified defects were corrected.",
+        "location": "6",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      },
+      {
+        "id": "60bd9250-567f-4a00-9e40-e716d0f8c9f1",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: He observed an installation issue with waterproofing in August 2022.",
+        "location": "7",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      },
+      {
+        "id": "b8163455-9a2a-4617-994c-9422147eba32",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: The work was necessary and was performed.",
+        "location": "Page 12",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      },
+      {
+        "id": "ed46738d-d37e-4dde-8451-e7935d4ffb7b",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: Did not write a non-conformance report or verify remediation.",
+        "location": "Page 12",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      },
+      {
+        "id": "37e3ee6a-4414-4773-bc39-600d3d1ff9aa",
+        "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+        "type": "key_evidence",
+        "source": "auto",
+        "text": "Admission: Did not document a known installation defect with a non-conformance report for the first time.",
+        "location": "Page 13",
+        "createdAt": "2026-04-09T15:53:09.195Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T15:53:09.195Z",
+    "depositionAnalysis": {
+      "witnessName": "Raymond Castillo",
+      "witnessRole": "Senior Superintendent with Meridian Construction Group",
+      "depositionDate": "March 14, 2025",
+      "location": "Whitaker & Ruiz, P.A., 1450 Brickell Avenue, Suite 2200, Miami, Florida 33131",
+      "attorneysPresent": [
+        {
+          "name": "Elena Ruiz",
+          "representing": "Plaintiff, Bayshore Tower Condominium Association"
+        },
+        {
+          "name": "David Halpern",
+          "representing": "Defendant, Meridian Construction Group, LLC"
+        },
+        {
+          "name": "Anthony Moretti",
+          "representing": "Defendant, Coastal Waterproofing Systems, Inc."
+        }
+      ],
+      "courtReporter": "Diana Holbrook",
+      "duration": "9:07 a.m. - 2:43 p.m.",
+      "topics": [
+        "Balcony slab issues",
+        "Construction start and completion",
+        "Witness background and experience",
+        "inspections and responsibilities",
+        "waterproofing issues",
+        "construction schedule",
+        "change orders",
+        "Change Order No. 11",
+        "Remediation Work",
+        "Project Supervision Responsibilities"
+      ],
+      "keyAdmissions": [
+        {
+          "topic": "Balcony slab waterproofing issues",
+          "admission": "Witness was aware of problems around August 2022 regarding membrane application before concrete cured.",
+          "pageReference": "5:17",
+          "significance": "high"
+        },
+        {
+          "topic": "Responsibilities of Superintendent",
+          "admission": "It was part of his duties to verify that identified defects were corrected.",
+          "pageReference": "6",
+          "significance": "high"
+        },
+        {
+          "topic": "Awareness of Waterproofing Issue",
+          "admission": "He observed an installation issue with waterproofing in August 2022.",
+          "pageReference": "7",
+          "significance": "high"
+        },
+        {
+          "topic": "Schedule Pressure",
+          "admission": "Schedule pressure was a factor in the early application of waterproofing.",
+          "pageReference": "10",
+          "significance": "medium"
+        },
+        {
+          "topic": "Remediation Work Performed",
+          "admission": "The work was necessary and was performed.",
+          "pageReference": "Page 12",
+          "significance": "high"
+        },
+        {
+          "topic": "Deficient Documentation",
+          "admission": "Did not write a non-conformance report or verify remediation.",
+          "pageReference": "Page 12",
+          "significance": "high"
+        },
+        {
+          "topic": "Failure to Document Known Installation Defect",
+          "admission": "Did not document a known installation defect with a non-conformance report for the first time.",
+          "pageReference": "Page 13",
+          "significance": "high"
+        }
+      ],
+      "keyDenials": [
+        {
+          "topic": "Proper Installation",
+          "denial": "The condition shown in the photographs is not consistent with a properly installed waterproofing system.",
+          "pageReference": "9"
+        },
+        {
+          "topic": "Characterization of Remediation Charge",
+          "denial": "Wouldn't characterize remediation as due to defective installation by a subcontractor.",
+          "pageReference": "Page 11"
+        }
+      ],
+      "exhibitsReferenced": [
+        {
+          "exhibitNumber": "1",
+          "description": "Meridian Daily Log dated August 12, 2022",
+          "pageReference": "9"
+        },
+        {
+          "exhibitNumber": "2",
+          "description": "RFI No. 47 and Response",
+          "pageReference": "12"
+        },
+        {
+          "exhibitNumber": "3",
+          "description": "Photographs of balcony slab, Unit 1204",
+          "pageReference": "14"
+        },
+        {
+          "exhibitNumber": "4",
+          "description": "Change Order No. 11",
+          "pageReference": "16"
+        },
+        {
+          "exhibitNumber": "5",
+          "description": "Castillo resume",
+          "pageReference": "17"
+        }
+      ],
+      "inconsistencies": [
+        {
+          "topic": "Procedure for defect reporting",
+          "description": "Witness initially states he verbally reported waterproofing issues to project manager Tom Brennan and noted it in his daily log (Page 5). He later admits he neither wrote a non-conformance report nor personally verified corrections (Page 5-6). These actions conflict with the responsibility of maintaining official records of defect reporting and ensuring corrections.",
+          "pages": [
+            "5:15-20",
+            "6:1-10"
+          ]
+        },
+        {
+          "topic": "Awareness of Balcony Issues",
+          "description": "On page 7, Mr. Castillo testified that he first became aware of the balcony slab issues in August 2022. However, on pages 7-8, when Plaintiff's Exhibit 2 showed RFI No. 47 dated June 3, 2022 seeking clarification on the same issue, he acknowledged knowing about a detail conflict in June 2022. These statements conflict about when he first knew of the waterproofing issue.",
+          "pages": [
+            "7",
+            "8"
+          ]
+        },
+        {
+          "topic": "Remediation Verification",
+          "description": "Mr. Castillo initially claimed the remediation work was necessary (Page 11-12), but later admitted he did not personally inspect it and relied on payment records for confirmation (Page 15). These statements conflict about the basis of confirming remediation.",
+          "pages": [
+            "Page 11",
+            "Page 12",
+            "Page 15"
+          ]
+        }
+      ],
+      "objectionsSummary": {
+        "total": 6,
+        "commonGrounds": [
+          "Form, Calls for a legal conclusion",
+          "form",
+          "calls for speculation",
+          "argumentative",
+          "Mischaracterizes the evidence",
+          "Calls for a legal conclusion"
+        ]
+      },
+      "summary": "Raymond Castillo, a Senior Superintendent with Meridian Construction Group, testified regarding balcony slab waterproofing issues encountered during a construction project. He acknowledged being aware of the membrane application problems by August 2022 but did not document the defects properly, as required by his role. Despite admitting that schedule pressures led to early application of waterproofing, Mr. Castillo failed to file a non-conformance report and verify the corrective actions. He also noted discrepancies regarding his awareness and reporting of the issues, with conflicting statements about the timeline and verification of remediation work. Furthermore, he did not agree with characterizations implying defective subcontractor installation.",
+      "followUpQuestions": [
+        "Mr. Castillo, can you clarify the procedure Meridian Construction Group follows for documenting and reporting construction defects, particularly involving waterproofing issues?",
+        "Why was there a delay between June 2022 when the RFI was issued and August 2022 when you acknowledged awareness of the issue?",
+        "What specific schedule pressures influenced the decision to apply waterproofing prematurely, and how were these pressures communicated to the team?",
+        "Can you provide more detail on why no non-conformance report was filed despite recognizing the waterproofing defect as required by your responsibility?",
+        "Describe the decision process for validating that remediation work was completed if you did not personally verify it.",
+        "To what extent did payment records influence your conclusion that the remediation work was carried out correctly?",
+        "Please elaborate on the communication between you and Project Manager Tom Brennan regarding the initial observation and reporting of the waterproofing defect."
+      ]
+    }
+  },
+  {
+    "id": "570ab3cb-60b5-4e57-9bba-d243e5ec02e6",
+    "documentId": "c8e2cdd3-3712-482e-a2ff-6f04351980c6",
+    "summary": "This document is a daily superintendent log for the Bayshore Tower Condominium project on August 12, 2022. It provides details on the construction work performed, crew on site, equipment usage, schedule status, issues observed, and deliveries. Notably, the project is behind schedule, and there is an issue with Coastal applying a waterproofing membrane prematurely.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Waterproofing membrane applied too early",
+        "description": "Coastal Waterproofing applied the membrane on floors 12 and 13 before the concrete cure time met the 28-day requirement or 75% design strength, potentially violating specifications per RFI No. 47.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Project delay",
+        "description": "The project is tracking approximately three weeks behind the baseline schedule, necessitating extended work hours for recovery.",
+        "severity": "medium"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Project: Bayshore Tower Condominium",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Location: 1800 North Bayshore Drive, Miami, FL 33132",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Date: August 12, 2022",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Concrete pour completed on floor 13 on August 12, 2022",
+        "category": "event",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Concrete pour on floor 12 was completed on July 22, 2022",
+        "category": "event",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Meridian Construction Group, LLC",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Raymond Castillo was the superintendent on August 12, 2022",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "35 workers were onsite on August 12, 2022",
+        "category": "other",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_2",
+        "date": "2022-07-22",
+        "description": "Concrete pour completed on floor 12",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "2022-08-12",
+        "description": "Daily log report for August 12, 2022, documenting construction activity at Bayshore Tower",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_3",
+        "date": "2022-08-12",
+        "description": "Concrete pour completed on floor 13 at 10:45 AM",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "No formal non-conformance report (NCR) issued for the waterproofing application issue",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Verification data or testing results for concrete strength for floors 12 and 13",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "35ceda8e-c187-4442-bd9a-549405ef8c67",
+        "documentId": "c8e2cdd3-3712-482e-a2ff-6f04351980c6",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "No formal non-conformance report (NCR) issued for the waterproofing application issue",
+        "location": "missing_1",
+        "createdAt": "2026-04-09T15:08:55.588Z",
+        "resolved": false
+      },
+      {
+        "id": "fa5bf034-3b38-4524-9b4a-4cf0215e6dfb",
+        "documentId": "c8e2cdd3-3712-482e-a2ff-6f04351980c6",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Verification data or testing results for concrete strength for floors 12 and 13",
+        "location": "missing_2",
+        "createdAt": "2026-04-09T15:08:55.588Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T15:08:55.588Z"
+  },
+  {
+    "id": "c1ad470e-02ba-47da-8006-66afe1f4318b",
+    "documentId": "4c276f43-f81f-4dee-9c5e-362aecbc4160",
+    "summary": "This document is a Request for Information (RFI) from Meridian Construction Group, regarding a conflict in the waterproofing detail for balcony-to-wall transitions between architectural and manufacturer's requirements at Bayshore Tower Condominium. The architect's response indicates that the manufacturer's guidelines should govern, confirming substrate curing requirements and superseding the architectural detail.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Waterproofing Detail Conflict",
+        "description": "Conflict between architectural detail and manufacturer's requirements for balcony-to-wall transition waterproofing, impacting installation procedures.",
+        "severity": "high"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "RFI No. 047 issued on June 3, 2022.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Response required by June 17, 2022.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Originator: Raymond Castillo, Superintendent.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Architectural detail (A-501) shows a 4-inch upturn and exposed termination.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Manufacturer's requirements include a minimum 6-inch upturn with concealed termination.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Concrete substrates must cure for a minimum of 28 days or reach 75% design strength before membrane application.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Response provided by Margaret Harlan, AIA, on June 13, 2022.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Project location: Bayshore Tower Condominium.",
+        "category": "other",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_3",
+        "date": "August 8, 2022",
+        "description": "Scheduled start of waterproofing work on floors 11-14.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_2",
+        "date": "June 13, 2022",
+        "description": "Architect responded confirming manufacturer's requirements should govern.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_1",
+        "date": "June 3, 2022",
+        "description": "RFI No. 047 issued regarding waterproofing detail conflict.",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "The exact revision date for the revised architectural detail is not provided.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "9cb1cc28-bc4d-4e5b-9fc9-6b2ba6d69793",
+        "documentId": "4c276f43-f81f-4dee-9c5e-362aecbc4160",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "The exact revision date for the revised architectural detail is not provided.",
+        "location": "missing_1",
+        "createdAt": "2026-04-09T15:09:07.805Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-09T15:09:07.805Z"
+  },
+  {
+    "id": "4afc479c-2988-4fc6-ae41-38dbf634cc01",
+    "documentId": "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1",
+    "summary": "The document is an extract from the standard form of agreement between the Owner, Palmetto Ridge Development, LLC, and the Contractor, Keystone Building Group, Inc., for the construction of the Palmetto Ridge Medical Office Building. It specifies critical dates, the contract sum, liquidated damages, procedures for change orders and claims, owner-caused delays, and dispute resolution processes.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Liquidated Damages Clause",
+        "description": "The contract includes a liquidated damages clause imposing $4,500 per calendar day for delays beyond the substantial completion date, up to a maximum of $600,000.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Notice of Claim Requirements",
+        "description": "Contractor is required to notify the Owner and Architect in writing of claims for additional time or compensation within 14 days of the event.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_3",
+        "title": "No Damages for Delay Clause",
+        "description": "Contractor not entitled to monetary damages for delay unless by written change order, except for delays caused by Owner's active interference or bad faith.",
+        "severity": "medium"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Palmetto Ridge Development, LLC is the Owner.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Keystone Building Group, Inc. is the Contractor.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "The contract date is April 12, 2023.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "The contract sum is $24,750,000.00.",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "The notice to proceed date is May 1, 2023.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Substantial completion is scheduled for August 15, 2024.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Location is 4850 Military Trail, Palm Beach Gardens, FL 33418.",
+        "category": "other",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_1",
+        "date": "2023-04-12",
+        "description": "Contract executed by Owner and Contractor.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "2023-05-01",
+        "description": "Notice to proceed issued, commencement of work.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_3",
+        "date": "2024-08-15",
+        "description": "Scheduled substantial completion date.",
+        "significance": "critical"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific terms or conditions related to payment schedule or milestones.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Detailed procedure for claim submission and handling beyond initial notice requirements.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "5c00c261-fe17-4b42-bacc-3aa98c7baa63",
+        "documentId": "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific terms or conditions related to payment schedule or milestones.",
+        "location": "missing_1",
+        "createdAt": "2026-04-10T03:04:28.000Z",
+        "resolved": false
+      },
+      {
+        "id": "9033764b-da8f-48d9-8412-7cbf5c05ab16",
+        "documentId": "9b1558b8-beb4-4e6a-82ed-3d58d3a922a1",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Detailed procedure for claim submission and handling beyond initial notice requirements.",
+        "location": "missing_2",
+        "createdAt": "2026-04-10T03:04:28.000Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-10T03:04:28.000Z"
+  },
+  {
+    "id": "e55d2b84-fd42-4583-a4f0-8911ed2e61ac",
+    "documentId": "657488e8-8187-4ff0-9b99-3aff646e2d0d",
+    "summary": "The document is a Request for Information (RFI) issued for the Palmetto Ridge Medical Office Building project regarding a structural conflict in the Level 3 mechanical room at grid E-7. The RFI highlights a critical schedule impact due to conflicting structural and MEP drawings, requiring immediate resolution. The response was delayed, causing further project delays as noted in the contractor's subsequent log.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Delayed RFI Response",
+        "description": "The response to RFI-089 was delayed by 28 days, impacting the critical path of the project.",
+        "severity": "high",
+        "pageRef": "section 1"
+      },
+      {
+        "id": "issue_2",
+        "title": "Structural and MEP Conflict",
+        "description": "A significant conflict between structural and MEP drawings on Level 3 requires redesign to proceed with construction.",
+        "severity": "high",
+        "pageRef": "section 1"
+      },
+      {
+        "id": "issue_3",
+        "title": "Contractual Non-compliance",
+        "description": "RFI responses exceeded the contractual requirement of 7 days, with an average delay of 20 days.",
+        "severity": "medium",
+        "pageRef": "section 1"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Project: Palmetto Ridge Medical Office Building",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Contractor: Keystone Building Group, Inc.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "RFI No.: RFI-089",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Date Issued: October 17, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Response Required: October 24, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Actual Response: November 14, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Conflict Location: Level 3 mechanical room, Grid E-7",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Critical Path Impact: Yes",
+        "category": "obligation",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_3",
+        "date": "November 14, 2023",
+        "description": "Architect's response to RFI-089 received.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_4",
+        "date": "November 16, 2023",
+        "description": "RFI-089 closed.",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "October 17, 2023",
+        "description": "RFI-089 issued regarding structural conflict on Level 3.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "October 24, 2023",
+        "description": "Response to RFI-089 required by this date.",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Impact analysis details for cost and time associated with the required changes.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Specific contract provision related to the RFI response time requirement.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "7f4bde05-1a58-484c-b884-25a27e5a8d32",
+        "documentId": "657488e8-8187-4ff0-9b99-3aff646e2d0d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Impact analysis details for cost and time associated with the required changes.",
+        "location": "missing_1",
+        "createdAt": "2026-04-10T03:04:36.314Z",
+        "resolved": false
+      },
+      {
+        "id": "ac94d27d-dccc-44e4-9f96-91a2e6f2b034",
+        "documentId": "657488e8-8187-4ff0-9b99-3aff646e2d0d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific contract provision related to the RFI response time requirement.",
+        "location": "missing_2",
+        "createdAt": "2026-04-10T03:04:36.314Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-10T03:04:36.314Z"
+  },
+  {
+    "id": "1ecc8773-a27b-489d-bfaa-6f11f76c4754",
+    "documentId": "39e80f45-f3f1-4eec-936a-c786f85c6367",
+    "summary": "The document is the Schedule Update No. 11 for the Palmetto Ridge Medical Office Building project, indicating the project is 94 days behind schedule as of February 29, 2024. It outlines the primary causes of delay, including RFI response delays, owner-directed design changes, and late delivery of owner-furnished equipment. Keystone Building Group reserves rights for additional time and compensation due to these delays.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Project delay",
+        "description": "The project is 94 calendar days behind the baseline schedule. The substantial completion date moved from August 15, 2024, to November 17, 2024.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Delayed RFI responses",
+        "description": "Responses to 6 critical-path RFIs were delayed, with an average response time of 23 days against a required 7 days.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_3",
+        "title": "Owner-directed design changes",
+        "description": "The owner issued significant design changes causing approximately 42 days of delay.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_4",
+        "title": "Owner-furnished equipment delays",
+        "description": "Late delivery of MRI machine, CT scanner, and ultrasound units causing 18 days of delay.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_5",
+        "title": "Reservation of Rights",
+        "description": "Keystone reserves rights for additional time and compensation due to owner-caused delays, acceleration costs, and challenges to liquidated damages.",
+        "severity": "medium"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Project: Palmetto Ridge Medical Office Building",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Project No.: PRM-2022-017",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Data Date: February 29, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Prepared by: Jorge Medina, PM, Keystone Building Group",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Reviewed by: Sarah Kim, Project Executive, Keystone Building Group",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Substantial Completion Baseline Date: August 15, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Current Substantial Completion Forecast: November 17, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Notice to Proceed Date: May 1, 2023",
+        "category": "date",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_3",
+        "date": "December 4, 2023",
+        "description": "Level 2 shell space conversion to imaging suite directive issued",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "February 29, 2024",
+        "description": "Project is 94 days behind schedule",
+        "significance": "critical"
+      },
+      {
+        "id": "event_5",
+        "date": "January 22, 2024",
+        "description": "Relocation of primary electrical service entrance directive issued",
+        "significance": "important"
+      },
+      {
+        "id": "event_4",
+        "date": "January 8, 2024",
+        "description": "Revised elevator specifications issued impacting construction",
+        "significance": "important"
+      },
+      {
+        "id": "event_2",
+        "date": "October 20, 2023 to November 16, 2023",
+        "description": "Level 3 steel erection suspended awaiting RFI response",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific contractual references for the right to additional compensation due to owner delays.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Confirmation of delivery dates for owner-furnished equipment.",
+        "importance": "required"
+      }
+    ],
+    "flags": [
+      {
+        "id": "2172d596-e7e0-46bf-87a2-23af0036b710",
+        "documentId": "39e80f45-f3f1-4eec-936a-c786f85c6367",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific contractual references for the right to additional compensation due to owner delays.",
+        "location": "missing_1",
+        "createdAt": "2026-04-10T03:04:45.197Z",
+        "resolved": false
+      },
+      {
+        "id": "8e34d968-4dbe-4e5e-b297-602f0cf7e0ee",
+        "documentId": "39e80f45-f3f1-4eec-936a-c786f85c6367",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Confirmation of delivery dates for owner-furnished equipment.",
+        "location": "missing_2",
+        "createdAt": "2026-04-10T03:04:45.197Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-10T03:04:45.197Z"
+  },
+  {
+    "id": "d9272b22-52ee-4a60-b365-aee0257951a7",
+    "documentId": "c4eeef61-448d-4952-8526-51fe245b9943",
+    "summary": "The document is a Notice of Claim letter from Keystone Building Group, Inc. to Palmetto Ridge Development, LLC regarding the Palmetto Ridge Medical Office Building project. Keystone claims an extension of the contract time by 94 days and additional compensation of approximately $1,847,000.00 due to delays attributed to the owner and architect.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Claim for contract time extension and compensation",
+        "description": "Keystone Building Group claims entitlement to an extension of 94 calendar days and additional compensation of $1,847,000.00 due to project delays caused by late RFI responses, owner-directed design changes, and delayed owner-furnished equipment.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Late Responses to RFIs",
+        "description": "The architect took an average of 20 days to respond to RFIs, compared to the contractual 7 days, causing delays on the critical path.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_3",
+        "title": "Owner-Directed Design Changes",
+        "description": "Owner issued significant design change directives impacting the critical path, including modifications to floor use and elevator specifications.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_4",
+        "title": "Delayed Owner-Furnished Equipment",
+        "description": "Owner's delay in procuring equipment resulted in an 8-10 week delivery delay, further delaying project progress.",
+        "severity": "medium"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Contract date: April 12, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Project start date: May 1, 2023",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Original Substantial Completion date: August 15, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Forecast Substantial Completion date: November 17, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Matter reported in Schedule Update No. 11 as of February 29, 2024",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Contract number: PRM-2022-017",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_7",
+        "fact": "Keystone claims an additional 94 calendar days for substantial completion",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_8",
+        "fact": "Additional compensation claimed: $1,847,000.00",
+        "category": "amount",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_3",
+        "date": "August 15, 2024",
+        "description": "Original Substantial Completion date per Contract",
+        "significance": "critical"
+      },
+      {
+        "id": "event_8",
+        "date": "December 4, 2023",
+        "description": "Owner-directed design change: Conversion of Level 2",
+        "significance": "important"
+      },
+      {
+        "id": "event_5",
+        "date": "February 29, 2024",
+        "description": "Data date of Schedule Update No. 11",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_10",
+        "date": "January 22, 2024",
+        "description": "Owner-directed design change: Relocation of electrical service",
+        "significance": "important"
+      },
+      {
+        "id": "event_9",
+        "date": "January 8, 2024",
+        "description": "Owner-directed design change: Revision of elevator specifications",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "March 22, 2024",
+        "description": "Notice of Claim letter dated",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "May 1, 2023",
+        "description": "Work commenced under Notice to Proceed",
+        "significance": "important"
+      },
+      {
+        "id": "event_7",
+        "date": "November 16, 2023",
+        "description": "RFI-089 response delay ended",
+        "significance": "important"
+      },
+      {
+        "id": "event_4",
+        "date": "November 17, 2024",
+        "description": "Forecast Substantial Completion date as reported",
+        "significance": "critical"
+      },
+      {
+        "id": "event_6",
+        "date": "October 20, 2023",
+        "description": "RFI-089 response delay began",
+        "significance": "important"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Exact reasons and documentation for the claim amount of $1,847,000.00 are not detailed in the notice of claim.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Specific contract sections other than Article 8 referenced are not detailed in association with claims.",
+        "importance": "helpful"
+      },
+      {
+        "id": "missing_3",
+        "description": "Resolution status of Change Order Proposals COP-017, COP-019, and COP-021 is not provided.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "6837bfb5-114c-408e-a444-b3483ef9c5b8",
+        "documentId": "c4eeef61-448d-4952-8526-51fe245b9943",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Exact reasons and documentation for the claim amount of $1,847,000.00 are not detailed in the notice of claim.",
+        "location": "missing_1",
+        "createdAt": "2026-04-10T03:04:56.926Z",
+        "resolved": false
+      },
+      {
+        "id": "14e73afc-5787-4c75-bc60-2f04b7b1e9d6",
+        "documentId": "c4eeef61-448d-4952-8526-51fe245b9943",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific contract sections other than Article 8 referenced are not detailed in association with claims.",
+        "location": "missing_2",
+        "createdAt": "2026-04-10T03:04:56.926Z",
+        "resolved": false
+      },
+      {
+        "id": "1a2a395b-2e9b-49b8-9574-f19634640436",
+        "documentId": "c4eeef61-448d-4952-8526-51fe245b9943",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Resolution status of Change Order Proposals COP-017, COP-019, and COP-021 is not provided.",
+        "location": "missing_3",
+        "createdAt": "2026-04-10T03:04:56.926Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-10T03:04:56.926Z"
+  },
+  {
+    "id": "a96d5ff6-4dd6-4e2b-b05e-cee4a4faa29b",
+    "documentId": "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e",
+    "summary": "This document is a denial letter from Palmetto Ridge Development, LLC to Keystone Building Group regarding a Notice of Claim dated March 22, 2024. The denial is based on the claim being untimely according to the contract's notice requirements and lacking merit on issues such as delay, owner-directed changes, and claim for damages.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Untimely Claim",
+        "description": "The claim was submitted past the contractual 14-day notice period for events Keystone cited, such as RFI response delays and design coordination issues.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Lack of Merit on Claim",
+        "description": "The owner disputes Keystone's delay claims and asserts errors in staff and process caused delays, not owner actions.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_3",
+        "title": "No-Damages-for-Delay Clause",
+        "description": "Keystone's claim for delay damages is disputed based on a contract section that bars monetary damages for delay except in cases of active interference or bad faith.",
+        "severity": "high"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Document date is April 15, 2024.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Claim was dated March 22, 2024.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Project name is Palmetto Ridge Medical Office Building.",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Keystone's claim for delay damages amounts to $1,847,000.",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Owner will assess liquidated damages at $4,500 per calendar day, up to a maximum of $600,000.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_6",
+        "fact": "Contract substantial completion date is August 15, 2024.",
+        "category": "date",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_2",
+        "date": "April 15, 2024",
+        "description": "Owner's Denial Letter issued.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_4",
+        "date": "July 2023",
+        "description": "Start of events referenced in the claim as per August 2023 RFI response delays.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_1",
+        "date": "March 22, 2024",
+        "description": "Keystone Building Group's Notice of Claim dated.",
+        "significance": "important"
+      },
+      {
+        "id": "event_3",
+        "date": "November 14, 2023",
+        "description": "RFI-089 response received by Keystone.",
+        "significance": "contextual"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific justification details for denying the merits of the claim related to scheduling and RFI issues.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Details of discussions or negotiations related to owner-directed changes.",
+        "importance": "helpful"
+      }
+    ],
+    "flags": [
+      {
+        "id": "dabd0f92-164a-492d-94b9-398977e8ef54",
+        "documentId": "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific justification details for denying the merits of the claim related to scheduling and RFI issues.",
+        "location": "missing_1",
+        "createdAt": "2026-04-10T03:05:05.162Z",
+        "resolved": false
+      },
+      {
+        "id": "d1be3075-959d-479c-aeba-f8a7906573a7",
+        "documentId": "e33e9858-1a30-43a2-b4bb-6ef19bfdf83e",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Details of discussions or negotiations related to owner-directed changes.",
+        "location": "missing_2",
+        "createdAt": "2026-04-10T03:05:05.162Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-10T03:05:05.162Z"
+  }
+]

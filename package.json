@@ -1,0 +1,41 @@
+{
+  "name": "lexxrebuild1",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.85.0",
+    "@tiptap/extension-bubble-menu": "^3.22.3",
+    "@tiptap/extension-placeholder": "^3.22.3",
+    "@tiptap/react": "^3.22.3",
+    "@tiptap/starter-kit": "^3.22.3",
+    "canvas": "^3.2.3",
+    "docx": "^9.6.1",
+    "file-saver": "^2.0.5",
+    "formidable": "^3.5.4",
+    "lucide-react": "^1.8.0",
+    "mammoth": "^1.12.0",
+    "next": "16.2.2",
+    "openai": "^6.33.0",
+    "pdf-parse": "^1.1.4",
+    "pdfjs-dist": "^3.11.174",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/file-saver": "^2.0.7",
+    "@types/formidable": "^3.5.0",
+    "@types/node": "^20",
+    "@types/pdf-parse": "^1.1.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

@@ -1,0 +1,635 @@
+                   IN THE CIRCUIT COURT OF THE
+              ELEVENTH JUDICIAL CIRCUIT IN AND FOR
+                    MIAMI-DADE COUNTY, FLORIDA
+
+                         CASE NO.: 2024-CA-008472
+
+BAYSHORE TOWER CONDOMINIUM
+ASSOCIATION, INC.,
+
+          Plaintiff,
+
+vs.
+
+MERIDIAN CONSTRUCTION GROUP, LLC,
+and COASTAL WATERPROOFING
+SYSTEMS, INC.,
+
+          Defendants.
+_____________________________________/
+
+
+                    DEPOSITION OF RAYMOND CASTILLO
+
+                    Taken on behalf of the Plaintiff
+
+                         March 14, 2025
+                         9:07 a.m. - 2:43 p.m.
+
+
+                    Held at the offices of:
+                    Whitaker & Ruiz, P.A.
+                    1450 Brickell Avenue, Suite 2200
+                    Miami, Florida 33131
+
+
+                    Reported by:
+                    Diana Holbrook, RPR, FPR
+                    Notary Public, State of Florida
+
+
+                                                                   Page 1
+
+
+                          A P P E A R A N C E S
+
+On behalf of the Plaintiff, Bayshore Tower Condominium Association:
+
+          WHITAKER & RUIZ, P.A.
+          BY: ELENA RUIZ, ESQUIRE
+          1450 Brickell Avenue, Suite 2200
+          Miami, Florida 33131
+
+On behalf of the Defendant, Meridian Construction Group, LLC:
+
+          HALPERN & STONE, LLP
+          BY: DAVID HALPERN, ESQUIRE
+          200 South Biscayne Boulevard, Suite 3400
+          Miami, Florida 33131
+
+On behalf of the Defendant, Coastal Waterproofing Systems, Inc.:
+
+          MORETTI LAW GROUP
+          BY: ANTHONY MORETTI, ESQUIRE
+          800 Douglas Road, Suite 500
+          Coral Gables, Florida 33134
+
+Also Present:  Raymond Castillo, Witness
+
+
+                                                                   Page 2
+
+
+                              I N D E X
+
+WITNESS                                                 PAGE
+
+RAYMOND CASTILLO
+
+    Direct Examination by Ms. Ruiz                        4
+    Cross-Examination by Mr. Halpern                     18
+    Cross-Examination by Mr. Moretti                     23
+
+
+                          E X H I B I T S
+
+PLAINTIFF'S                                             PAGE
+
+Exhibit 1 - Meridian Daily Log dated August 12, 2022      9
+Exhibit 2 - RFI No. 47 and Response                      12
+Exhibit 3 - Photographs of balcony slab, Unit 1204       14
+Exhibit 4 - Change Order No. 11                          16
+Exhibit 5 - Castillo resume                              17
+
+
+                                                                   Page 3
+
+
+                       P R O C E E D I N G S
+
+     Thereupon,
+
+                       RAYMOND CASTILLO,
+
+having been first duly sworn, was examined and testified
+as follows:
+
+                       DIRECT EXAMINATION
+
+BY MS. RUIZ:
+
+     Q.   Good morning, Mr. Castillo. Could you please state
+your full name for the record.
+
+     A.   Raymond Arturo Castillo.
+
+     Q.   And what is your current occupation?
+
+     A.   I'm a senior superintendent with Meridian Construction
+Group. I've been with the company about eleven years.
+
+     Q.   Prior to Meridian, where did you work?
+
+     A.   I was with Turner Construction for about six years
+before that, mostly on commercial high-rise projects in South
+Florida.
+
+     Q.   And what is your educational background?
+
+     A.   I have an associate's degree in construction
+management from Miami Dade College. I also have an OSHA 30
+certification and I'm a certified concrete field testing
+technician through ACI.
+
+     Q.   Have you ever testified in a deposition before today?
+
+     A.   Yes, ma'am. Three times, I believe. All construction
+matters.
+
+
+                                                                   Page 4
+
+
+     Q.   Let's turn to the Bayshore Tower project. What was
+your role on that project?
+
+     A.   I was the superintendent of record from the start of
+construction through substantial completion. I was on site
+every day the crew was working.
+
+     Q.   When did construction begin?
+
+     A.   We mobilized in February of 2021. Foundations started
+the following month.
+
+     Q.   And when was substantial completion?
+
+     A.   November 18, 2023. I remember because it was two days
+before Thanksgiving.
+
+     Q.   Mr. Castillo, are you familiar with the balcony slab
+issues that are the subject of this lawsuit?
+
+     A.   Yes, I am.
+
+     Q.   When did you first become aware that there were
+problems with the balcony slabs?
+
+     A.   Uh, I would say probably around August of 2022. We
+were doing the balcony pours on floors eleven through fourteen
+during that period.
+
+     Q.   What did you observe?
+
+     A.   There was some question about whether the waterproofing
+membrane was being installed in accordance with the
+manufacturer's specifications. I noticed that the Coastal
+Waterproofing crew was applying the membrane before the
+concrete had fully cured in some areas.
+
+                                                                   Page 5
+
+
+     Q.   Did you report this observation to anyone?
+
+     A.   I mentioned it to the project manager, Tom Brennan.
+
+     Q.   Verbally?
+
+     A.   Yes, verbally. I also noted it in my daily log.
+
+     Q.   Did you write up a non-conformance report?
+
+     A.   No, I did not.
+
+     Q.   Why not?
+
+     A.   Because Tom told me he would handle it with Coastal's
+foreman directly. He said it wasn't necessary to escalate it
+formally.
+
+     Q.   And did the issue get resolved?
+
+     A.   I was told it was. I didn't personally verify the
+corrections.
+
+     Q.   So you didn't inspect the remediation work?
+
+     A.   Not specifically, no. I continued with my other
+supervisory duties.
+
+     Q.   Mr. Castillo, as the superintendent of record, wasn't
+it your responsibility to verify that identified defects were
+corrected?
+
+          MR. HALPERN: Objection. Form. Calls for a legal
+     conclusion.
+
+          MS. RUIZ: You can answer.
+
+
+                                                                   Page 6
+
+
+     A.   In general, yes, that would be part of my duties.
+But in this case I relied on Tom's assurance that it had been
+handled.
+
+     Q.   Let me show you what I'm going to mark as
+Plaintiff's Exhibit 1.
+
+          (Plaintiff's Exhibit 1 marked for identification.)
+
+BY MS. RUIZ:
+
+     Q.   Mr. Castillo, do you recognize this document?
+
+     A.   Yes. That's my daily log from August 12, 2022.
+
+     Q.   Is this the log in which you noted the waterproofing
+issue you just described?
+
+     A.   Yes, ma'am.
+
+     Q.   Can you read for the record the entry near the bottom
+of the page under "Issues Observed"?
+
+     A.   It says, "Coastal applying membrane on floors 12 and
+13 before concrete cure time met. Notified T. Brennan."
+
+     Q.   And what is the date written at the top of this log?
+
+     A.   August 12, 2022.
+
+     Q.   Thank you. Now, earlier you testified that you first
+became aware of the balcony slab issues in August 2022, is
+that correct?
+
+     A.   That's right.
+
+
+                                                                   Page 7
+
+
+     Q.   Mr. Castillo, I'd like you to turn to what's been
+marked as Plaintiff's Exhibit 2.
+
+          (Plaintiff's Exhibit 2 marked for identification.)
+
+BY MS. RUIZ:
+
+     Q.   Do you recognize this document?
+
+     A.   Yes. That's RFI number 47.
+
+     Q.   Who prepared this RFI?
+
+     A.   I did.
+
+     Q.   And what is the date on this RFI?
+
+     A.   June 3, 2022.
+
+     Q.   June 3, 2022. And what was the subject of this RFI?
+
+     A.   It's asking the architect for clarification on the
+waterproofing detail at the balcony-to-wall transition. There
+was a conflict between the architectural drawings and the
+waterproofing manufacturer's recommended detail.
+
+     Q.   So as of June 3, 2022, you were aware that there was
+an issue with how the waterproofing was supposed to be
+installed at the balconies?
+
+     A.   I was aware of a detail conflict. That's different
+from knowing there was a defect in the work itself.
+
+     Q.   Mr. Castillo, you testified a few minutes ago that
+you first became aware of the balcony slab issues in August of
+2022. Is that testimony still accurate?
+
+
+                                                                   Page 8
+
+
+     A.   I mean, the detail question came up in June, but the
+actual installation issue I observed was in August. Those are
+two different things in my mind.
+
+     Q.   Did you inform the project manager about the June
+RFI?
+
+     A.   Tom was copied on the RFI when it went out, yes.
+
+     Q.   And did you receive a response?
+
+     A.   The architect responded about ten days later directing
+us to follow the manufacturer's detail.
+
+     Q.   So by mid-June 2022, you had a written directive to
+follow the manufacturer's installation requirements?
+
+     A.   Correct.
+
+     Q.   And yet in August you observed Coastal violating those
+very requirements?
+
+          MR. MORETTI: Objection. Form. Argumentative.
+
+     A.   I observed what appeared to be a deviation, yes.
+
+     Q.   Let me show you Plaintiff's Exhibit 3.
+
+          (Plaintiff's Exhibit 3 marked for identification.)
+
+BY MS. RUIZ:
+
+     Q.   These are photographs taken by the owner's consultant
+in March of 2024. Do you see the condition of the balcony slab
+at Unit 1204?
+
+
+                                                                   Page 9
+
+
+     A.   I can see the photographs, yes.
+
+     Q.   Can you describe what you see?
+
+     A.   There's visible water intrusion staining on the
+underside of the slab and what looks like efflorescence along
+the edge.
+
+     Q.   Based on your experience, what causes that condition?
+
+     A.   Typically that's caused by water migrating through the
+slab or through a failed waterproofing membrane.
+
+     Q.   Mr. Castillo, is the condition shown in these
+photographs consistent with a properly installed waterproofing
+system?
+
+     A.   No. A properly installed system should not allow that
+kind of water migration.
+
+     Q.   Thank you. Let me ask you about scheduling. Were the
+balcony pours on floors eleven through fourteen ahead of
+schedule or behind schedule when they occurred?
+
+     A.   We were behind. Maybe three weeks behind the baseline.
+
+     Q.   And was there pressure from Meridian's management to
+accelerate the work?
+
+     A.   There's always pressure on a project like this. I
+wouldn't call it unusual.
+
+     Q.   Was there a specific directive to catch up on schedule?
+
+     A.   Tom told the crews to work six tens instead of five
+eights during that period, yes.
+
+
+                                                                  Page 10
+
+
+     Q.   And do you believe the accelerated schedule contributed
+to Coastal's crew applying waterproofing before the concrete
+had properly cured?
+
+          MR. HALPERN: Objection. Form. Calls for speculation.
+
+     A.   I think the schedule pressure was a factor, yes. When
+you're trying to make up time, sometimes corners get cut. I'm
+not saying that's what happened for sure, but it's possible.
+
+     Q.   Mr. Castillo, let me show you what's been marked as
+Plaintiff's Exhibit 4.
+
+          (Plaintiff's Exhibit 4 marked for identification.)
+
+BY MS. RUIZ:
+
+     Q.   This is Change Order No. 11. Do you recognize it?
+
+     A.   Yes.
+
+     Q.   What does this change order cover?
+
+     A.   It's for additional waterproofing work on the
+balconies on floors eleven through fourteen. Remediation work.
+
+     Q.   And what is the date?
+
+     A.   October 4, 2022.
+
+     Q.   So approximately six weeks after you observed the
+improper installation, Meridian was issued a change order for
+remediation work on the very same balconies?
+
+     A.   That appears to be correct.
+
+
+                                                                  Page 11
+
+
+     Q.   Who requested this change order?
+
+     A.   Tom Brennan on behalf of Meridian.
+
+     Q.   And what was the amount?
+
+     A.   I believe it was around eighty-seven thousand dollars.
+
+     Q.   Mr. Castillo, is it fair to say that Meridian charged
+the owner for remediation work that was necessary because of
+defective installation by a subcontractor?
+
+          MR. HALPERN: Objection. Form. Mischaracterizes the
+     evidence. Calls for a legal conclusion.
+
+     A.   I wouldn't characterize it that way. I don't know all
+the details of the change order negotiation. That was handled
+above my level.
+
+     Q.   But the physical remediation work was necessary, was
+it not?
+
+     A.   Yes, the work was performed.
+
+     Q.   Because the original installation was defective?
+
+     A.   Because there were concerns about the installation,
+yes.
+
+     Q.   Mr. Castillo, you have been testifying today that the
+installation issue was something Tom Brennan was handling. Do
+you have any documentation of Mr. Brennan's instructions to
+Coastal Waterproofing to correct the installation?
+
+
+                                                                  Page 12
+
+
+     A.   I don't personally have that documentation, no. That
+would be in the project management files.
+
+     Q.   Have you searched for it?
+
+     A.   I haven't been asked to.
+
+     Q.   To your knowledge, does any written record exist of
+Mr. Brennan directing Coastal to correct the installation?
+
+     A.   I'm not aware of one.
+
+     Q.   Did you ever speak directly with Luis Ordoñez, the
+Coastal foreman?
+
+     A.   A few times, in passing. Not about this specific issue.
+
+     Q.   So to summarize: you observed what you believed to be
+improper waterproofing installation, you reported it verbally
+to your project manager, you did not write a non-conformance
+report, you did not personally verify the remediation, and you
+are not aware of any written record of remediation instructions
+being given to the subcontractor. Is that an accurate summary?
+
+     A.   That's accurate, yes.
+
+     Q.   Mr. Castillo, in your eleven years as a superintendent,
+have you ever before failed to document a known installation
+defect with a non-conformance report?
+
+          MR. HALPERN: Objection. Form. Argumentative.
+
+     A.   Not that I recall, no.
+
+
+                                                                  Page 13
+
+
+     Q.   So this was the first time?
+
+     A.   I suppose so, yes.
+
+     Q.   Why?
+
+     A.   I relied on Tom. That was my mistake.
+
+     Q.   Thank you, Mr. Castillo. I have no further questions
+at this time.
+
+          MR. HALPERN: I have a few questions on cross.
+
+                       CROSS-EXAMINATION
+
+BY MR. HALPERN:
+
+     Q.   Mr. Castillo, Mr. Halpern for Meridian Construction.
+Just a few quick clarifications. When you observed the
+waterproofing installation in August of 2022, you are not a
+waterproofing expert, correct?
+
+     A.   Correct.
+
+     Q.   You were relying on general construction knowledge?
+
+     A.   Yes.
+
+     Q.   And it is possible that what you observed was not
+actually a defect, correct?
+
+     A.   It's possible, I suppose.
+
+
+                                                                  Page 14
+
+
+     Q.   Mr. Brennan was your supervisor on the project?
+
+     A.   Yes.
+
+     Q.   And it was reasonable for you to rely on his judgment
+regarding how to handle the issue?
+
+     A.   I thought so at the time.
+
+     Q.   Nothing further.
+
+          MR. MORETTI: A few questions for Coastal.
+
+                       CROSS-EXAMINATION
+
+BY MR. MORETTI:
+
+     Q.   Mr. Castillo, Anthony Moretti for Coastal Waterproofing.
+You never personally inspected any of the waterproofing membrane
+after installation, did you?
+
+     A.   Not specifically, no.
+
+     Q.   So when you say the installation was defective, you
+are basing that on what you saw during installation, not on
+post-installation inspection?
+
+     A.   Correct.
+
+     Q.   And you don't know whether Coastal returned to correct
+the areas in question?
+
+     A.   I don't know personally, no.
+
+     Q.   Nothing further.
+
+
+                                                                  Page 15
+
+
+          MS. RUIZ: Brief redirect.
+
+                     REDIRECT EXAMINATION
+
+BY MS. RUIZ:
+
+     Q.   Mr. Castillo, earlier you testified that the remediation
+work covered by Change Order No. 11 was performed. How do you
+know it was performed if you did not personally inspect it?
+
+     A.   Because I signed off on the change order payment
+application. Payment was made, so the work must have been
+done.
+
+     Q.   So your knowledge that the remediation occurred is
+based on a payment record, not on physical inspection?
+
+     A.   Yes, that's fair.
+
+     Q.   Nothing further.
+
+          MR. HALPERN: Nothing further from Meridian.
+          MR. MORETTI: Nothing from Coastal.
+
+          (Deposition concluded at 2:43 p.m.)
+
+
+                                                                  Page 16
+
+
+                       C E R T I F I C A T E
+
+STATE OF FLORIDA       )
+COUNTY OF MIAMI-DADE   )
+
+     I, Diana Holbrook, Registered Professional Reporter and
+Florida Professional Reporter, do hereby certify that I was
+authorized to and did stenographically report the foregoing
+deposition of RAYMOND CASTILLO; that a review of the transcript
+was requested; and that the transcript is a true record of the
+testimony given by the witness.
+
+     I further certify that I am not a relative, employee,
+attorney, or counsel of any of the parties, nor am I a relative
+or employee of any of the parties' attorneys or counsel
+connected with the action, nor am I financially interested in
+the action.
+
+     Dated this 28th day of March, 2025.
+
+
+                         _________________________________
+                         Diana Holbrook, RPR, FPR
+                         Notary Public, State of Florida
+
+
+                                                                  Page 17

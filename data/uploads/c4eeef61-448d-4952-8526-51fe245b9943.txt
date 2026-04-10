@@ -1,0 +1,198 @@
+KEYSTONE BUILDING GROUP, INC.
+2840 Commerce Parkway
+West Palm Beach, Florida 33411
+(561) 555-0180  |  info@keystonebuilding.example
+
+
+
+                                                    March 22, 2024
+
+
+VIA CERTIFIED MAIL AND EMAIL
+Return Receipt Requested
+
+Richard Vance, Managing Member
+Palmetto Ridge Development, LLC
+1100 PGA Boulevard, Suite 800
+Palm Beach Gardens, FL 33418
+
+CC:  Daniel Whitfield, AIA
+     Whitfield & Associates Architects, P.A.
+     450 Royal Palm Way, Suite 400
+     Palm Beach, FL 33480
+
+
+     RE:  NOTICE OF CLAIM
+          Palmetto Ridge Medical Office Building
+          Project No. PRM-2022-017
+          Contract dated April 12, 2023
+          Claim for Additional Contract Time and Compensation
+
+
+Dear Mr. Vance:
+
+This letter constitutes formal written notice of claim by
+Keystone Building Group, Inc. ("Keystone") under Article 8 of
+the Contract dated April 12, 2023, between Palmetto Ridge
+Development, LLC ("Owner") and Keystone for the Palmetto Ridge
+Medical Office Building project.
+
+Keystone hereby claims entitlement to (1) an extension of the
+Contract Time of ninety-four (94) calendar days and (2)
+additional compensation in the approximate amount of
+$1,847,000.00, subject to further analysis and documentation,
+for delays and impacts caused by the Owner and the Architect
+as more fully described below.
+
+
+I.   BACKGROUND
+
+Keystone commenced work under the Contract on May 1, 2023
+pursuant to the Owner's Notice to Proceed. The Contract
+established a Substantial Completion date of August 15, 2024,
+representing a 471-day construction duration.
+
+As of the data date of Keystone's Schedule Update No. 11
+(February 29, 2024), the project is 94 calendar days behind the
+baseline schedule, with a current forecast Substantial Completion
+date of November 17, 2024. Keystone's analysis, supported by
+contemporaneous project records, demonstrates that the
+substantial majority of this delay is attributable to causes
+for which the Owner bears responsibility under the Contract.
+
+
+II.  BASES OF CLAIM
+
+A.   LATE RESPONSES TO CRITICAL-PATH REQUESTS FOR INFORMATION
+
+Contract Section 8.2 requires the Architect to respond to
+Requests for Information within seven (7) calendar days. During
+the period from July 2023 through February 2024, the average
+response time to RFIs submitted by Keystone was twenty (20)
+calendar days, nearly three times the contractual requirement.
+
+Eight critical-path RFIs experienced response delays of 13 to
+28 days each. The most significant individual impact was
+RFI-089 (Level 3 mechanical room structural conflict), which
+received a response 28 days after the required date, suspending
+steel erection at Level 3 from October 20, 2023 through
+November 16, 2023.
+
+Cumulative critical-path delay attributable to RFI response
+delays: approximately 34 calendar days.
+
+B.   OWNER-DIRECTED DESIGN CHANGES
+
+Between December 2023 and February 2024, the Owner issued
+three significant design change directives that impacted the
+critical path:
+
+  1. December 4, 2023 - Conversion of Level 2 shell space to
+     imaging suite
+  2. January 8, 2024 - Revision of elevator specifications from
+     hydraulic to traction
+  3. January 22, 2024 - Relocation of primary electrical service
+     entrance
+
+These changes required redesign work, subcontractor re-mobilization,
+and re-sequencing of dependent trades. Change Order proposals
+COP-017, COP-019, and COP-021 addressing these changes remain
+unresolved.
+
+Cumulative critical-path delay attributable to owner-directed
+changes: approximately 42 calendar days.
+
+C.   DELAYED OWNER-FURNISHED EQUIPMENT
+
+The Contract contemplates owner-furnished installation of
+medical imaging equipment on Levels 1 and 2. The Owner's
+procurement of this equipment has not proceeded in accordance
+with the baseline schedule assumptions, and current vendor
+delivery estimates reflect an 8-10 week delay.
+
+Cumulative critical-path delay attributable to owner-furnished
+equipment delays: approximately 18 calendar days.
+
+
+III. MITIGATION EFFORTS
+
+Keystone has undertaken substantial acceleration efforts at
+its own cost to mitigate the impacts described above, including
+extended work shifts, additional equipment mobilization, and
+subcontractor overtime authorization. These efforts have
+recovered approximately 22 calendar days of schedule time, but
+are insufficient to offset the cumulative delay impacts
+caused by the Owner.
+
+
+IV.  RELIEF REQUESTED
+
+Keystone respectfully requests:
+
+  1. Extension of the Contract Time by ninety-four (94) calendar
+     days, revising the Substantial Completion date to
+     November 17, 2024;
+
+  2. Additional compensation in the approximate amount of
+     $1,847,000.00, consisting of:
+
+     - Extended general conditions (94 days @ $8,200/day):   $  770,800.00
+     - Acceleration and overtime costs:                       $  412,000.00
+     - Subcontractor delay damages (pass-through):            $  518,000.00
+     - Extended bond and insurance premiums:                  $   94,200.00
+     - Overhead and profit on the above (5%):                 $   89,750.00
+     - Contingency (3%):                                      $   57,000.00
+                                                              ------------
+                                                TOTAL:        $1,941,750.00
+
+     (Subject to final documentation and detailed analysis.)
+
+  3. Agreement that no liquidated damages shall be assessed
+     against Keystone for delays attributable to the causes
+     described herein;
+
+  4. Prompt resolution of pending Change Order Proposals
+     COP-017, COP-019, and COP-021.
+
+
+V.   RESERVATION OF RIGHTS
+
+Keystone reserves all rights under the Contract and applicable
+law, including the right to supplement this Claim as additional
+information becomes available, the right to recover consequential
+damages where permitted, and the right to challenge the
+enforceability of Contract Section 9.2 (No Damages for Delay)
+to the extent the Owner's conduct constitutes active interference
+or bad faith.
+
+Keystone also reserves the right to pursue mediation, arbitration,
+or litigation as provided in Article 12 of the Contract if this
+Claim cannot be resolved through direct negotiation.
+
+
+VI.  REQUEST FOR MEETING
+
+Keystone requests a meeting with the Owner and Architect within
+the next fourteen (14) days to discuss this Claim and attempt
+to reach a resolution. Please contact the undersigned at your
+earliest convenience to schedule.
+
+
+                                    Very truly yours,
+
+
+                                    _______________________________
+                                    Michael Torres
+                                    President
+                                    Keystone Building Group, Inc.
+
+
+Enclosures:
+  - Schedule Update No. 11 Narrative (dated March 6, 2024)
+  - RFI Log Summary
+  - Supporting correspondence
+
+
+cc:  Sarah Kim, Project Executive, Keystone
+     Jorge Medina, Project Manager, Keystone
+     Keystone legal file
