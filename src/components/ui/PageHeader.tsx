@@ -17,6 +17,7 @@ export function PageHeader({ title, subtitle, action }: PageHeaderProps) {
     >
       <div>
         <h1
+          suppressHydrationWarning
           className="font-semibold"
           style={{
             fontFamily: "var(--font-serif)",

@@ -1,129 +1,5 @@
 [
   {
-    "id": "4cc3ea03-98b5-4412-bd17-09aace065412",
-    "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
-    "summary": "Maria Gonzalez's legal counsel demands $250,000 settlement from State Farm Insurance for a traffic accident involving their insured, Thomas Whitfield. The accident resulted in significant injuries, medical expenses, and lost wages for Ms. Gonzalez, who was struck when Mr. Whitfield ran a red light.",
-    "keyIssues": [
-      {
-        "id": "issue_1",
-        "title": "Failure to yield",
-        "description": "Thomas Whitfield failed to yield at a red traffic signal, causing a collision with Maria Gonzalez's vehicle.",
-        "severity": "high",
-        "pageRef": "1"
-      },
-      {
-        "id": "issue_2",
-        "title": "Medical expenses",
-        "description": "Maria Gonzalez incurred significant medical expenses totaling $76,380 as a result of the accident.",
-        "severity": "high",
-        "pageRef": "1"
-      },
-      {
-        "id": "issue_3",
-        "title": "Lost wages",
-        "description": "Maria Gonzalez lost wages totaling $13,398 due to inability to work following the accident.",
-        "severity": "medium",
-        "pageRef": "1"
-      },
-      {
-        "id": "issue_4",
-        "title": "Pain and suffering",
-        "description": "Maria Gonzalez has experienced significant ongoing pain and suffering impacting her daily life and professional duties.",
-        "severity": "high",
-        "pageRef": "1"
-      }
-    ],
-    "extractedFacts": [
-      {
-        "id": "fact_1",
-        "fact": "Maria Gonzalez was injured in a car accident.",
-        "category": "event",
-        "pageRef": "1",
-        "confidence": "high"
-      },
-      {
-        "id": "fact_2",
-        "fact": "Accident occurred on November 3, 2023.",
-        "category": "date",
-        "pageRef": "1",
-        "confidence": "high"
-      },
-      {
-        "id": "fact_3",
-        "fact": "Demand for settlement is $250,000.",
-        "category": "amount",
-        "pageRef": "1",
-        "confidence": "high"
-      },
-      {
-        "id": "fact_4",
-        "fact": "Mr. Whitfield cited for traffic violation.",
-        "category": "event",
-        "pageRef": "1",
-        "confidence": "high"
-      }
-    ],
-    "timeline": [
-      {
-        "id": "event_4",
-        "date": "March 15, 2024",
-        "description": "Demand letter sent to State Farm Insurance.",
-        "significance": "critical"
-      },
-      {
-        "id": "event_3",
-        "date": "November 18, 2023",
-        "description": "MRI confirmed herniated disc at L4-L5.",
-        "significance": "important"
-      },
-      {
-        "id": "event_1",
-        "date": "November 3, 2023",
-        "description": "Maria Gonzalez was involved in a car accident and sustained injuries.",
-        "significance": "critical"
-      },
-      {
-        "id": "event_2",
-        "date": "November 4, 2023",
-        "description": "Maria Gonzalez was discharged from the hospital.",
-        "significance": "important"
-      }
-    ],
-    "missingInformation": [
-      {
-        "id": "missing_1",
-        "description": "Definitive acceptance or response from State Farm Insurance.",
-        "importance": "required"
-      }
-    ],
-    "flags": [
-      {
-        "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
-        "type": "contradiction",
-        "source": "manual",
-        "text": "Failure to yield",
-        "location": "issue_1",
-        "resolved": true,
-        "id": "416a07e6-78ba-42ca-b7c3-9a5fa2c08f4e",
-        "createdAt": "2026-04-09T12:05:26.296Z",
-        "resolvedAt": "2026-04-09T12:06:02.332Z"
-      },
-      {
-        "documentId": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
-        "type": "contradiction",
-        "source": "manual",
-        "text": "Pain and suffering",
-        "location": "issue_4",
-        "resolved": true,
-        "id": "11b42052-44f8-4000-a599-9100da4d0462",
-        "createdAt": "2026-04-09T12:06:10.235Z",
-        "resolvedAt": "2026-04-09T12:06:22.367Z"
-      }
-    ],
-    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
-    "processedAt": "2026-04-09T12:04:45.291Z"
-  },
-  {
     "id": "3fa36171-4420-4d49-bb09-383feb35edfc",
     "documentId": "6281476c-6f34-476e-894c-28837c1e91bb",
     "summary": "The document is a demand letter from Castillo & Associates, P.A., representing Maria Gonzalez in a personal injury claim against Thomas Whitfield following a vehicle collision. It details the incident, injuries, medical treatments, and resulting damages, demanding $250,000 for settlement.",
@@ -1849,5 +1725,505 @@
     ],
     "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
     "processedAt": "2026-04-10T03:05:05.162Z"
+  },
+  {
+    "id": "ddee2a06-4a73-469a-af40-49d4634b9e8b",
+    "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+    "summary": "The document pertains to a construction dispute between Scherer Construction, LLC and Hedquist Construction, Inc., centered on alleged breaches of contract such as substandard asphalt paving work, breach of the implied covenant of good faith and fair dealing, changes from asphalt to concrete paving, and responsibilities for repairs. The court addresses these issues, ultimately awarding Scherer withheld payments and remanding specific matters related to good faith for further consideration, highlighting disputes over repair obligations and contractual breaches.",
+    "keyIssues": [
+      {
+        "id": "issue_1",
+        "title": "Breach of Contract - Failure to Perform",
+        "description": "Allegations that Scherer failed to provide reasonable notice to Hedquist to repair defective work.",
+        "severity": "high",
+        "pageRef": "Page 4"
+      },
+      {
+        "id": "issue_2",
+        "title": "Improper Solicitation of Change Order - Cardinal Change Doctrine",
+        "description": "Claim that Hedquist improperly solicited a change order from the City of Casper, resulting in a significant change in project terms.",
+        "severity": "high",
+        "pageRef": "Page 5"
+      },
+      {
+        "id": "issue_3",
+        "title": "Change in Material - Asphalt to Concrete",
+        "description": "Change in paving material from asphalt to concrete without proper notice, leading to a reduction in the subcontract value and allegations of breach of contract.",
+        "severity": "medium",
+        "pageRef": "Page 5"
+      },
+      {
+        "id": "issue_1",
+        "title": "Allegation of Deficient Asphalt Work",
+        "description": "Hedquist alleged Scherer's asphalt work was defective, citing deficiencies in density and thickness, leading to a dispute over responsibility and resulting set-off claims.",
+        "severity": "high",
+        "pageRef": "Page 7"
+      },
+      {
+        "id": "issue_2",
+        "title": "Denial of Reasonable Time for Repairs",
+        "description": "The court found Hedquist failed to give Scherer reasonable time to address alleged defects, resulting in a denial of Hedquist's set-off request.",
+        "severity": "high",
+        "pageRef": "Page 8"
+      },
+      {
+        "id": "issue_1",
+        "title": "Breach of Implied Covenant of Good Faith and Fair Dealing",
+        "description": "The document discusses whether a breach of the implied covenant of good faith and fair dealing occurred in the context of a contract. It explores distinctions between tort-based and contract-based claims and the enforceability of this covenant in the context of commercial contracts.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_1",
+        "title": "Breach of Covenant of Good Faith and Fair Dealing",
+        "description": "The document discusses whether a breach of the covenant of good faith and fair dealing can be claimed in Wyoming, highlighting specific cases where this was acknowledged or rejected by the courts.",
+        "severity": "high"
+      },
+      {
+        "id": "issue_2",
+        "title": "Employment vs Commercial Contracts",
+        "description": "The document distinguishes between the application of the implied covenant in employment contracts, where termination clauses are prevalent, and commercial contracts covered by the Uniform Commercial Code.",
+        "severity": "medium"
+      },
+      {
+        "id": "issue_1",
+        "title": "Cardinal Change Dispute",
+        "description": "Scherer alleges that a cardinal change occurred when Hedquist was involved in a significant alteration of the contract terms that affected the material nature of the work.",
+        "severity": "high",
+        "pageRef": "Page 13"
+      },
+      {
+        "id": "issue_2",
+        "title": "Withholding Payments for Defective Work",
+        "description": "Hedquist withheld payments from Scherer alleging non-compliance with contractual terms for defect correction and alleged failure to perform work in a timely manner.",
+        "severity": "medium",
+        "pageRef": "Page 14"
+      },
+      {
+        "id": "issue_1",
+        "title": "Implied Covenant of Good Faith and Fair Dealing",
+        "description": "The document identifies a dispute over whether Hedquist failed in the implied covenant of good faith and fair dealing in the contract with Scherer.",
+        "severity": "high",
+        "pageRef": "Page 15"
+      }
+    ],
+    "extractedFacts": [
+      {
+        "id": "fact_1",
+        "fact": "Scherer Construction, LLC was a subcontractor for a project involving East Second Street Reconstruction in Casper.",
+        "category": "party",
+        "pageRef": "Page 4",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Hedquist Construction, Inc. was the main contractor for the East Second Street Reconstruction project.",
+        "category": "party",
+        "pageRef": "Page 5",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "The subcontract value was reduced from $448,240.45 to $105,098.81 due to a change in materials from asphalt to concrete.",
+        "category": "amount",
+        "pageRef": "Page 5",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "The original subcontract called for the use of performance graded asphalt, which was later changed to concrete.",
+        "category": "obligation",
+        "pageRef": "Page 4",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Scherer expended over $35,000 on special equipment and materials for asphalt paving which became superfluous due to the change to concrete.",
+        "category": "amount",
+        "pageRef": "Page 5",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_1",
+        "fact": "Judgment was issued on July 21, 1999.",
+        "category": "date",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Scherer awarded $28,280.74 withheld payments.",
+        "category": "amount",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Scherer subcontracted by Hedquist.",
+        "category": "party",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_4",
+        "fact": "Dispute over responsibility for substandard work in March 1999.",
+        "category": "date",
+        "confidence": "high",
+        "pageRef": "Page 7"
+      },
+      {
+        "id": "fact_5",
+        "fact": "Hedquist hired 71 Construction for repairs.",
+        "category": "party",
+        "confidence": "high",
+        "pageRef": "Page 8"
+      },
+      {
+        "id": "fact_1",
+        "fact": "Wyoming recognizes a claim for breach of the implied covenant of good faith and fair dealing under contract law.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "The district court granted summary judgment in favor of Scherer, which is being contested based on the existence of the implied covenant.",
+        "category": "event",
+        "pageRef": "8",
+        "confidence": "medium"
+      },
+      {
+        "id": "fact_1",
+        "fact": "In Wyoming, the at-will employment doctrine allows termination for any or no reason unless otherwise specified by contract.",
+        "category": "obligation",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Restatement (Second) of Contracts § 205 is often referenced for the covenant of good faith and fair dealing.",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "Case references: Cody Country v. Chamber, Bourgeous v. Horizon Healthcare Corp.",
+        "category": "other",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_1",
+        "fact": "Scherer was required to respond to the demand by July 5.",
+        "category": "date",
+        "pageRef": "Page 13",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "Hedquist was entitled to withhold payment from Scherer for defect correction costs under the subcontract.",
+        "category": "obligation",
+        "pageRef": "Page 13",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_3",
+        "fact": "The district court concluded that Hedquist did not provide reasonable notice to Scherer for defect correction.",
+        "category": "event",
+        "pageRef": "Page 14",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_1",
+        "fact": "Hedquist and Scherer are parties involved in the construction contract dispute.",
+        "category": "party",
+        "pageRef": "Page 15",
+        "confidence": "high"
+      },
+      {
+        "id": "fact_2",
+        "fact": "The district court's order is partially affirmed and partially reversed for reconsideration.",
+        "category": "event",
+        "pageRef": "Page 15",
+        "confidence": "high"
+      }
+    ],
+    "timeline": [
+      {
+        "id": "event_1",
+        "date": "1994",
+        "description": "Case of Husman v. State Farm Automobile Insurance Company mentioned.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_2",
+        "date": "1996",
+        "description": "Four Nines Gold, Inc. v. 71 Construction, Inc. case discussed.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_3",
+        "date": "1997",
+        "description": "Case mentioned: Astec Gas & Oil Company v. Roemer Oil Corporation.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_1",
+        "date": "2000",
+        "description": "Hoffman v. Bachmeier decision regarding summary judgment and tort-based theory was cited.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_3",
+        "date": "January 21, 2000",
+        "description": "Court hearing on the dispute.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_1",
+        "date": "July 1",
+        "description": "Hedquist sent a written demand to Scherer to correct defects.",
+        "significance": "important"
+      },
+      {
+        "id": "event_4",
+        "date": "July 10, 1998",
+        "description": "Scherer filed an action against Hedquist claiming breach of subcontract and implied covenant of good faith and fair dealing.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_1",
+        "date": "July 21, 1999",
+        "description": "Judgment for Scherer issued.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "July 5",
+        "description": "Deadline for Scherer to respond to Hedquist's demand.",
+        "significance": "important"
+      },
+      {
+        "id": "event_3",
+        "date": "July 6",
+        "description": "Scherer did not respond by this date, prompting Hedquist to make arrangements for repairs.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_3",
+        "date": "June 19, 1998",
+        "description": "City Engineer and Public Services Director recommended substituting concrete for asphalt paving, and a change order was approved.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "June 3, 1998",
+        "description": "Hedquist sent a letter to the Project Engineer detailing a cost comparison between concrete and asphalt.",
+        "significance": "important"
+      },
+      {
+        "id": "event_1",
+        "date": "March 1, 2001",
+        "description": "Wyoming Supreme Court heard arguments in the dispute between Scherer Construction, LLC and Hedquist Construction, Inc.",
+        "significance": "critical"
+      },
+      {
+        "id": "event_2",
+        "date": "March 1999",
+        "description": "Dispute over asphalt deficiencies reported.",
+        "significance": "important"
+      },
+      {
+        "id": "event_2",
+        "date": "October 2023",
+        "description": "Document creation discussing implications of legal precedents on the contract dispute.",
+        "significance": "contextual"
+      },
+      {
+        "id": "event_1",
+        "date": "Unknown",
+        "description": "District court's order on summary judgment was rendered and is now being reconsidered.",
+        "significance": "critical"
+      }
+    ],
+    "missingInformation": [
+      {
+        "id": "missing_1",
+        "description": "Specific contract provisions cited for breach by Hedquist or Scherer are not detailed.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "The exact nature of the defective work alleged by Hedquist is not described.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_1",
+        "description": "Specific breakdown of the awarded $28,280.74 in withheld payments.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Detailed response to Scherer's refusal to complete 'punch list' repairs.",
+        "importance": "helpful"
+      },
+      {
+        "id": "missing_1",
+        "description": "The specific details of the contract terms that are claimed to have been breached are not provided in this document.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "There is no discussion or evidence of the actual performance or actions taken by the parties that would constitute the alleged breach.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_1",
+        "description": "Specific contract provisions or factual context that led to the case discussions mentioned are not provided.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Details on the outcomes of the specific court cases discussed in the document.",
+        "importance": "helpful"
+      },
+      {
+        "id": "missing_1",
+        "description": "No specific monetary amounts are discussed for the withheld payments or cost of defect corrections.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "The document does not specify the exact nature of the alleged defective work.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_1",
+        "description": "Specific dates of the court's prior decision and this reconsideration are not provided.",
+        "importance": "required"
+      },
+      {
+        "id": "missing_2",
+        "description": "Details of the alleged deficiencies and context for the court's decision are unclear.",
+        "importance": "required"
+      }
+    ],
+    "flags": [
+      {
+        "id": "338f7d9c-6513-4c1d-be2c-5c96265c1323",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific contract provisions cited for breach by Hedquist or Scherer are not detailed.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "6f6b86aa-6bef-431a-87d3-e12f50daa831",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "The exact nature of the defective work alleged by Hedquist is not described.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "8334b3aa-06f1-4eb2-a557-cd231fc744f7",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific breakdown of the awarded $28,280.74 in withheld payments.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "2c48fb7d-2ae2-4460-8373-83c378f93890",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Detailed response to Scherer's refusal to complete 'punch list' repairs.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "f8b1a5e8-8a5e-43de-9bb3-07f903d183e3",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "The specific details of the contract terms that are claimed to have been breached are not provided in this document.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "daa161b6-85bc-4d52-8e60-1ac796a84390",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "There is no discussion or evidence of the actual performance or actions taken by the parties that would constitute the alleged breach.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "efc15f0c-d123-4169-83cc-8f336efcd3eb",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific contract provisions or factual context that led to the case discussions mentioned are not provided.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "6b996fbf-e4ee-4d14-959f-34c5b2ff7d33",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Details on the outcomes of the specific court cases discussed in the document.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "3e215807-0709-41dd-92dc-0c8b2dbc5dff",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "No specific monetary amounts are discussed for the withheld payments or cost of defect corrections.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "1392d631-3ce0-4aed-89c4-5bb40583add1",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "The document does not specify the exact nature of the alleged defective work.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "cbbd5fb3-56e7-4d32-8b73-b7e53e5aeb52",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Specific dates of the court's prior decision and this reconsideration are not provided.",
+        "location": "missing_1",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      },
+      {
+        "id": "e88f3547-bd35-4492-8a8a-59b6e28b0d62",
+        "documentId": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+        "type": "missing_info",
+        "source": "auto",
+        "text": "Details of the alleged deficiencies and context for the court's decision are unclear.",
+        "location": "missing_2",
+        "createdAt": "2026-04-14T16:45:59.873Z",
+        "resolved": false
+      }
+    ],
+    "disclaimer": "This output is not legal advice and requires attorney review before any action is taken.",
+    "processedAt": "2026-04-14T16:45:59.874Z"
   }
 ]

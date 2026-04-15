@@ -10,18 +10,20 @@ import OpenAI from "openai";
 import type {
   Matter,
   Document,
+  Draft,
   ProcessingResult,
   Flag,
   ChatConversation,
   ChatMessage,
   Citation,
-  SuggestedAction,
+  ChatAction,
 } from "@/types";
 import { readFile } from "@/lib/store/fileStore";
 import { extractText } from "@/lib/parsers/extractText";
+import { MODELS } from "@/lib/ai/models";
 
 const client = new OpenAI();
-const MODEL = "gpt-4o";
+const MODEL = MODELS.fast;
 
 // ── Token estimation ──────────────────────────────────────────────────────────
 // Rough approximation: 4 chars ≈ 1 token
@@ -29,12 +31,28 @@ function estimateTokens(text: string): number {
   return Math.ceil(text.length / 4);
 }
 
+// ── HTML stripping ────────────────────────────────────────────────────────────
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, " ")      // replace tags with a space
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s{2,}/g, " ")       // collapse whitespace
+    .trim();
+}
+
 // ── System prompt ─────────────────────────────────────────────────────────────
 export function buildSystemPrompt(
   matter: Matter,
   documents: Document[],
   results: Map<string, ProcessingResult>,
-  flags: Array<Flag & { documentFileName: string }>
+  flags: Array<Flag & { documentFileName: string }>,
+  drafts: Draft[] = [],
+  docNameMap: Map<string, string> = new Map()
 ): string {
   const TOKEN_BUDGET = 10000;
   let usedTokens = 0;
@@ -161,6 +179,56 @@ export function buildSystemPrompt(
     }
   }
 
+  // ── Drafts ───────────────────────────────────────────────
+  let draftsSection = "";
+  if (usedTokens < TOKEN_BUDGET * 0.94) {
+    if (drafts.length === 0) {
+      draftsSection = "\n\nDRAFTS IN THIS MATTER: none yet. The user has not generated any drafts in the workspace.";
+      usedTokens += estimateTokens(draftsSection);
+    } else {
+      const inProgress = drafts.filter((d) => (d.status ?? "draft") !== "final").length;
+      const finalized = drafts.filter((d) => d.status === "final").length;
+      const header = `\n\nDRAFTS IN THIS MATTER (${drafts.length} total, ${inProgress} in progress, ${finalized} finalized):`;
+
+      // Try each draft with 500-char excerpts first, then 200, then no excerpt
+      let placed = false;
+      for (const excerptLen of [500, 200, 0]) {
+        const lines: string[] = [header];
+        for (const d of drafts) {
+          const sourceName = d.documentId
+            ? (docNameMap.get(d.documentId) ?? "unknown document")
+            : "matter-wide";
+          const statusLine =
+            d.status === "final"
+              ? `final (finalized ${d.finalizedAt ? d.finalizedAt.slice(0, 10) : "unknown"})`
+              : `draft (last edited ${d.updatedAt.slice(0, 10)})`;
+          const typeLabel = d.draftType.replace(/_/g, " ");
+          let entry = `\n- Title: "${d.title}"\n  Type: ${typeLabel}\n  Status: ${statusLine}\n  Source: ${sourceName}`;
+          if (excerptLen > 0 && d.content) {
+            const plain = stripHtml(d.content).slice(0, excerptLen);
+            entry += `\n  Excerpt: "${plain}${plain.length >= excerptLen ? "\u2026" : ""}"`;
+          }
+          lines.push(entry);
+        }
+        const candidate = lines.join("");
+        if (usedTokens + estimateTokens(candidate) < TOKEN_BUDGET * 0.94) {
+          draftsSection = candidate;
+          usedTokens += estimateTokens(candidate);
+          placed = true;
+          break;
+        }
+      }
+      // Last resort: just the count
+      if (!placed) {
+        const fallback = `\n\nDRAFTS IN THIS MATTER: ${drafts.length} draft${drafts.length !== 1 ? "s" : ""} total. Context too large to list individually.`;
+        if (usedTokens + estimateTokens(fallback) < TOKEN_BUDGET * 0.96) {
+          draftsSection = fallback;
+          usedTokens += estimateTokens(fallback);
+        }
+      }
+    }
+  }
+
   // ── Flags ────────────────────────────────────────────────
   let flagsSection = "";
   if (flags.length > 0 && usedTokens < TOKEN_BUDGET * 0.95) {
@@ -180,6 +248,15 @@ export function buildSystemPrompt(
   // ── Rules and output format ──────────────────────────────
   const rules = `
 
+DRAFTS IN THE WORKSPACE — BEHAVIOR RULES:
+- You have read-only awareness of drafts the user has generated in the workspace for this matter. When relevant, reference existing drafts by title in your answers.
+- When the user asks what they've been working on, what drafts exist, or what has been finalized, answer from the DRAFTS IN THIS MATTER section above.
+- Do not invent drafts that aren't in the section. If the user asks about a draft that doesn't exist, respond with a suggested action to create it — never say "go to the workspace" without also returning a suggestedAction button that takes them there.
+- If the user asks a question that an existing draft already addresses, point to it: e.g. "You addressed this in your [draft title] — it's in draft status, last edited [date]."
+- Do not quote large portions of draft content verbatim. Paraphrase from the excerpt.
+- You cannot edit, delete, or modify existing drafts from chat. If the user asks you to modify an existing draft, redirect them: "I can't modify drafts from the chat. Open the workspace to make changes." and include an open_draft suggestedAction if the draft id is known.
+- You CAN suggest new drafts via the suggestedActions field. Suggesting is actively encouraged whenever the user asks to begin work on any document.
+
 ━━━ CITATION CONTRACT — NON-NEGOTIABLE ━━━
 Every inline marker [cite:N] you write in "content" MUST have a corresponding entry in the "citations" array with "id": "cite:N". One marker = one citation object. If you write [cite:1] and [cite:2] in content, citations must contain objects with "id": "cite:1" and "id": "cite:2". An empty citations array combined with any inline markers is a structural error that breaks the application. If you cannot cite a source for a claim, do not make the claim.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -189,22 +266,63 @@ RULES:
 2. CITATIONS ARE MANDATORY: Every factual claim must include an inline [cite:N] marker AND a matching entry in the citations array. The N in [cite:N] must match the "id" field "cite:N" in citations. Number citations sequentially starting at 1.
 3. If the documents do not contain information to answer a question, say so explicitly: "The documents in this matter do not contain information about [topic]." Do not use citation markers for this statement.
 4. Never provide legal advice or strategic recommendations. Describe what the documents say. If the attorney asks for advice, redirect: "I can help you understand what the documents say about this — [rephrased version of the question as a factual question]."
-5. When appropriate, suggest a next step (draft a document, view a specific document, view a flag). These are suggestions only.
+5. When the user asks to draft, write, prepare, create, make, or produce a document, you MUST return at least one suggestedAction of the appropriate type. Do not refuse — return the action button and let the user trigger generation from the workspace.
 6. If a question requires a specific quote or text not in your summaries, use the get_document_excerpt tool to retrieve it. Use the document's ID (the part in [brackets] above) as the documentId argument.
 7. If you see any reference to a case or matter other than "${matter.name}", respond: "I only have access to the documents in ${matter.name}. I can't help with other cases from this conversation."
 8. Write as a senior associate briefing a partner: direct, factual, unhedged, but never overconfident. No preamble. No "certainly" or "great question."
 
+SUGGESTED ACTIONS — mandatory triggers and format:
+
+You MUST include at least one suggestedAction when the user's message contains any of these signals:
+- Words: "draft", "write", "prepare", "create", "make", "let's do", "help me with", "produce", "generate", "start", "begin" — followed by any document type
+- Document types that trigger actions: claim letter, notice of dispute, notice of claim, demand letter, mediation brief, motion, summary, client update, delay narrative, defect summary, deposition outline, formal notice
+- Examples that MUST return an action:
+  - "let's make the formal notice of dispute" → draft_demand_letter or draft_claim_letter
+  - "draft a claim letter" → draft_claim_letter
+  - "write a client update" → draft_client_update
+  - "help me prepare a mediation brief" → draft_mediation_brief
+  - "what should I do next?" → open_workspace or the most relevant draft type given the case context
+
+NEVER respond with "I can't create drafts" or "go to the workspace to draft" without also returning a suggestedAction. The action button IS the way to create drafts. Your job is to return the right button, not to refuse.
+
+Available action types:
+
+- "draft_claim_letter" — formal notice of claim; use for "claim letter", "notice of claim", "notice of dispute", "asserting rights"
+- "draft_demand_letter" — initial demand or formal notice; use for "demand letter", "formal notice", "notice of dispute" (when no claim is yet filed)
+- "draft_mediation_brief" — when the user mentions mediation, settlement, or dispute resolution
+- "draft_motion_outline" — when the user discusses motions or formal court filings
+- "draft_case_summary" — when the user wants a structured summary of the case
+- "draft_client_update" — when the user mentions updating their client
+- "draft_delay_narrative" — for delay-related drafting in delay claim cases
+- "draft_defect_summary" — for defect-related drafting in defect cases
+- "draft_deposition_outline" — when discussing a specific deposition document (requires documentId from the document list above)
+- "open_draft" — when referencing an existing draft the user might want to open (requires draftId)
+- "open_document" — when pointing to a specific document (requires documentId)
+- "open_workspace" — generic "go to workspace" suggestion
+- "open_matter" — generic "open the case file" suggestion
+
+Format rules:
+- Each entry must have "type", "label" (3–6 word user-facing button text), and "matterId": "${matter.id}"
+- draft_deposition_outline also requires "documentId": "<uuid of the deposition doc>"
+- open_draft requires "draftId": "<id of the existing draft>"
+- open_document requires "documentId": "<uuid>"
+- Optionally include "prefill": "<one sentence of context from this conversation to pass to the workspace>"
+- Do not suggest the same action twice in one response
+- Do not suggest more than 3 actions per message
+
 OUTPUT FORMAT — YOU MUST RETURN VALID JSON:
 Your entire response must be a single JSON object. No markdown fences, no backticks, no text outside the JSON.
 
-EXAMPLE (two citations, two markers):
+EXAMPLE (two citations, one suggested action):
 {
   "content": "The waterproofing issue was first documented on August 12, 2022 [cite:1]. Castillo acknowledged awareness in his deposition [cite:2].",
   "citations": [
     { "id": "cite:1", "documentId": "abc-uuid-here", "documentName": "Daily Log 8-12-22.pdf", "excerpt": "Waterproofing membrane failure noted at north elevation", "location": "Entry dated Aug 12 2022" },
     { "id": "cite:2", "documentId": "def-uuid-here", "documentName": "Castillo Deposition.pdf", "excerpt": "I became aware of the issue in August", "location": "p.47" }
   ],
-  "suggestedActions": []
+  "suggestedActions": [
+    { "type": "draft_claim_letter", "label": "Draft a claim letter", "matterId": "abc-matter-id", "prefill": "User is investigating waterproofing failure and Castillo's awareness" }
+  ]
 }
 
 RULES FOR THE JSON:
@@ -214,7 +332,7 @@ RULES FOR THE JSON:
 - "suggestedActions": array (may be empty)
 - If no facts are cited, citations may be []`;
 
-  return header + docSections.join("") + caseIntelSection + flagsSection + rules;
+  return header + docSections.join("") + caseIntelSection + draftsSection + flagsSection + rules;
 }
 
 // ── Document excerpt retrieval ────────────────────────────────────────────────
@@ -295,9 +413,11 @@ export async function sendChatMessage(
   matter: Matter,
   documents: Document[],
   results: Map<string, ProcessingResult>,
-  flags: Array<Flag & { documentFileName: string }>
+  flags: Array<Flag & { documentFileName: string }>,
+  drafts: Draft[] = [],
+  docNameMap: Map<string, string> = new Map()
 ): Promise<ChatResult> {
-  const systemPrompt = buildSystemPrompt(matter, documents, results, flags);
+  const systemPrompt = buildSystemPrompt(matter, documents, results, flags, drafts, docNameMap);
 
   // Last 20 messages for history (skip system messages)
   const history = conversation.messages
@@ -346,7 +466,7 @@ export async function sendChatMessage(
   while (true) {
     const response = await client.chat.completions.create({
       model: MODEL,
-      max_tokens: 2048,
+      max_completion_tokens: 2048,
       messages: currentMessages,
       tools,
       tool_choice: "auto",
@@ -409,7 +529,7 @@ export async function sendChatMessage(
       const rawContent = (choice.message.content ?? "").trim();
 
       // Helper: parse raw JSON string from model into structured response
-      const parseRaw = (raw: string): { content: string; citations: Citation[]; suggestedActions: SuggestedAction[] } | null => {
+      const parseRaw = (raw: string): { content: string; citations: Citation[]; suggestedActions: ChatAction[] } | null => {
         try {
           const cleaned = raw
             .replace(/^```json\s*/i, "")
@@ -467,7 +587,7 @@ export async function sendChatMessage(
           ];
           const retryResponse = await client.chat.completions.create({
             model: MODEL,
-            max_tokens: 2048,
+            max_completion_tokens: 2048,
             messages: retryMessages,
             response_format: { type: "json_object" },
           });
@@ -511,8 +631,8 @@ export async function sendChatMessage(
       if (isFirstMessage && conversation.name === "New conversation") {
         try {
           const nameRes = await client.chat.completions.create({
-            model: "gpt-4o-mini",
-            max_tokens: 20,
+            model: MODELS.fast,
+            max_completion_tokens: 20,
             messages: [
               {
                 role: "user",

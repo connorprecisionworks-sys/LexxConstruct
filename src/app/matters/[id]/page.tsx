@@ -5,14 +5,16 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { timeAgo } from "@/lib/utils";
 import type { FlagType } from "@/types";
+import { PenLine, ArrowRight } from "lucide-react";
 import { ProcessingStepper } from "@/components/ProcessingStepper";
 import { UploadQueuePanel } from "@/components/UploadQueuePanel";
 import { useUploadQueue } from "@/hooks/useUploadQueue";
 import { ChatPanel } from "@/components/ChatPanel";
 
-interface Matter { id: string; name: string; clientName: string; matterType: string; status: string; notes: string; createdAt: string; caseIntelligence?: CaseIntelligence; }
+interface Matter { id: string; name: string; clientName: string; matterType: string; status: string; notes: string; representedParty?: string; createdAt: string; caseIntelligence?: CaseIntelligence; }
 interface Doc { id: string; fileName: string; fileType: string; fileSize: number; status: "uploading" | "processing" | "ready" | "error"; processingStage?: string; uploadedAt: string; documentKind?: string; }
 interface MatterFlag { id: string; documentId: string; documentFileName: string; type: FlagType; source: "auto" | "manual"; text: string; createdAt: string; resolved: boolean; }
+interface MatterDraft { id: string; title: string; draftType: string; documentId: string | null; matterId: string; status: "draft" | "final"; finalizedAt?: string; createdAt: string; updatedAt: string; sourceDocumentName?: string | null; }
 interface ContradictionItem {
   topic: string;
   documentA: { id: string; statement: string };
@@ -61,6 +63,8 @@ export default function MatterDetail() {
   const { queue, enqueue, cancel, dismiss, sessionStats } = useUploadQueue();
   const [editingNotes, setEditingNotes] = useState(false);
   const [notes, setNotes] = useState("");
+  const [editingParty, setEditingParty] = useState(false);
+  const [representedParty, setRepresentedParty] = useState("");
   const [caseIntel, setCaseIntel] = useState<CaseIntelligence | null>(null);
   const [buildingIntel, setBuildingIntel] = useState(false);
   const [intelStage, setIntelStage] = useState(0);
@@ -76,6 +80,7 @@ export default function MatterDetail() {
   const [deleting, setDeleting] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [matterDraftsCount, setMatterDraftsCount] = useState(0);
+  const [matterDrafts, setMatterDrafts] = useState<MatterDraft[]>([]);
   const router = useRouter();
 
   const fetchData = useCallback(async () => {
@@ -91,6 +96,7 @@ export default function MatterDetail() {
       setMatter(m);
       if (m) {
         setNotes(m.notes || "");
+        setRepresentedParty(m.representedParty || "");
         if (m.caseIntelligence) setCaseIntel(m.caseIntelligence);
       }
       const docs: Doc[] = await docsRes.json();
@@ -125,7 +131,24 @@ export default function MatterDetail() {
     finally { setLoading(false); }
   }, [id]);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  const fetchDrafts = useCallback(async () => {
+    try {
+      const r = await fetch(`/api/drafts?matterId=${id}`);
+      if (r.ok) {
+        const d = await r.json();
+        if (Array.isArray(d)) setMatterDrafts(d);
+      }
+    } catch { /* ignore */ }
+  }, [id]);
+
+  useEffect(() => { fetchData(); fetchDrafts(); }, [fetchData, fetchDrafts]);
+
+  // Re-fetch drafts when user returns to this tab (e.g. after visiting workspace)
+  useEffect(() => {
+    function onVisibility() { if (document.visibilityState === "visible") fetchDrafts(); }
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, [fetchDrafts]);
 
   // Poll while documents are processing
   useEffect(() => {
@@ -145,6 +168,11 @@ export default function MatterDetail() {
   async function saveNotes() {
     setEditingNotes(false);
     await fetch("/api/matters", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, notes }) });
+  }
+
+  async function saveRepresentedParty() {
+    setEditingParty(false);
+    await fetch("/api/matters", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, representedParty }) });
   }
 
   // Refresh documents whenever a queue item completes
@@ -301,15 +329,24 @@ export default function MatterDetail() {
             </button>
           )}
           {readyCount > 0 && (
-            <button
-              onClick={() => setShowChat(true)}
-              className="flex items-center gap-1.5 px-4 py-2 bg-surface border border-border text-sm font-medium text-charcoal rounded-[6px] hover:border-accent/40 hover:text-accent transition-colors"
-            >
-              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-              </svg>
-              Chat
-            </button>
+            <div className="flex items-center" style={{ gap: "var(--space-2)" }}>
+              <button
+                onClick={() => router.push(`/matters/${id}/workspace`)}
+                className="flex items-center gap-1.5 px-4 py-2 bg-surface border border-border text-sm font-medium text-charcoal rounded-[6px] hover:border-accent/40 hover:text-accent transition-colors"
+              >
+                <PenLine className="h-4 w-4" strokeWidth={1.75} />
+                Workspace
+              </button>
+              <button
+                onClick={() => setShowChat(true)}
+                className="flex items-center gap-1.5 px-4 py-2 bg-surface border border-border text-sm font-medium text-charcoal rounded-[6px] hover:border-accent/40 hover:text-accent transition-colors"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.75} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+                Chat
+              </button>
+            </div>
           )}
         </div>
       </div>
@@ -322,7 +359,47 @@ export default function MatterDetail() {
           onClose={() => setShowChat(false)}
         />
       )}
-      <p className="text-sm text-muted mb-4">{matter.clientName}</p>
+      <p className="text-sm text-muted mb-2">{matter.clientName}</p>
+
+      {/* Represented party */}
+      <div className="mb-4">
+        {editingParty ? (
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-muted flex-shrink-0">Representing:</span>
+            <input
+              value={representedParty}
+              onChange={(e) => setRepresentedParty(e.target.value)}
+              onBlur={saveRepresentedParty}
+              onKeyDown={(e) => e.key === "Enter" && saveRepresentedParty()}
+              autoFocus
+              placeholder="e.g. Bayshore Tower Condominium Association"
+              className="flex-1 px-2 py-1 border border-border rounded-[6px] text-sm focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white"
+            />
+          </div>
+        ) : representedParty ? (
+          <button
+            onClick={() => setEditingParty(true)}
+            className="flex items-center gap-1.5 text-sm text-charcoal hover:text-accent transition-colors group"
+            title="Click to edit represented party"
+          >
+            <span className="text-xs text-muted">Representing:</span>
+            <span className="font-medium">{representedParty}</span>
+            <svg className="h-3 w-3 text-muted opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Z" />
+            </svg>
+          </button>
+        ) : (
+          <button
+            onClick={() => setEditingParty(true)}
+            className="flex items-center gap-1.5 text-xs text-[#D97706] bg-[#FFFBEB] border border-[#FDE68A] rounded-[6px] px-3 py-1.5 hover:bg-[#FEF3C7] transition-colors"
+          >
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+            Set the represented party so drafts are written from the correct side of the dispute
+          </button>
+        )}
+      </div>
 
       {/* Case intelligence build progress */}
       {buildingIntel && (
@@ -444,6 +521,96 @@ export default function MatterDetail() {
           })}
         </div>
       )}
+
+      {/* Generated Content section */}
+      {(() => {
+        const sortedDrafts: MatterDraft[] = [
+          ...matterDrafts.filter((d) => (d.status ?? "draft") !== "final").sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)),
+          ...matterDrafts.filter((d) => d.status === "final").sort((a, b) => (b.finalizedAt ?? b.updatedAt).localeCompare(a.finalizedAt ?? a.updatedAt)),
+        ];
+        const DRAFT_TYPE_LABEL: Record<string, string> = {
+          draft_claim_letter: "Claim Letter",
+          draft_summary: "Case Summary",
+          draft_mediation_brief: "Mediation Brief",
+          draft_deposition_outline: "Deposition Outline",
+          draft_delay_narrative: "Delay Narrative",
+          draft_defect_summary: "Defect Summary",
+          draft_motion: "Motion",
+          draft_client_update: "Client Update",
+          deposition_summary_memo: "Deposition Memo",
+          cross_examination_outline: "Cross-Exam Outline",
+          witness_prep_outline: "Witness Prep",
+        };
+        return (
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-semibold text-primary">Generated Content</h2>
+                {sortedDrafts.length > 0 && (
+                  <span className="text-[10px] font-medium text-muted bg-[#F3F4F6] px-1.5 py-0.5 rounded">{sortedDrafts.length}</span>
+                )}
+              </div>
+              <Link
+                href={`/matters/${id}/workspace`}
+                className="flex items-center gap-1.5 text-xs font-medium text-muted hover:text-accent transition-colors"
+              >
+                <PenLine className="h-3.5 w-3.5" strokeWidth={1.75} />
+                Open workspace
+              </Link>
+            </div>
+            {sortedDrafts.length === 0 ? (
+              <div className="bg-surface border border-border rounded-lg p-8 text-center" style={{ boxShadow: "var(--shadow)" }}>
+                <p className="text-sm text-muted mb-3">No drafts yet. Generate demand letters, case summaries, and more in the workspace.</p>
+                <Link
+                  href={`/matters/${id}/workspace`}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-accent text-white text-sm font-medium rounded-[6px] hover:bg-accent-hover transition-colors"
+                >
+                  <PenLine className="h-4 w-4" strokeWidth={1.75} />
+                  Open Workspace
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 gap-3">
+                {sortedDrafts.map((draft) => {
+                  const isFinal = draft.status === "final";
+                  const href = draft.documentId
+                    ? `/matters/${id}/documents/${draft.documentId}/workspace?draftId=${draft.id}`
+                    : `/matters/${id}/workspace?draftId=${draft.id}`;
+                  const typeLabel = DRAFT_TYPE_LABEL[draft.draftType] ?? draft.draftType.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+                  return (
+                    <Link
+                      key={draft.id}
+                      href={href}
+                      className="group flex flex-col gap-2 px-4 py-3 rounded-lg border border-border hover:border-accent/40 transition-colors"
+                      style={{
+                        backgroundColor: isFinal ? "var(--color-mint-soft)" : "var(--color-surface)",
+                        boxShadow: "var(--shadow)",
+                      }}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          {isFinal ? (
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#D1FAE5] text-[#059669]">Final</span>
+                          ) : (
+                            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#F3F4F6] text-[#6B7280]">In Progress</span>
+                          )}
+                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-accent-light text-accent">{typeLabel}</span>
+                        </div>
+                        <ArrowRight className="h-3.5 w-3.5 text-muted opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" strokeWidth={1.75} />
+                      </div>
+                      <p className="text-sm font-medium text-primary leading-snug line-clamp-2">{draft.title}</p>
+                      {draft.sourceDocumentName && (
+                        <p className="text-[11px] text-muted truncate">From: {draft.sourceDocumentName}</p>
+                      )}
+                      <p className="text-[11px] text-muted">{timeAgo(draft.updatedAt)}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })()}
 
       {/* Flags section */}
       <div className="mb-6 bg-surface border border-border rounded-lg" style={{ boxShadow: "var(--shadow)" }}>

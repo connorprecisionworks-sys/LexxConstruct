@@ -12,7 +12,7 @@ interface TimelineEvent { id: string; date: string; description: string; signifi
 interface MissingInfo { id: string; description: string; importance: "required" | "helpful" | "optional"; }
 interface Flag { id: string; documentId: string; type: FlagType; source: "auto" | "manual"; text: string; location?: string; createdAt: string; resolved: boolean; resolvedAt?: string; }
 interface ProcessingResult { summary: string; keyIssues: KeyIssue[]; extractedFacts: ExtractedFact[]; timeline: TimelineEvent[]; missingInformation: MissingInfo[]; flags: Flag[]; disclaimer: string; }
-interface Doc { id: string; fileName: string; status: string; notes: string; matterId: string; documentKind?: string; extractionMethod?: "text" | "ocr" | "mixed" | "failed"; ocrConfidence?: number; }
+interface Doc { id: string; fileName: string; status: string; notes: string; matterId: string; documentKind?: string; extractionMethod?: "text" | "ocr" | "mixed" | "failed"; ocrConfidence?: number; ocrQuality?: "low" | "high"; }
 interface Matter { id: string; name: string; }
 
 const FLAG_TYPES: FlagType[] = ["contradiction", "missing_info", "follow_up", "key_evidence", "deadline"];
@@ -153,14 +153,27 @@ export default function DocumentIntelligence() {
 
       {error && <div className="mb-4 px-4 py-3 bg-[#FEE2E2] border border-[#FECACA] rounded-lg"><span className="text-sm text-[#DC2626]">{error}</span></div>}
 
+      {doc.ocrQuality === "low" && (
+        <div className="mb-4 px-4 py-3 bg-[#FFFBEB] border border-[#FDE68A] rounded-lg flex items-start gap-3">
+          <span className="text-[#D97706] text-lg leading-none flex-shrink-0 mt-0.5">⚠</span>
+          <p className="text-sm text-[#92400E]">
+            <span className="font-semibold">Low-quality scan detected.</span> AI analysis may be less reliable for this document. Consider re-scanning at higher resolution if critical details are missing.
+          </p>
+        </div>
+      )}
+
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
             <h1 className="text-xl font-semibold text-primary">{doc.fileName}</h1>
             {(doc.extractionMethod === "ocr" || doc.extractionMethod === "mixed") && (
               <span
-                title={`Text extracted via OCR${doc.ocrConfidence !== undefined ? ` (avg confidence: ${doc.ocrConfidence}%)` : ""}. Minor transcription errors may be present.`}
-                className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#F4F4F4] text-[#767676] border border-[#E8E8E8] cursor-default select-none"
+                title={`Text extracted via OCR${doc.ocrConfidence !== undefined ? ` (avg confidence: ${doc.ocrConfidence}%)` : ""}. Minor transcription errors may be present — verify critical details against the source.`}
+                className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border cursor-default select-none ${
+                  doc.ocrQuality === "low"
+                    ? "bg-[#FEF3C7] text-[#D97706] border-[#FDE68A]"
+                    : "bg-[#F4F4F4] text-[#767676] border-[#E8E8E8]"
+                }`}
               >
                 OCR
               </span>
@@ -184,13 +197,22 @@ export default function DocumentIntelligence() {
           <p className="text-sm text-muted mt-0.5">Document Intelligence Report</p>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            disabled
-            title="Document comparison — coming soon."
-            className="px-4 py-2 text-sm font-medium text-muted bg-[#F3F4F6] border border-border rounded-[6px] cursor-not-allowed"
-          >
-            Compare Documents
-          </button>
+          {otherDocs.length > 0 ? (
+            <button
+              onClick={() => setShowCompare(true)}
+              className="px-4 py-2 text-sm font-medium text-charcoal bg-white border border-border rounded-[6px] hover:bg-surface transition-colors"
+            >
+              Compare Documents
+            </button>
+          ) : (
+            <button
+              disabled
+              title="Upload at least one other ready document to enable comparison."
+              className="px-4 py-2 text-sm font-medium text-muted bg-[#F3F4F6] border border-border rounded-[6px] cursor-not-allowed"
+            >
+              Compare Documents
+            </button>
+          )}
           <Link href={`/matters/${matterId}/documents/${docId}/workspace`} className="px-4 py-2 bg-accent text-white text-sm font-medium rounded-[6px] hover:bg-accent-hover transition-colors hover-lift btn-press">
             Open Workspace &rarr;
           </Link>
@@ -234,11 +256,11 @@ export default function DocumentIntelligence() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card title="Key Issues" count={result.keyIssues.length}>
             {result.keyIssues.length === 0 ? <p className="text-sm text-muted">No key issues identified.</p> : (
-              <div className="space-y-3">{result.keyIssues.map((issue) => {
+              <div className="space-y-3">{result.keyIssues.map((issue, idx) => {
                 const isOpen = openPopover === issue.id;
                 const alreadyFlagged = activeFlags.some((f) => f.location === issue.id && f.source === "manual");
                 return (
-                  <div key={issue.id} className="flex gap-2">
+                  <div key={`issue-${idx}-${issue.id ?? ""}`} className="flex gap-2">
                     <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded flex-shrink-0 h-fit mt-0.5 ${SEV[issue.severity]}`}>{issue.severity.toUpperCase()}</span>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-primary">{issue.title}</p>
@@ -280,7 +302,7 @@ export default function DocumentIntelligence() {
           <Card title="Extracted Facts" count={result.extractedFacts.length}>
             {result.extractedFacts.length === 0 ? <p className="text-sm text-muted">No facts extracted.</p> : (
               <div className="space-y-2">{result.extractedFacts.map((fact, i) => (
-                <div key={fact.id} className={`flex items-start gap-2 px-2 py-1.5 rounded ${i % 2 === 1 ? "bg-row-alt" : ""}`}>
+                <div key={`fact-${i}-${fact.id ?? ""}`} className={`flex items-start gap-2 px-2 py-1.5 rounded ${i % 2 === 1 ? "bg-row-alt" : ""}`}>
                   <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5 ${CAT[fact.category] || CAT.other}`}>{fact.category.toUpperCase()}</span>
                   <p className="text-sm text-charcoal flex-1">{fact.fact}</p>
                   <span className={`text-lg leading-none flex-shrink-0 ${CONF[fact.confidence]}`} title={`${fact.confidence} confidence`}>&#9679;</span>
@@ -295,8 +317,8 @@ export default function DocumentIntelligence() {
           <Card title="Timeline" count={result.timeline.length}>
             {result.timeline.length === 0 ? <p className="text-sm text-muted">No timeline events identified.</p> : (
               <div className="space-y-0 border-l-2 border-accent/20 ml-2 pl-4">
-                {[...result.timeline].sort((a, b) => a.date.localeCompare(b.date)).map((event) => (
-                  <div key={event.id} className="relative pb-4 last:pb-0">
+                {[...result.timeline].sort((a, b) => a.date.localeCompare(b.date)).map((event, idx) => (
+                  <div key={`event-${idx}-${event.id ?? ""}`} className="relative pb-4 last:pb-0">
                     <div className="absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full bg-accent border-2 border-surface" />
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-xs font-mono text-muted">{event.date}</span>
@@ -312,8 +334,8 @@ export default function DocumentIntelligence() {
 
           <Card title="Missing Information" count={result.missingInformation.length}>
             {result.missingInformation.length === 0 ? <p className="text-sm text-muted">No missing information identified.</p> : (
-              <div className="space-y-2">{result.missingInformation.map((info) => (
-                <div key={info.id} className="flex items-start gap-2">
+              <div className="space-y-2">{result.missingInformation.map((info, idx) => (
+                <div key={`missing-${idx}-${info.id ?? ""}`} className="flex items-start gap-2">
                   <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5 ${IMP[info.importance]}`}>{info.importance.toUpperCase()}</span>
                   <p className="text-sm text-charcoal">{info.description}</p>
                 </div>

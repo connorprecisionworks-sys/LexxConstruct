@@ -1,16 +1,5 @@
 [
   {
-    "id": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "fileName": "lexx_test_demand_letter.docx",
-    "fileType": "docx",
-    "fileSize": 10915,
-    "storageKey": "f8e6c02b-83d9-4f33-b030-2eda9637e9ee.docx",
-    "status": "ready",
-    "notes": "",
-    "uploadedAt": "2026-04-09T12:04:35.615Z"
-  },
-  {
     "id": "6281476c-6f34-476e-894c-28837c1e91bb",
     "matterId": "66079567-0951-44e7-8bfb-df5ebeed978b",
     "fileName": "lexx_test_demand_letter.docx",
@@ -148,5 +137,33 @@
     "documentKind": "standard",
     "notes": "",
     "uploadedAt": "2026-04-10T03:04:56.961Z"
+  },
+  {
+    "id": "09600c31-a2e9-457d-a7b7-61e15d19c9e9",
+    "matterId": "89b3c2c3-1d53-4104-b36a-7e5851ce206f",
+    "fileName": "2629824.pdf",
+    "fileType": "pdf",
+    "fileSize": 1160380,
+    "storageKey": "09600c31-a2e9-457d-a7b7-61e15d19c9e9.pdf",
+    "status": "error",
+    "processingStage": "extracting",
+    "documentKind": "standard",
+    "extractionMethod": "failed",
+    "notes": "",
+    "uploadedAt": "2026-04-14T16:38:11.417Z"
+  },
+  {
+    "id": "2ce69bd3-2aa1-437a-8153-c243cbb8658d",
+    "matterId": "89b3c2c3-1d53-4104-b36a-7e5851ce206f",
+    "fileName": "2629824.pdf",
+    "fileType": "pdf",
+    "fileSize": 1160380,
+    "storageKey": "2ce69bd3-2aa1-437a-8153-c243cbb8658d.pdf",
+    "status": "ready",
+    "processingStage": "done",
+    "documentKind": "standard",
+    "extractionMethod": "text",
+    "notes": "",
+    "uploadedAt": "2026-04-14T16:45:46.313Z"
   }
 ]

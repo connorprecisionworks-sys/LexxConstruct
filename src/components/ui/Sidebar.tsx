@@ -47,10 +47,10 @@ const NAV_ITEMS: NavItem[] = [
     Icon: MessageSquare,
   },
   {
-    kind: "placeholder",
+    kind: "active",
     label: "Workspace",
+    href: "/workspace",
     Icon: PenLine,
-    tooltip: "All your active draft sessions across every matter, in one place.",
   },
   {
     kind: "placeholder",

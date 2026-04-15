@@ -6,26 +6,29 @@ import Link from "next/link";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { timeAgo } from "@/lib/utils";
 import type { DraftEditorHandle } from "@/components/workspace/DraftEditor";
+import { ProcessingStepper } from "@/components/ProcessingStepper";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { DropdownMenu } from "@/components/ui/DropdownMenu";
+import type { SuggestedEdit } from "@/types";
 import {
   Pencil, Check, Download, Save, Clock,
-  CheckCircle2, Undo2, Sparkles,
+  CheckCircle2, Undo2, MoreHorizontal, Sparkles,
 } from "lucide-react";
-import type { SuggestedEdit } from "@/types";
 
 const DraftEditor = dynamic(() => import("@/components/workspace/DraftEditor"), { ssr: false });
 const RegenerationModal = dynamic(() => import("@/components/workspace/RegenerationModal"), { ssr: false });
 const VersionHistoryPanel = dynamic(() => import("@/components/workspace/VersionHistoryPanel"), { ssr: false });
 const FloatingAssistant = dynamic(() => import("@/components/workspace/FloatingAssistant"), { ssr: false });
 
+interface Matter { id: string; name: string; clientName: string; }
 interface Doc { id: string; fileName: string; documentKind?: string; }
-interface Matter { id: string; name: string; }
 interface DraftRecord {
   id: string;
   title: string;
   draftType: string;
+  documentId: string | null;
+  matterId?: string;
   content: string;
   disclaimer: string;
   status?: "draft" | "final";
@@ -34,19 +37,19 @@ interface DraftRecord {
   updatedAt: string;
 }
 
-interface Output {
+interface ActiveDraft {
   id: string;
-  type: "answer" | "draft";
+  draftId?: string;
   label: string;
   content: string;
   disclaimer: string;
-  draftId?: string;
-  editing?: boolean;
+  draftType: string;
+  editing: boolean;
   editContent?: string;
   saved?: boolean;
   savedMsg?: string;
   showHistory?: boolean;
-  // lifecycle management (draft outputs only)
+  // lifecycle management
   status?: "draft" | "final";
   openedAsFinal?: boolean;
   isRenamingTitle?: boolean;
@@ -59,19 +62,18 @@ interface DeleteModal { outputId: string; title: string; versionCount: number; }
 
 const DISCLAIMER = "This output is not legal advice and requires attorney review before any action is taken.";
 
-const ALL_ACTIONS = [
-  { key: "ask", label: "Ask a Question", desc: "Query the document directly", depositionOnly: false },
-  { key: "deposition_summary_memo", label: "Deposition Summary Memo", desc: "Internal memo summarizing testimony with key admissions and recommendations", depositionOnly: true },
-  { key: "cross_examination_outline", label: "Cross-Examination Outline", desc: "Topic-by-topic outline with leading questions for cross-examination", depositionOnly: true },
-  { key: "witness_prep_outline", label: "Witness Prep Outline", desc: "Preparation guide covering background, prior statements, and attack areas", depositionOnly: true },
-  { key: "draft_claim_letter", label: "Draft Claim Letter", desc: "Formal notice of claim for time or compensation under contract notice provisions", depositionOnly: false },
-  { key: "draft_summary", label: "Draft Case Summary", desc: "Internal summary memo for attorney review", depositionOnly: false },
-  { key: "draft_mediation_brief", label: "Draft Mediation Brief Outline", desc: "Outline for a pre-mediation position paper", depositionOnly: false },
-  { key: "draft_deposition_outline", label: "Draft Deposition Outline", desc: "Witness deposition outline based on case documents", depositionOnly: false },
-  { key: "draft_delay_narrative", label: "Draft Delay Narrative", desc: "Narrative description of delay events for expert handoff", depositionOnly: false },
-  { key: "draft_defect_summary", label: "Draft Defect Summary", desc: "Summary of defect allegations with document citations", depositionOnly: false },
-  { key: "draft_motion", label: "Draft Motion Outline", desc: "Outline for summary judgment or other motions", depositionOnly: false },
-  { key: "draft_client_update", label: "Draft Client Update", desc: "Client-facing status update email in plain English", depositionOnly: false },
+const DRAFT_ACTIONS = [
+  { key: "deposition_summary_memo",   label: "Deposition Summary Memo",     desc: "Internal memo summarising testimony, admissions, and recommendations", depositionFirst: true },
+  { key: "cross_examination_outline", label: "Cross-Examination Outline",    desc: "Topic-by-topic outline with leading questions", depositionFirst: true },
+  { key: "witness_prep_outline",      label: "Witness Prep Outline",         desc: "Preparation guide covering prior statements and attack areas", depositionFirst: true },
+  { key: "draft_claim_letter",        label: "Claim Letter",                 desc: "Formal notice of claim under contract notice provisions", depositionFirst: false },
+  { key: "draft_summary",             label: "Case Summary",                 desc: "Internal summary memo for attorney review", depositionFirst: false },
+  { key: "draft_mediation_brief",     label: "Mediation Brief Outline",      desc: "Outline for a pre-mediation position paper", depositionFirst: false },
+  { key: "draft_deposition_outline",  label: "Deposition Outline",           desc: "Witness deposition outline based on case documents", depositionFirst: false },
+  { key: "draft_delay_narrative",     label: "Delay Narrative",              desc: "Narrative of delay events for expert handoff", depositionFirst: false },
+  { key: "draft_defect_summary",      label: "Defect Summary",               desc: "Summary of defect allegations with document citations", depositionFirst: false },
+  { key: "draft_motion",              label: "Motion Outline",               desc: "Outline for summary judgment or other motions", depositionFirst: false },
+  { key: "draft_client_update",       label: "Client Update",                desc: "Client-facing status update in plain English", depositionFirst: false },
 ];
 
 const DRAFT_TYPE_BADGE: Record<string, string> = {
@@ -88,6 +90,8 @@ const DRAFT_TYPE_BADGE: Record<string, string> = {
   witness_prep_outline: "Witness Prep",
 };
 
+const STAGES = ["Gathering matter context", "Drafting with AI", "Finalizing"];
+
 interface RegenerationState {
   outputId: string;
   selectedText: string;
@@ -98,27 +102,36 @@ interface RegenerationState {
   variants: string[] | null;
 }
 
-export default function Workspace() {
-  const params = useParams<{ id: string; docId: string }>();
+// Maps ChatAction types to the DRAFT_ACTIONS keys used in this workspace
+const CHAT_ACTION_TO_DRAFT_KEY: Record<string, string> = {
+  draft_claim_letter: "draft_claim_letter",
+  draft_mediation_brief: "draft_mediation_brief",
+  draft_motion_outline: "draft_motion",
+  draft_demand_letter: "draft_claim_letter",
+  draft_case_summary: "draft_summary",
+  draft_client_update: "draft_client_update",
+  draft_delay_narrative: "draft_delay_narrative",
+  draft_defect_summary: "draft_defect_summary",
+};
+
+export default function MatterWorkspace() {
+  const params = useParams<{ id: string }>();
   const matterId = params?.id ?? "";
-  const docId = params?.docId ?? "";
   const router = useRouter();
   const searchParams = useSearchParams();
   const preloadDraftId = searchParams?.get("draftId") ?? null;
   const actionParam = searchParams?.get("action") ?? null;
   const prefillParam = searchParams?.get("prefill") ?? null;
 
-  const [doc, setDoc] = useState<Doc | null>(null);
   const [matter, setMatter] = useState<Matter | null>(null);
+  const [docs, setDocs] = useState<Doc[]>([]);
+  const [drafts, setDrafts] = useState<DraftRecord[]>([]);
   const [loading, setLoading] = useState(true);
-  const [question, setQuestion] = useState("");
-  const [processing, setProcessing] = useState(false);
+  const [generating, setGenerating] = useState(false);
   const [activeAction, setActiveAction] = useState<string | null>(null);
-  const [selectedAction, setSelectedAction] = useState<string | null>(null);
-  const [outputs, setOutputs] = useState<Output[]>([]);
+  const [stageIdx, setStageIdx] = useState(0);
+  const [outputs, setOutputs] = useState<ActiveDraft[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [threadId, setThreadId] = useState<string | null>(null);
-  const [previousDrafts, setPreviousDrafts] = useState<DraftRecord[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [regen, setRegen] = useState<RegenerationState | null>(null);
   const [deleteModal, setDeleteModal] = useState<DeleteModal | null>(null);
@@ -128,7 +141,13 @@ export default function Workspace() {
   const autoOpenedRef = useRef(false);
 
   const editorRefs = useRef<Map<string, DraftEditorHandle>>(new Map());
+  const stageTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const hasDeposition = docs.some((d) => d.documentKind === "deposition");
+  const sortedActions = hasDeposition
+    ? [...DRAFT_ACTIONS.filter((a) => a.depositionFirst), ...DRAFT_ACTIONS.filter((a) => !a.depositionFirst)]
+    : DRAFT_ACTIONS.filter((a) => !a.depositionFirst);
 
   useEffect(() => {
     async function load() {
@@ -136,67 +155,66 @@ export default function Workspace() {
         const [mattersRes, docsRes, draftsRes] = await Promise.all([
           fetch("/api/matters"),
           fetch(`/api/documents?matterId=${matterId}`),
-          fetch(`/api/drafts?documentId=${docId}`),
+          fetch(`/api/drafts?matterId=${matterId}`),
         ]);
         const matters = await mattersRes.json();
-        if (Array.isArray(matters)) setMatter(matters.find((m: Matter) => m.id === matterId) || null);
-        const docs = await docsRes.json();
-        if (Array.isArray(docs)) setDoc(docs.find((d: Doc) => d.id === docId) || null);
+        if (Array.isArray(matters)) setMatter(matters.find((m: Matter) => m.id === matterId) ?? null);
+        const docsData = await docsRes.json();
+        if (Array.isArray(docsData)) setDocs(docsData.filter((d: Doc & { status: string }) => d.status === "ready"));
         if (draftsRes.ok) {
-          const drafts = await draftsRes.json();
-          if (Array.isArray(drafts)) setPreviousDrafts(sortDrafts(drafts));
+          const d = await draftsRes.json();
+          if (Array.isArray(d)) setDrafts(d);
         }
       } catch (e) { setError(e instanceof Error ? e.message : "Failed to load"); }
       finally { setLoading(false); }
     }
     load();
-  }, [matterId, docId]);
+  }, [matterId]);
 
   // Auto-load a draft specified via ?draftId= query param (fires once after initial load)
   const didPreload = useRef(false);
   useEffect(() => {
-    if (!preloadDraftId || loading || previousDrafts.length === 0 || didPreload.current) return;
-    const target = previousDrafts.find((d) => d.id === preloadDraftId);
+    if (!preloadDraftId || loading || drafts.length === 0 || didPreload.current) return;
+    const target = drafts.find((d) => d.id === preloadDraftId);
     if (!target) return;
     didPreload.current = true;
-    loadPreviousDraft(target);
+    loadDraft(target);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [preloadDraftId, loading, previousDrafts]);
+  }, [preloadDraftId, loading, drafts]);
 
   // Auto-trigger draft generation from ?action= query param (fires once after initial load)
-  // Currently supports: action=deposition_outline
   // If both ?draftId= and ?action= are present, ?draftId= takes priority (handled above)
   const didActionTrigger = useRef(false);
   useEffect(() => {
     if (!actionParam || preloadDraftId || loading || didActionTrigger.current) return;
-    const ACTION_MAP: Record<string, { key: string; label: string }> = {
-      deposition_outline: { key: "draft_deposition_outline", label: "Draft Deposition Outline" },
-    };
-    const mapped = ACTION_MAP[actionParam];
-    if (!mapped) return; // Unrecognized action — degrade gracefully
-    const actionExists = ALL_ACTIONS.find((a) => a.key === mapped.key);
-    if (!actionExists) return;
+    const draftKey = CHAT_ACTION_TO_DRAFT_KEY[actionParam];
+    if (!draftKey) return; // Unrecognized action — degrade gracefully
+    const action = DRAFT_ACTIONS.find((a) => a.key === draftKey);
+    if (!action) return;
     didActionTrigger.current = true;
     // Clear query params so a refresh doesn't re-trigger generation
-    router.replace(`/matters/${matterId}/documents/${docId}/workspace`, { scroll: false });
-    handleDraft(mapped.key, mapped.label, prefillParam ?? undefined);
+    router.replace(`/matters/${matterId}/workspace`, { scroll: false });
+    handleGenerate(action, prefillParam ?? undefined);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [actionParam, preloadDraftId, loading, matterId, docId]);
+  }, [actionParam, preloadDraftId, loading, matterId]);
 
-  // ── Helpers ────────────────────────────────────────────────────────────────
+  useEffect(() => {
+    if (generating) {
+      setStageIdx(0);
+      stageTimerRef.current = setInterval(() => {
+        setStageIdx((i) => Math.min(i + 1, STAGES.length - 1));
+      }, 3500);
+    } else {
+      if (stageTimerRef.current) { clearInterval(stageTimerRef.current); stageTimerRef.current = null; }
+    }
+    return () => { if (stageTimerRef.current) clearInterval(stageTimerRef.current); };
+  }, [generating]);
 
-  function sortDrafts(drafts: DraftRecord[]): DraftRecord[] {
-    return [
-      ...drafts.filter((d) => (d.status ?? "draft") !== "final")
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
-      ...drafts.filter((d) => d.status === "final")
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
-    ];
-  }
+  // ── Helpers ──────────────────────────────────────────────────────────────
 
   async function refreshDrafts() {
-    const dRes = await fetch(`/api/drafts?documentId=${docId}`);
-    if (dRes.ok) { const d = await dRes.json(); if (Array.isArray(d)) setPreviousDrafts(sortDrafts(d)); }
+    const dRes = await fetch(`/api/drafts?matterId=${matterId}`);
+    if (dRes.ok) { const d = await dRes.json(); if (Array.isArray(d)) setDrafts(d); }
   }
 
   function showToast(msg: string) {
@@ -205,62 +223,58 @@ export default function Workspace() {
     toastTimerRef.current = setTimeout(() => setToast(null), 3000);
   }
 
-  // ── Q&A / draft generation ────────────────────────────────────────────────
+  // ── Generation ────────────────────────────────────────────────────────────
 
-  async function handleAsk(e: React.FormEvent) {
-    e.preventDefault();
-    if (!question.trim() || processing) return;
-    setProcessing(true); setActiveAction("ask");
+  async function handleGenerate(action: typeof DRAFT_ACTIONS[0], additionalInstructions?: string) {
+    if (generating) return;
+    setGenerating(true);
+    setActiveAction(action.key);
+    setError(null);
     try {
-      const res = await fetch("/api/workspace/ask", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ documentId: docId, question, threadId }),
-      });
-      const data = await res.json();
-      if (data.threadId) setThreadId(data.threadId);
-      setOutputs((prev) => [{
-        id: crypto.randomUUID(), type: "answer", label: question,
-        content: data.answer, disclaimer: DISCLAIMER,
-      }, ...prev]);
-      setQuestion("");
-    } catch { alert("Failed to get answer."); }
-    finally { setProcessing(false); setActiveAction(null); }
-  }
-
-  async function handleDraft(actionType: string, label: string, additionalInstructions?: string) {
-    if (processing) return;
-    setProcessing(true); setActiveAction(actionType);
-    try {
-      const res = await fetch("/api/workspace/draft", {
+      const res = await fetch(`/api/matters/${matterId}/workspace/draft`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          documentId: docId,
-          actionType,
-          ...(additionalInstructions ? { additionalContext: additionalInstructions } : {}),
+          draftType: action.key,
+          ...(additionalInstructions ? { additionalInstructions } : {}),
         }),
       });
-      const data = await res.json();
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Draft generation failed");
+      }
+      const draft: DraftRecord = await res.json();
       setOutputs((prev) => [{
-        id: crypto.randomUUID(), type: "draft", label, content: data.content,
-        disclaimer: data.disclaimer || DISCLAIMER, draftId: data.id,
-        status: "draft", openedAsFinal: false,
+        id: crypto.randomUUID(),
+        draftId: draft.id,
+        label: action.label,
+        content: draft.content,
+        disclaimer: draft.disclaimer,
+        draftType: action.key,
+        editing: false,
+        status: "draft",
+        openedAsFinal: false,
       }, ...prev]);
       await refreshDrafts();
-    } catch { alert("Failed to generate draft."); }
-    finally { setProcessing(false); setActiveAction(null); }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Draft generation failed");
+    } finally {
+      setGenerating(false);
+      setActiveAction(null);
+    }
   }
 
-  function handleActionClick(key: string, label: string) {
-    if (key === "ask") { setSelectedAction("ask"); } else { handleDraft(key, label); }
-  }
-
-  function loadPreviousDraft(draft: DraftRecord) {
+  function loadDraft(draft: DraftRecord) {
     setOutputs((prev) => [{
-      id: crypto.randomUUID(), type: "draft", label: draft.title,
-      content: draft.content, disclaimer: draft.disclaimer, draftId: draft.id,
-      status: draft.status ?? "draft", openedAsFinal: draft.status === "final",
+      id: crypto.randomUUID(),
+      draftId: draft.id,
+      label: draft.title,
+      content: draft.content,
+      disclaimer: draft.disclaimer,
+      draftType: draft.draftType,
+      editing: false,
+      status: draft.status ?? "draft",
+      openedAsFinal: draft.status === "final",
     }, ...prev]);
   }
 
@@ -289,10 +303,6 @@ export default function Workspace() {
     ));
   }
 
-  function updateEditContent(outputId: string, content: string) {
-    setOutputs((prev) => prev.map((o) => o.id === outputId ? { ...o, editContent: content } : o));
-  }
-
   async function saveDraftEdit(outputId: string) {
     const output = outputs.find((o) => o.id === outputId);
     if (!output?.draftId || output.editContent === undefined) return;
@@ -312,7 +322,8 @@ export default function Workspace() {
         o.id === outputId ? { ...o, saved: false, savedMsg: undefined } : o
       )), 3000);
       setAssistantPanelState("closed");
-    } catch { alert("Failed to save."); }
+      await refreshDrafts();
+    } catch { setError("Failed to save draft."); }
   }
 
   // ── Rename ────────────────────────────────────────────────────────────────
@@ -414,26 +425,24 @@ export default function Workspace() {
     } catch { setError("Failed to delete draft."); }
   }
 
-  // ── Export / copy ─────────────────────────────────────────────────────────
+  // ── Export / copy / regen ─────────────────────────────────────────────────
 
-  async function exportDraft(draftId: string) {
-    const res = await fetch(`/api/drafts/${draftId}/export?format=docx`, { method: "POST" });
+  async function exportDraft(draftId: string, format: "docx" | "pdf" = "docx") {
+    const res = await fetch(`/api/drafts/${draftId}/export?format=${format}`, { method: "POST" });
     const blob = await res.blob();
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a"); a.href = url;
-    a.download = "Lexx-draft.docx";
+    const a = document.createElement("a");
+    a.href = url; a.download = `Lexx-draft.${format}`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
-  async function copyToClipboard(id: string, text: string) {
-    const plain = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  async function copyToClipboard(id: string, html: string) {
+    const plain = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
     await navigator.clipboard.writeText(plain);
     setCopiedId(id);
     setTimeout(() => setCopiedId(null), 2000);
   }
-
-  // ── Regen ─────────────────────────────────────────────────────────────────
 
   const handleRegenerateParagraph = useCallback(
     async (outputId: string, draftType: string, selectedText: string, from: number, to: number) => {
@@ -483,13 +492,21 @@ export default function Workspace() {
     try {
       const res = await fetch(`/api/drafts/${output.draftId}/versions/${version.id}/restore`, { method: "POST" });
       const data = await res.json();
-      const restored = data.content;
       setOutputs((prev) => prev.map((o) =>
-        o.id === outputId ? { ...o, content: restored, editContent: restored, showHistory: false, saved: true, savedMsg: "Restored" } : o
+        o.id === outputId ? { ...o, content: data.content, editContent: data.content, showHistory: false, saved: true, savedMsg: "Restored" } : o
       ));
       setTimeout(() => setOutputs((prev) => prev.map((o) => o.id === outputId ? { ...o, saved: false, savedMsg: undefined } : o)), 3000);
-    } catch { alert("Failed to restore version."); }
+    } catch { setError("Failed to restore version."); }
   }
+
+  // ── Sorted drafts list (in-progress first, then final) ────────────────────
+
+  const sortedDrafts = [
+    ...drafts.filter((d) => (d.status ?? "draft") !== "final")
+      .sort((a, b) => (b.updatedAt ?? b.createdAt).localeCompare(a.updatedAt ?? a.createdAt)),
+    ...drafts.filter((d) => d.status === "final")
+      .sort((a, b) => (b.updatedAt ?? b.createdAt).localeCompare(a.updatedAt ?? a.createdAt)),
+  ];
 
   // ── Render ────────────────────────────────────────────────────────────────
 
@@ -499,126 +516,68 @@ export default function Workspace() {
     </div>
   );
 
+  const readyCount = docs.length;
+
   return (
-    <div className="px-8 py-8 max-w-[1200px]">
-      <div className="text-xs text-muted mb-6 flex items-center gap-1.5">
-        <Link href="/" className="hover:text-accent transition-colors">Dashboard</Link><span>/</span>
-        <Link href={`/matters/${matterId}`} className="hover:text-accent transition-colors">{matter?.name || "Matter"}</Link><span>/</span>
-        <Link href={`/matters/${matterId}/documents/${docId}`} className="hover:text-accent transition-colors">{doc?.fileName || "Document"}</Link><span>/</span>
-        <span className="text-primary">Workspace</span>
+    <div className="h-screen flex flex-col">
+      {/* Top bar */}
+      <div className="flex-shrink-0 px-6 py-2.5 border-b border-border bg-surface flex items-center gap-3">
+        <Link href={`/matters/${matterId}`} className="flex items-center gap-1.5 text-xs text-muted hover:text-charcoal transition-colors">
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+          Back to matter
+        </Link>
+        <span className="text-muted text-xs">·</span>
+        <span className="text-sm font-medium text-primary">{matter?.name ?? "Matter"}</span>
+        <span className="text-muted text-xs">·</span>
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+          </svg>
+          {readyCount} document{readyCount !== 1 ? "s" : ""} in scope
+        </span>
       </div>
 
       {error && (
-        <div className="mb-4 px-4 py-3 bg-[#FEE2E2] border border-[#FECACA] rounded-lg flex items-center justify-between">
+        <div className="flex-shrink-0 mx-6 mt-3 px-4 py-2.5 bg-[#FEE2E2] border border-[#FECACA] rounded-lg flex items-center justify-between">
           <span className="text-sm text-[#DC2626]">{error}</span>
-          <button onClick={() => setError(null)} className="text-[#DC2626] text-xs hover:underline ml-3">Dismiss</button>
+          <button onClick={() => setError(null)} className="text-[#DC2626] text-xs hover:underline">Dismiss</button>
         </div>
       )}
 
-      <div className="mb-8">
-        <h1 className="text-xl font-semibold text-primary">AI Workspace</h1>
-        <p className="text-sm text-muted mt-0.5">{doc?.fileName || "Document"}</p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-        {/* Left — actions + previous drafts */}
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3 px-1">Actions</h3>
-            <div className="space-y-2">
-              {(doc?.documentKind === "deposition"
-                ? ALL_ACTIONS
-                : ALL_ACTIONS.filter((a) => !a.depositionOnly)
-              ).map((action) => (
-                <button
-                  key={action.key}
-                  onClick={() => handleActionClick(action.key, action.label)}
-                  disabled={processing}
-                  className={`w-full text-left px-3 py-3 border rounded-[6px] transition-all disabled:opacity-50 ${
-                    selectedAction === action.key
-                      ? "border-accent bg-accent-light"
-                      : "border-border bg-surface hover:border-accent/30 hover:bg-accent-light/50"
-                  }`}
-                  style={{ boxShadow: "var(--shadow)" }}
-                >
-                  {activeAction === action.key ? (
-                    <span className="flex items-center gap-2 text-sm text-accent"><Spinner /> Generating...</span>
-                  ) : (
-                    <>
-                      <span className="text-sm font-medium text-primary block">{action.label}</span>
-                      <span className="text-[11px] text-muted block mt-0.5">{action.desc}</span>
-                    </>
-                  )}
-                </button>
-              ))}
+      {/* Main area */}
+      <div className="flex-1 min-h-0 grid grid-cols-[1fr_340px]">
+        {/* Left — editor */}
+        <div className="overflow-y-auto border-r border-border px-6 py-6">
+          {generating && (
+            <div className="flex flex-col items-center justify-center h-full min-h-[300px] gap-6">
+              <Spinner />
+              <ProcessingStepper stages={STAGES} currentStage={stageIdx} />
             </div>
-          </div>
-
-          {selectedAction === "ask" && (
-            <form onSubmit={handleAsk} className="space-y-2">
-              <textarea
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="What are the contract notice requirements for delay claims?"
-                rows={3}
-                autoFocus
-                className="w-full px-3 py-2 border border-border rounded-[6px] text-sm resize-none focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent bg-white"
-              />
-              <button
-                type="submit"
-                disabled={!question.trim() || processing}
-                className="w-full px-3 py-2 bg-accent text-white text-sm font-medium rounded-[6px] hover:bg-accent-hover transition-colors disabled:opacity-50"
-              >
-                {activeAction === "ask" ? <><Spinner /> Asking...</> : "Submit Question"}
-              </button>
-            </form>
           )}
 
-          {previousDrafts.length > 0 && (
-            <div>
-              <h3 className="text-xs font-semibold text-muted uppercase tracking-wider mb-3 px-1">Previous Drafts</h3>
-              <div className="space-y-1.5">
-                {previousDrafts.map((d) => {
-                  const isFinal = d.status === "final";
-                  return (
-                    <button
-                      key={d.id}
-                      onClick={() => loadPreviousDraft(d)}
-                      className="w-full text-left px-3 py-2 border border-border rounded-[6px] transition-colors"
-                      style={{
-                        boxShadow: "var(--shadow)",
-                        backgroundColor: isFinal ? "var(--color-mint-soft)" : "var(--color-paper)",
-                      }}
-                    >
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#F3E8FF] text-[#7C3AED] flex-shrink-0">
-                          {DRAFT_TYPE_BADGE[d.draftType] || d.title}
-                        </span>
-                        {isFinal && <Badge variant="mint" size="sm">Final</Badge>}
-                      </div>
-                      <p className="text-[11px] font-medium text-primary truncate mt-1">{d.title}</p>
-                      <p className="text-[11px] text-muted mt-0.5">{timeAgo(d.createdAt)}</p>
-                    </button>
-                  );
-                })}
+          {!generating && outputs.length === 0 && (
+            <div className="flex items-center justify-center h-full min-h-[300px]">
+              <div className="text-center max-w-sm">
+                <div className="w-10 h-10 rounded-lg bg-accent-light flex items-center justify-center mx-auto mb-3">
+                  <svg className="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                  </svg>
+                </div>
+                <p className="text-sm font-medium text-primary mb-1">Select a draft action to begin</p>
+                <p className="text-xs text-muted">or open an existing draft from the list on the right</p>
+                {readyCount === 0 && (
+                  <p className="text-xs text-[#D97706] mt-3 bg-[#FEF3C7] px-3 py-2 rounded-[6px]">
+                    No ready documents in this matter yet. Upload and process documents first.
+                  </p>
+                )}
               </div>
             </div>
           )}
-        </div>
 
-        {/* Right — outputs */}
-        <div>
-          {outputs.length === 0 && !processing ? (
-            <div className="bg-surface border border-border rounded-lg py-20 text-center" style={{ boxShadow: "var(--shadow)" }}>
-              <p className="text-sm text-muted">Select an action to get started</p>
-            </div>
-          ) : (
+          {!generating && outputs.length > 0 && (
             <div className="space-y-4">
-              {processing && outputs.length === 0 && (
-                <div className="bg-surface border border-border rounded-lg p-8 flex items-center justify-center gap-3" style={{ boxShadow: "var(--shadow)" }}>
-                  <Spinner /><span className="text-sm text-muted">Generating...</span>
-                </div>
-              )}
               {outputs.map((output) => (
                 <div key={output.id} className="bg-surface border border-border rounded-lg" style={{ boxShadow: "var(--shadow)" }}>
                   {/* ── Card header ── */}
@@ -629,27 +588,17 @@ export default function Workspace() {
                       borderBottom: "1px solid var(--color-border-subtle)",
                     }}
                   >
-                    {/* Left: type badge + title (rename for drafts) */}
+                    {/* Left: status badge + clickable title */}
                     <div className="flex items-center gap-2 min-w-0">
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded flex-shrink-0 ${
-                        output.type === "answer" ? "bg-[#EEF2FF] text-[#4F46E5]" : "bg-[#F3E8FF] text-[#7C3AED]"
-                      }`}>
-                        {output.type === "answer" ? "Q&A" : "DRAFT"}
-                      </span>
+                      <Badge
+                        variant={output.status === "final" ? "mint" : "neutral"}
+                        size="sm"
+                        className="flex-shrink-0"
+                      >
+                        {output.status === "final" ? "Final" : "Draft"}
+                      </Badge>
 
-                      {/* Status badge for drafts */}
-                      {output.type === "draft" && (
-                        <Badge
-                          variant={output.status === "final" ? "mint" : "neutral"}
-                          size="sm"
-                          className="flex-shrink-0"
-                        >
-                          {output.status === "final" ? "Final" : "Draft"}
-                        </Badge>
-                      )}
-
-                      {/* Title: clickable rename for drafts, static for answers */}
-                      {output.type === "draft" && output.isRenamingTitle ? (
+                      {output.isRenamingTitle ? (
                         <input
                           autoFocus
                           value={output.renameValue ?? output.label}
@@ -659,27 +608,25 @@ export default function Workspace() {
                             if (e.key === "Escape") cancelRename(output.id);
                           }}
                           onBlur={() => commitRename(output.id)}
-                          className="text-sm font-medium text-primary bg-transparent border-b border-accent outline-none min-w-0 w-[240px] max-w-full"
+                          className="text-sm font-medium text-primary bg-transparent border-b border-accent outline-none min-w-0 w-[280px] max-w-full"
                           maxLength={120}
                         />
-                      ) : output.type === "draft" ? (
+                      ) : (
                         <button
                           onClick={() => startRename(output.id)}
-                          className="text-sm font-medium text-primary truncate hover:text-accent transition-colors text-left max-w-[240px]"
+                          className="text-sm font-medium text-primary truncate hover:text-accent transition-colors text-left max-w-[280px]"
                           title="Click to rename"
                         >
                           {output.label}
                         </button>
-                      ) : (
-                        <span className="text-sm font-medium text-primary truncate max-w-sm">{output.label}</span>
                       )}
 
                     </div>
 
                     {/* Right: action buttons */}
                     <div className="flex items-center flex-wrap gap-[var(--space-2)] flex-shrink-0">
-                      {/* 1. Edit / Done editing — primary teal (drafts only) */}
-                      {output.type === "draft" && output.draftId && (
+                      {/* 1. Edit / Done editing — primary teal */}
+                      {output.draftId && (
                         output.editing ? (
                           <Button variant="secondary" size="base" onClick={() => saveDraftEdit(output.id)}>
                             <Check className="h-4 w-4" />
@@ -693,8 +640,8 @@ export default function Workspace() {
                         )
                       )}
 
-                      {/* Ask Assistant button (draft, edit mode only) */}
-                      {output.type === "draft" && output.editing && output.draftId && (
+                      {/* Ask Assistant button (edit mode only) */}
+                      {output.editing && output.draftId && (
                         <Button
                           variant="secondary"
                           size="base"
@@ -706,36 +653,36 @@ export default function Workspace() {
                         </Button>
                       )}
 
-                      {/* 2. Export Word — secondary (draft, view mode) */}
-                      {output.type === "draft" && output.draftId && !output.editing && (
-                        <Button variant="secondary" size="base" onClick={() => exportDraft(output.draftId!)}>
+                      {/* 2. Export Word — secondary */}
+                      {output.draftId && !output.editing && (
+                        <Button variant="secondary" size="base" onClick={() => exportDraft(output.draftId!, "docx")}>
                           <Download className="h-4 w-4" />
                           Export Word
                         </Button>
                       )}
 
-                      {/* 3. Save (draft, edit mode) — secondary */}
-                      {output.type === "draft" && output.editing && output.draftId && (
+                      {/* 3. Save (edit mode only) — secondary */}
+                      {output.editing && output.draftId && (
                         <Button variant="secondary" size="base" onClick={() => saveDraftEdit(output.id)}>
                           <Save className="h-4 w-4" />
                           Save
                         </Button>
                       )}
 
-                      {/* 4. History (draft, edit mode) — ghost */}
-                      {output.type === "draft" && output.editing && output.draftId && (
+                      {/* 4. History (edit mode only) — ghost */}
+                      {output.editing && output.draftId && (
                         <Button
                           variant="ghost"
                           size="base"
-                          onClick={() => setOutputs((prev) => prev.map((o) => o.id === output.id ? { ...o, showHistory: !o.showHistory } : o))}
+                          onClick={() => setOutputs((p) => p.map((o) => o.id === output.id ? { ...o, showHistory: !o.showHistory } : o))}
                         >
                           <Clock className="h-4 w-4" />
                           History
                         </Button>
                       )}
 
-                      {/* 5. Mark as final / Revert — secondary (drafts only) */}
-                      {output.type === "draft" && output.draftId && (
+                      {/* 5. Mark as final / Revert — secondary */}
+                      {output.draftId && (
                         output.status === "final" ? (
                           <Button variant="secondary" size="base" onClick={() => revertToDraft(output.id)}>
                             <Undo2 className="h-4 w-4" />
@@ -749,8 +696,8 @@ export default function Workspace() {
                         )
                       )}
 
-                      {/* 6. Overflow menu (Delete) — drafts only */}
-                      {output.type === "draft" && output.draftId && (
+                      {/* 6. Overflow menu (Delete) — ghost icon-only */}
+                      {output.draftId && (
                         <DropdownMenu
                           items={[{ label: "Delete draft", onClick: () => startDelete(output.id), danger: true }]}
                         />
@@ -789,11 +736,10 @@ export default function Workspace() {
                       <DraftEditor
                         key={output.draftId}
                         value={output.editContent ?? output.content}
-                        onChange={(html) => updateEditContent(output.id, html)}
-                        onRegenerateParagraph={(selectedText, from, to) => {
-                          const draftType = previousDrafts.find((d) => d.id === output.draftId)?.draftType ?? "legal_document";
-                          handleRegenerateParagraph(output.id, draftType, selectedText, from, to);
-                        }}
+                        onChange={(html) => setOutputs((p) => p.map((o) => o.id === output.id ? { ...o, editContent: html } : o))}
+                        onRegenerateParagraph={(selectedText, from, to) =>
+                          handleRegenerateParagraph(output.id, output.draftType, selectedText, from, to)
+                        }
                         onCursorChange={(info) => setCursorInfo(info)}
                         ref={(handle) => {
                           if (handle) editorRefs.current.set(output.id, handle);
@@ -812,11 +758,85 @@ export default function Workspace() {
             </div>
           )}
         </div>
+
+        {/* Right — actions + drafts list */}
+        <div className="overflow-y-auto px-4 py-4 space-y-6 bg-[#FAFAFA]">
+          {/* Action buttons */}
+          <div>
+            <p className="text-[10px] font-semibold text-muted uppercase tracking-wider mb-3 px-1">Draft Actions</p>
+            <div className="space-y-1.5">
+              {sortedActions.map((action) => (
+                <button
+                  key={action.key}
+                  onClick={() => handleGenerate(action)}
+                  disabled={generating || readyCount === 0}
+                  className={`w-full text-left px-3 py-2.5 border rounded-[6px] transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                    activeAction === action.key
+                      ? "border-accent bg-accent-light"
+                      : "border-border bg-white hover:border-accent/30 hover:bg-accent-light/40"
+                  }`}
+                  style={{ boxShadow: "var(--shadow)" }}
+                >
+                  {activeAction === action.key ? (
+                    <span className="flex items-center gap-2 text-sm text-accent"><Spinner /> Generating…</span>
+                  ) : (
+                    <>
+                      <span className="text-sm font-medium text-primary block">{action.label}</span>
+                      <span className="text-[11px] text-muted block mt-0.5">{action.desc}</span>
+                    </>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Drafts list */}
+          <div>
+            <p className="text-[10px] font-semibold text-muted uppercase tracking-wider mb-3 px-1">
+              Drafts in this matter
+              {drafts.length > 0 && <span className="ml-1.5 font-normal">({drafts.length})</span>}
+            </p>
+            {drafts.length === 0 ? (
+              <p className="text-xs text-muted px-1">No drafts yet. Select an action above to create one.</p>
+            ) : (
+              <div className="space-y-1.5">
+                {sortedDrafts.map((draft) => {
+                  const isFinal = draft.status === "final";
+                  const sourceDoc = draft.documentId ? docs.find((d) => d.id === draft.documentId) : null;
+                  return (
+                    <button
+                      key={draft.id}
+                      onClick={() => loadDraft(draft)}
+                      className="w-full text-left px-3 py-2 border border-border rounded-[6px] hover:bg-accent-light/40 transition-colors"
+                      style={{
+                        boxShadow: "var(--shadow)",
+                        backgroundColor: isFinal ? "var(--color-mint-soft)" : "white",
+                      }}
+                    >
+                      <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-[#F3E8FF] text-[#7C3AED] flex-shrink-0">
+                          {DRAFT_TYPE_BADGE[draft.draftType] ?? draft.title}
+                        </span>
+                        {isFinal && <Badge variant="mint" size="sm">Final</Badge>}
+                      </div>
+                      <p className="text-xs font-medium text-primary truncate">{draft.title}</p>
+                      {sourceDoc && (
+                        <p className="text-[10px] text-muted mt-0.5 truncate">from {sourceDoc.fileName}</p>
+                      )}
+                      <p className="text-[10px] text-muted mt-0.5">{timeAgo(draft.updatedAt ?? draft.createdAt)}</p>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
       </div>
 
       {/* Floating Writing Assistant */}
       {(() => {
-        const editingOutput = outputs.find((o) => o.editing && o.type === "draft");
+        const editingOutput = outputs.find((o) => o.editing);
         return editingOutput?.draftId ? (
           <FloatingAssistant
             draftId={editingOutput.draftId}
@@ -850,7 +870,7 @@ export default function Workspace() {
             key={`history-${output.id}`}
             draftId={output.draftId}
             isOpen={true}
-            onClose={() => setOutputs((prev) => prev.map((o) => o.id === output.id ? { ...o, showHistory: false } : o))}
+            onClose={() => setOutputs((p) => p.map((o) => o.id === output.id ? { ...o, showHistory: false } : o))}
             onRestore={(version) => handleRestoreVersion(output.id, version)}
           />
         ) : null
@@ -874,7 +894,10 @@ export default function Workspace() {
               This cannot be undone.
             </p>
             <div className="flex justify-end gap-3">
-              <button onClick={() => setDeleteModal(null)} className="text-sm text-muted hover:text-primary transition-colors">
+              <button
+                onClick={() => setDeleteModal(null)}
+                className="text-sm text-muted hover:text-primary transition-colors"
+              >
                 Cancel
               </button>
               <Button variant="danger" size="sm" onClick={confirmDelete}>

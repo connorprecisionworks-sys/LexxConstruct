@@ -8,9 +8,10 @@
 
 import OpenAI from "openai";
 import type { DepositionAnalysis } from "@/types";
+import { MODELS } from "@/lib/ai/models";
 
 const client = new OpenAI();
-const MODEL = "gpt-4o";
+const MODEL = MODELS.fast;
 
 // ~6000 chars ≈ 8k tokens; 500-char overlap
 const CHUNK_SIZE = 6000;
@@ -61,7 +62,7 @@ type PartialAnalysis = Omit<DepositionAnalysis, "summary" | "followUpQuestions">
 async function extractChunk(text: string, chunkIndex: number): Promise<PartialAnalysis> {
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 2048,
+    max_completion_tokens: 2048,
     messages: [
       { role: "system", content: CHUNK_SYSTEM_PROMPT },
       { role: "user", content: `${CHUNK_PROMPT}\n\nTranscript portion ${chunkIndex + 1}:\n${text}` },
@@ -262,7 +263,7 @@ async function synthesize(
 
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 1024,
+    max_completion_tokens: 1024,
     messages: [
       { role: "system", content: SYNTHESIS_SYSTEM_PROMPT },
       { role: "user", content: `Deposition data:\n${contextData}` },

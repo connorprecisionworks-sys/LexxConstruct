@@ -1,3 +1,25 @@
+const _ACTION_LABELS: Record<string, string> = {
+  matter_created:          "Matter created",
+  matter_deleted:          "Matter deleted",
+  document_uploaded:       "Document uploaded",
+  document_processed:      "Document processed",
+  draft_generated:         "Draft generated",
+  draft_deleted:           "Draft deleted",
+  draft_finalized:         "Draft finalized",
+  note_added:              "Note added",
+  flag_added:              "Flag added",
+  case_intelligence_built: "Case intelligence built",
+  chat_message_sent:       "Chat message sent",
+  draft_assist_applied:    "Assistant edit applied",
+};
+
+export function formatActivityAction(action: string): string {
+  return (
+    _ACTION_LABELS[action] ??
+    action.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+  );
+}
+
 export function timeAgo(dateStr: string): string {
   const now = Date.now();
   const then = new Date(dateStr).getTime();

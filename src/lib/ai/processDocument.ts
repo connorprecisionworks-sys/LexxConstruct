@@ -1,11 +1,14 @@
 import OpenAI from "openai";
 import type { ProcessingResult, KeyIssue, ExtractedFact, TimelineEvent, MissingInfo, Flag } from "@/types";
 import { chunkText } from "@/lib/parsers/extractText";
+import { MODELS } from "@/lib/ai/models";
 
 const client = new OpenAI();
-const MODEL = "gpt-4o";
+const MODEL = MODELS.fast;
 const DISCLAIMER = "This output is not legal advice and requires attorney review before any action is taken.";
-const SYSTEM_PROMPT = `You are a legal analyst for a construction litigation firm. You analyze documents from construction project disputes — contracts, schedules, RFIs, change orders, daily logs, correspondence, expert reports, and meeting minutes. Your job is to extract structured information that will help attorneys build their case.
+const SYSTEM_PROMPT = `You are a legal document analyst. You always respond with valid JSON only. Never include markdown, code fences, or explanatory text.
+
+You analyze documents from construction project disputes — contracts, schedules, RFIs, change orders, daily logs, correspondence, expert reports, and meeting minutes. Your job is to extract structured information that will help attorneys build their case.
 
 When analyzing a document, identify:
 - A concise summary of what the document is and what it says, focused on the facts relevant to a construction dispute.
@@ -14,7 +17,7 @@ When analyzing a document, identify:
 - Timeline events — dated events mentioned in the document, each with a date and a short description. Include both events the document describes and the document's own date.
 - Missing information — important information that a construction litigator would expect in a document like this but that is absent. Examples: a change order without a cost impact, an RFI without a response date, a daily log without weather conditions, a pay application without backup, a notice letter without a specific contract provision cited.
 
-Never provide legal advice. Never speculate beyond what the document says. Use construction industry terminology accurately: change order, RFI, pay application, substantial completion, notice to proceed, critical path, liquidated damages, retainage, differing site conditions, force majeure. Respond only with valid JSON, no markdown, no explanation.`;
+Never provide legal advice. Never speculate beyond what the document says. Use construction industry terminology accurately: change order, RFI, pay application, substantial completion, notice to proceed, critical path, liquidated damages, retainage, differing site conditions, force majeure.`;
 
 const ANALYSIS_PROMPT = `Analyze this construction project document and return JSON with this exact structure:
 {
@@ -24,10 +27,6 @@ const ANALYSIS_PROMPT = `Analyze this construction project document and return J
   "timeline": [{ "id": "event_1", "date": "string", "description": "string", "significance": "critical|important|contextual" }],
   "missingInformation": [{ "id": "missing_1", "description": "string", "importance": "required|helpful|optional" }]
 }`;
-
-function cleanJson(raw: string): string {
-  return raw.replace(/^```json\s*/i, "").replace(/```\s*$/i, "").trim();
-}
 
 interface ChunkResult {
   summary: string;
@@ -40,7 +39,8 @@ interface ChunkResult {
 async function processChunk(text: string, documentName: string, chunkIndex: number): Promise<ChunkResult> {
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 4096,
+    max_completion_tokens: 4096,
+    response_format: { type: "json_object" },
     messages: [
       { role: "system", content: SYSTEM_PROMPT },
       { role: "user", content: `${ANALYSIS_PROMPT}\nDocument name: ${documentName} (section ${chunkIndex + 1})\nDocument content:\n${text}` },
@@ -48,7 +48,7 @@ async function processChunk(text: string, documentName: string, chunkIndex: numb
   });
 
   const raw = response.choices[0].message.content || "";
-  const parsed = JSON.parse(cleanJson(raw));
+  const parsed = JSON.parse(raw);
 
   return {
     summary: parsed.summary || "",
@@ -72,7 +72,7 @@ function deduplicateByField<T>(items: T[], field: keyof T): T[] {
 async function unifiedSummary(chunkSummaries: string[], documentName: string): Promise<string> {
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 512,
+    max_completion_tokens: 512,
     messages: [
       { role: "system", content: "You are a construction litigation analyst. Combine the following section summaries into one unified 2-3 sentence summary of the entire document, focused on facts relevant to a construction dispute. Respond with only the summary text, no JSON." },
       { role: "user", content: `Document: ${documentName}\n\nSection summaries:\n${chunkSummaries.map((s, i) => `${i + 1}. ${s}`).join("\n")}` },

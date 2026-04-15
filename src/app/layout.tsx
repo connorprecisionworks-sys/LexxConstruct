@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { DiagnosticShortcut } from "@/components/DiagnosticShortcut";
+import { CommandPalette } from "@/components/CommandPalette";
 import { LayoutShell } from "@/components/LayoutShell";
 
 const inter = Inter({
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body className="min-h-full flex font-sans bg-background text-primary">
         <LayoutShell>{children}</LayoutShell>
         <DiagnosticShortcut />
+        <CommandPalette />
       </body>
     </html>
   );

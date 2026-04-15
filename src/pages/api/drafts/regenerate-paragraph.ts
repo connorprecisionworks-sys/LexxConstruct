@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
+import { MODELS } from "@/lib/ai/models";
 
 const client = new OpenAI();
 
@@ -33,8 +34,8 @@ ${selectedText}
 Generate 3 distinct rewrites of the selected text.`;
 
   const response = await client.chat.completions.create({
-    model: "gpt-4o",
-    max_tokens: 1024,
+    model: MODELS.premium,
+    max_completion_tokens: 1024,
     messages: [
       { role: "system", content: systemPrompt },
       { role: "user", content: userPrompt },

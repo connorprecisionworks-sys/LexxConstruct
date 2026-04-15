@@ -8,7 +8,7 @@
 
 import type { NextApiRequest, NextApiResponse } from "next";
 import { extractPdfText } from "@/lib/extraction/pdfExtract";
-import { extractText } from "@/lib/parsers/extractText";
+import { extractText, truncateForProcessing } from "@/lib/parsers/extractText";
 import { processDocument } from "@/lib/ai/processDocument";
 import { detectDeposition } from "@/lib/ai/detectDeposition";
 import { processDeposition } from "@/lib/ai/processDeposition";
@@ -19,6 +19,31 @@ import type { Document, ProcessingResult, DepositionAnalysis, Flag } from "@/typ
 export const config = { api: { bodyParser: false } };
 
 const DISCLAIMER = "This output is not legal advice and requires attorney review before any action is taken.";
+const MAX_FILE_SIZE = 50 * 1024 * 1024; // 50 MB
+const ALLOWED_EXTENSIONS = new Set(["pdf", "docx", "txt"]);
+const AI_TIMEOUT_MS = 120_000; // 2 minutes
+
+/** Wraps a promise with a timeout that rejects with a descriptive message. */
+function withTimeout<T>(promise: Promise<T>, ms: number, message: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error(message)), ms)),
+  ]);
+}
+
+/**
+ * Validates that extracted text is long enough to be useful.
+ * Throws a user-facing error if not.
+ */
+function validateExtractedText(text: string, fileName: string): void {
+  if (!text || text.trim().length < 100) {
+    throw new Error(
+      `Could not extract readable text from "${fileName}". ` +
+      `If this is a scanned document, OCR will be attempted automatically. ` +
+      `If the problem persists, ensure the PDF is not password-protected or corrupted.`
+    );
+  }
+}
 
 function buildDepositionResult(
   depo: DepositionAnalysis,
@@ -100,7 +125,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!matterId) return res.status(400).json({ error: "matterId is required" });
 
     const f = file as { originalFilename?: string; filepath: string; size: number };
-    const ext = f.originalFilename?.split(".").pop()?.toLowerCase() as "pdf" | "docx" | "txt";
+
+    // ── File size check ─────────────────────────────────────────────────────
+    if (f.size > MAX_FILE_SIZE) {
+      return res.status(400).json({
+        error: "File size exceeds 50MB limit. Please split the document into smaller sections.",
+      });
+    }
+
+    const rawExt = f.originalFilename?.split(".").pop()?.toLowerCase() ?? "";
+
+    // ── File type validation ────────────────────────────────────────────────
+    if (!ALLOWED_EXTENSIONS.has(rawExt)) {
+      return res.status(400).json({
+        error: "Unsupported file type. Lexx accepts PDF, Word (.docx), and text files.",
+      });
+    }
+
+    const ext = rawExt as "pdf" | "docx" | "txt";
     const docId = crypto.randomUUID();
     const storageKey = `${docId}.${ext}`;
     const fileName = f.originalFilename || "document";
@@ -115,12 +157,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     let text: string;
     let extractionMethod: Document["extractionMethod"];
     let ocrConfidence: number | undefined;
+    let ocrQuality: Document["ocrQuality"];
 
     if (ext === "pdf") {
       const pdfResult = await extractPdfText(buffer);
       text = pdfResult.text;
       extractionMethod = pdfResult.method;
       ocrConfidence = pdfResult.confidence;
+      ocrQuality = pdfResult.ocrQuality;
 
       if (pdfResult.warnings.length > 0) {
         console.warn(`[Lexx] PDF extraction warnings for "${fileName}":`, pdfResult.warnings);
@@ -154,6 +198,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       extractionMethod = undefined; // not applicable for DOCX/TXT
     }
 
+    // ── Validate extracted text ─────────────────────────────────────────────
+    validateExtractedText(text, fileName);
+
+    // ── Truncate large documents ────────────────────────────────────────────
+    text = truncateForProcessing(text);
+
     // ── Detect deposition ───────────────────────────────────────────────────
     const isDeposition = detectDeposition(fileName, text.slice(0, 2000));
     const documentKind: "standard" | "deposition" = isDeposition ? "deposition" : "standard";
@@ -170,6 +220,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       documentKind,
       extractionMethod,
       ocrConfidence,
+      ocrQuality,
       notes: "",
       uploadedAt: new Date().toISOString(),
     };
@@ -187,12 +238,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     let result: ProcessingResult;
 
+    const TIMEOUT_MESSAGE =
+      "Document processing timed out. This may indicate an unusually large document. " +
+      "Please try splitting it into smaller sections.";
+
     if (documentKind === "deposition") {
       console.log(`[Lexx] Detected deposition: ${fileName}`);
-      const depoAnalysis = await processDeposition(text, fileName);
+      const depoAnalysis = await withTimeout(
+        processDeposition(text, fileName),
+        AI_TIMEOUT_MS,
+        TIMEOUT_MESSAGE
+      );
       result = buildDepositionResult(depoAnalysis, docId);
     } else {
-      result = await processDocument(text, document.fileName);
+      result = await withTimeout(
+        processDocument(text, document.fileName),
+        AI_TIMEOUT_MS,
+        TIMEOUT_MESSAGE
+      );
       result.documentId = docId;
 
       // Set documentId on auto-promoted flags; dedup against any existing flags on re-process

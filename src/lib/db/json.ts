@@ -21,6 +21,8 @@ import type {
   Activity,
   ChatConversation,
   ChatMessage,
+  DraftAssistantConversation,
+  DraftAssistantMessage,
 } from "@/types";
 
 const DATA_DIR = path.join(process.cwd(), "data");
@@ -58,6 +60,12 @@ function readCollection<T>(name: string): T[] {
   } catch {
     return [];
   }
+}
+
+/** Lazy migration: ensure every Draft has a status field. */
+function normalizeDraft(d: Draft): Draft {
+  if (d.status) return d;
+  return { ...d, status: "draft" };
 }
 
 function writeCollection<T>(name: string, data: T[]): void {
@@ -112,9 +120,13 @@ export const JsonAdapter: StorageAdapter = {
     }
 
     // Collect draft IDs so we can cascade to draft_versions
+    // Include both document-scoped drafts and matter-level drafts (documentId: null, matterId set)
     const draftIds = new Set(
       readCollection<Draft>("drafts")
-        .filter((d) => docIds.has(d.documentId))
+        .filter((d) =>
+          (d.documentId != null && docIds.has(d.documentId)) ||
+          d.matterId === matterId
+        )
         .map((d) => d.id)
     );
 
@@ -123,8 +135,11 @@ export const JsonAdapter: StorageAdapter = {
     writeCollection("documents", readCollection<Document>("documents").filter((d) => d.matterId !== matterId));
     writeCollection("processing_results", readCollection<ProcessingResult>("processing_results").filter((r) => !docIds.has(r.documentId)));
     writeCollection("threads", readCollection<WorkspaceThread>("threads").filter((t) => !docIds.has(t.documentId)));
-    writeCollection("drafts", readCollection<Draft>("drafts").filter((d) => !docIds.has(d.documentId)));
+    writeCollection("drafts", readCollection<Draft>("drafts").filter((d) =>
+      !((d.documentId != null && docIds.has(d.documentId)) || d.matterId === matterId)
+    ));
     writeCollection("draft_versions", readCollection<DraftVersion>("draft_versions").filter((v) => !draftIds.has(v.draftId)));
+    writeCollection("draft_assistant_conversations", readCollection<DraftAssistantConversation>("draft_assistant_conversations").filter((c) => !draftIds.has(c.draftId)));
     writeCollection("chat_conversations", readCollection<ChatConversation>("chat_conversations").filter((c) => c.matterId !== matterId));
     writeCollection("activities", readCollection<Activity>("activities").filter((a) => a.matterId !== matterId));
   },
@@ -274,14 +289,45 @@ export const JsonAdapter: StorageAdapter = {
   },
 
   // ── Drafts ───────────────────────────────────────────────
+
+  /** Lazily infer matterId for legacy drafts that predate the matter-level workspace. */
   async getDraft(id) {
-    return readCollection<Draft>("drafts").find((d) => d.id === id) ?? null;
+    const draft = readCollection<Draft>("drafts").find((d) => d.id === id);
+    if (!draft) return null;
+    if (!draft.matterId && draft.documentId) {
+      const doc = readCollection<Document>("documents").find((d) => d.id === draft.documentId);
+      if (doc) draft.matterId = doc.matterId;
+    }
+    return normalizeDraft(draft);
   },
   async listDrafts(documentId) {
-    return readCollection<Draft>("drafts").filter((d) => d.documentId === documentId);
+    const drafts = readCollection<Draft>("drafts").filter((d) => d.documentId === documentId);
+    const doc = readCollection<Document>("documents").find((d) => d.id === documentId);
+    if (doc) {
+      for (const draft of drafts) {
+        if (!draft.matterId) draft.matterId = doc.matterId;
+      }
+    }
+    return drafts.map(normalizeDraft);
+  },
+  async listDraftsForMatter(matterId) {
+    const allDrafts = readCollection<Draft>("drafts");
+    const docs = readCollection<Document>("documents").filter((d) => d.matterId === matterId);
+    const docToMatter = new Map(docs.map((d) => [d.id, matterId]));
+
+    return allDrafts.filter((d) => {
+      if (d.matterId === matterId) return true;
+      if (!d.matterId && d.documentId && docToMatter.has(d.documentId)) return true;
+      return false;
+    }).map((d) => {
+      const migrated = (!d.matterId && d.documentId && docToMatter.has(d.documentId))
+        ? { ...d, matterId }
+        : d;
+      return normalizeDraft(migrated);
+    });
   },
   async listAllDrafts() {
-    return readCollection<Draft>("drafts");
+    return readCollection<Draft>("drafts").map(normalizeDraft);
   },
   async saveDraft(draft) {
     const all = readCollection<Draft>("drafts");
@@ -314,6 +360,35 @@ export const JsonAdapter: StorageAdapter = {
     writeCollection("drafts", all);
     const versionCount = readCollection<DraftVersion>("draft_versions").filter((v) => v.draftId === id).length;
     return { draft: all[idx], versionCount };
+  },
+
+  async deleteDraft(draftId) {
+    writeCollection("draft_versions", readCollection<DraftVersion>("draft_versions").filter((v) => v.draftId !== draftId));
+    writeCollection("draft_assistant_conversations", readCollection<DraftAssistantConversation>("draft_assistant_conversations").filter((c) => c.draftId !== draftId));
+    writeCollection("drafts", readCollection<Draft>("drafts").filter((d) => d.id !== draftId));
+  },
+  async renameDraft(draftId, title) {
+    const all = readCollection<Draft>("drafts");
+    const idx = all.findIndex((d) => d.id === draftId);
+    if (idx < 0) throw new Error("Draft not found");
+    all[idx].title = title;
+    all[idx].updatedAt = new Date().toISOString();
+    writeCollection("drafts", all);
+    return normalizeDraft(all[idx]);
+  },
+  async setDraftStatus(draftId, status) {
+    const all = readCollection<Draft>("drafts");
+    const idx = all.findIndex((d) => d.id === draftId);
+    if (idx < 0) throw new Error("Draft not found");
+    all[idx].status = status;
+    if (status === "final") {
+      all[idx].finalizedAt = new Date().toISOString();
+    } else {
+      delete all[idx].finalizedAt;
+    }
+    all[idx].updatedAt = new Date().toISOString();
+    writeCollection("drafts", all);
+    return normalizeDraft(all[idx]);
   },
 
   // ── Draft Versions ────────────────────────────────────────
@@ -393,5 +468,39 @@ export const JsonAdapter: StorageAdapter = {
     const all = readCollection<ChatConversation>("chat_conversations");
     const filtered = all.filter((c) => c.id !== conversationId);
     writeCollection("chat_conversations", filtered);
+  },
+
+  // ── Draft Assistant Conversations ─────────────────────────
+  async getDraftAssistantConversation(draftId) {
+    return readCollection<DraftAssistantConversation>("draft_assistant_conversations").find((c) => c.draftId === draftId) ?? null;
+  },
+  async saveDraftAssistantMessage(draftId, matterId, message) {
+    const all = readCollection<DraftAssistantConversation>("draft_assistant_conversations");
+    const now = new Date().toISOString();
+    const idx = all.findIndex((c) => c.draftId === draftId);
+    if (idx >= 0) {
+      all[idx].messages.push(message);
+      all[idx].updatedAt = now;
+      writeCollection("draft_assistant_conversations", all);
+      return all[idx];
+    } else {
+      const conv: DraftAssistantConversation = {
+        id: crypto.randomUUID(),
+        draftId,
+        matterId,
+        messages: [message],
+        createdAt: now,
+        updatedAt: now,
+      };
+      all.push(conv);
+      writeCollection("draft_assistant_conversations", all);
+      return conv;
+    }
+  },
+  async clearDraftAssistantConversation(draftId) {
+    writeCollection(
+      "draft_assistant_conversations",
+      readCollection<DraftAssistantConversation>("draft_assistant_conversations").filter((c) => c.draftId !== draftId)
+    );
   },
 };

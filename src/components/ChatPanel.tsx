@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { timeAgo } from "@/lib/utils";
-import type { ChatMessage, Citation, SuggestedAction } from "@/types";
+import { PenLine, ArrowUpRight, Eye } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import type { ChatMessage, Citation, ChatAction } from "@/types";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface ConvSummary {
@@ -279,12 +281,55 @@ export function ChatPanel({
     if (selectedConvId === id) { setSelectedConvId(null); setMessages([]); }
   }
 
-  function handleSuggestedAction(action: SuggestedAction) {
+  function getActionIcon(type: string) {
+    if (type?.startsWith("draft_")) return <PenLine className="h-4 w-4 flex-shrink-0" />;
+    if (type?.startsWith("view_")) return <Eye className="h-4 w-4 flex-shrink-0" />;
+    return <ArrowUpRight className="h-4 w-4 flex-shrink-0" />;
+  }
+
+  function buildActionUrl(action: ChatAction): string | null {
+    const id = action.matterId ?? matterId;
+    const maybePrefill = (action as Record<string, unknown>).prefill;
+    const prefill = typeof maybePrefill === "string" && maybePrefill ? `&prefill=${encodeURIComponent(maybePrefill)}` : "";
+    switch (action.type) {
+      case "draft_claim_letter":
+      case "draft_mediation_brief":
+      case "draft_motion_outline":
+      case "draft_demand_letter":
+      case "draft_case_summary":
+      case "draft_client_update":
+      case "draft_delay_narrative":
+      case "draft_defect_summary":
+        return `/matters/${id}/workspace?action=${action.type}${prefill}`;
+      case "draft_deposition_outline": {
+        const docId = "documentId" in action ? action.documentId : null;
+        if (!docId) { console.warn("[Lexx Chat] draft_deposition_outline missing documentId"); return null; }
+        return `/matters/${id}/documents/${docId}/workspace?action=deposition_outline${prefill}`;
+      }
+      case "open_draft": {
+        const draftId = "draftId" in action ? action.draftId : null;
+        if (!draftId) { console.warn("[Lexx Chat] open_draft missing draftId"); return null; }
+        return `/matters/${id}/workspace?draftId=${draftId}`;
+      }
+      case "open_document": {
+        const docId = "documentId" in action ? action.documentId : null;
+        if (!docId) { console.warn("[Lexx Chat] open_document missing documentId"); return null; }
+        return `/matters/${id}/documents/${docId}`;
+      }
+      case "open_workspace":
+        return `/matters/${id}/workspace`;
+      case "open_matter":
+        return `/matters/${id}`;
+      default:
+        return null;
+    }
+  }
+
+  function handleSuggestedAction(action: ChatAction) {
+    const url = buildActionUrl(action);
+    if (!url) return;
     if (!standalone) onClose();
-    if (action.actionType === "generate_draft") router.push(`/matters/${matterId}`);
-    else if (action.actionType === "view_document" && action.params.documentId)
-      router.push(`/matters/${matterId}/documents/${action.params.documentId}`);
-    else if (action.actionType === "view_flag") router.push(`/matters/${matterId}`);
+    router.push(url);
   }
 
   const filteredConvs = conversations.filter((c) =>
@@ -396,13 +441,26 @@ export function ChatPanel({
                       </div>
                     )}
                     {(msg.suggestedActions ?? []).length > 0 && (
-                      <div className="flex flex-wrap gap-2 px-1">
-                        {(msg.suggestedActions ?? []).map((action, i) => (
-                          <button key={i} onClick={() => handleSuggestedAction(action)} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-accent text-accent rounded-[6px] hover:bg-accent-light transition-colors">
-                            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                            {action.label}
-                          </button>
-                        ))}
+                      <div className="flex flex-col gap-[var(--space-2,8px)] px-1 pt-[var(--space-3,12px)] border-t border-[var(--color-border-subtle,#E5E7EB)]">
+                        <p className="text-xs text-[var(--color-ink-muted)] text-[var(--color-ink-muted,#6B7280)]">Suggested next steps</p>
+                        {(msg.suggestedActions ?? []).map((action, i) => {
+                          const url = buildActionUrl(action);
+                          const disabled = url === null;
+                          return (
+                            <Button
+                              key={i}
+                              variant="secondary"
+                              size="base"
+                              disabled={disabled}
+                              onClick={() => handleSuggestedAction(action)}
+                              title={disabled ? "Action incomplete" : undefined}
+                              className="justify-start"
+                            >
+                              {getActionIcon(action.type)}
+                              {action.label || "Open"}
+                            </Button>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

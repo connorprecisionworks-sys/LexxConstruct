@@ -47,6 +47,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Load matter flags
   const flags = await db.listFlagsForMatter(conversation.matterId);
 
+  // Load drafts for this matter (fresh per request, no cache)
+  let matterDrafts: import("@/types").Draft[] = [];
+  try {
+    matterDrafts = await db.listDraftsForMatter(conversation.matterId);
+  } catch {
+    // Non-fatal — chat works without draft context
+  }
+
+  // Build docId → fileName map for draft source resolution
+  const docNameMap = new Map(allDocs.map((d) => [d.id, d.fileName]));
+
   // Save user message first (so it appears immediately if UI polls)
   const userMessage = await db.appendChatMessage(conversationId, {
     role: "user",
@@ -62,7 +73,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       matter,
       readyDocs,
       resultsMap,
-      flags as Array<Flag & { documentFileName: string }>
+      flags as Array<Flag & { documentFileName: string }>,
+      matterDrafts,
+      docNameMap
     );
   } catch (aiErr) {
     console.error("[Lexx Chat] AI error:", aiErr);

@@ -293,5 +293,222 @@
     "id": "97c13031-f788-464b-8049-09b11d45c423",
     "createdAt": "2026-04-10T04:18:33.303Z",
     "updatedAt": "2026-04-10T15:18:03.254Z"
+  },
+  {
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "name": "New conversation",
+    "messages": [
+      {
+        "role": "user",
+        "content": "what have I been working on",
+        "id": "f062e327-80d0-49ff-ae41-6a07920a6440",
+        "createdAt": "2026-04-15T12:34:37.041Z"
+      },
+      {
+        "role": "assistant",
+        "content": "You have been working on the following drafts in this matter:\n\n1. **Deposition Summary Memo**: A draft memorandum summarizing the deposition of Raymond Castillo, focusing on the improper application of waterproofing, the need for remediation, and Change Order No. 11. Last edited on April 9, 2026.\n\n2. **Draft Claim Letter**: You have several drafts of claim letters addressing formal claims related to the Bayshore Tower project. These letters are drafted to different parties involved in the project and were last edited on April 14, 2026.\n\n3. **Draft Client Update**: This was finalized and provides an update on the ongoing construction dispute, emphasizing the non-compliance issue with the waterproofing membrane. It was finalized on April 14, 2026.",
+        "citations": [],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 4723,
+          "completion": 187,
+          "total": 4910
+        },
+        "id": "3857dce9-14bd-40c4-9314-8b89f3227b12",
+        "createdAt": "2026-04-15T12:34:41.778Z"
+      },
+      {
+        "role": "user",
+        "content": "what should I make next",
+        "id": "885474ef-158e-4e81-b926-448a90e2ee25",
+        "createdAt": "2026-04-15T12:34:50.073Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Given the current status of the matter, it might be useful to consider drafting:\n\n1. **Formal Notice of Dispute**: If not already done, a formal notice detailing the issues and discrepancies related to the waterproofing installation, including documentation inconsistencies and any procedural lapses identified in the deposition.\n\n2. **Draft Motion for Discovery**: If more information or documents are needed, especially regarding concrete strength verification or approval dates related to the change order, a motion to compel discovery could be necessary.\n\n3. **Summary of Documented Issues**: A consolidated report summarizing the key issues, contradictions, and missing information identified so far. This report could help in strategizing the next steps or preparing for further negotiations or hearings.\n\nThese drafts would align well with the ongoing concerns highlighted in the documents. If any of these options interest you, you can begin drafting in the workspace.",
+        "citations": [],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 4895,
+          "completion": 177,
+          "total": 5072
+        },
+        "id": "bc5573c8-3b8e-4611-b2df-a50dc6bc65ce",
+        "createdAt": "2026-04-15T12:34:54.389Z"
+      },
+      {
+        "role": "user",
+        "content": "can we do the formal notice of dispute",
+        "id": "a14416d7-46a1-4153-8429-e2a43f95106a",
+        "createdAt": "2026-04-15T12:35:05.322Z"
+      },
+      {
+        "role": "assistant",
+        "content": "Given the current status of the matter, it might be useful to consider drafting:\n\n1. **Formal Notice of Dispute**: If not already done, a formal notice detailing the issues and discrepancies related to the waterproofing installation, including documentation inconsistencies and any procedural lapses identified in the deposition.\n\n2. **Draft Motion for Discovery**: If more information or documents are needed, especially regarding concrete strength verification or approval dates related to the change order, a motion to compel discovery could be necessary.\n\n3. **Summary of Documented Issues**: A consolidated report summarizing the key issues, contradictions, and missing information identified so far. This report could help in strategizing the next steps or preparing for further negotiations or hearings.\n\nThese drafts would align well with the ongoing concerns highlighted in the documents. If any of these options interest you, you can begin drafting in the workspace.",
+        "citations": [],
+        "suggestedActions": [
+          {
+            "title": "Draft Formal Notice of Dispute",
+            "action": "Open the workspace to begin drafting a formal notice of dispute based on the information and guidance provided."
+          }
+        ],
+        "tokenUsage": {
+          "prompt": 5090,
+          "completion": 1139,
+          "total": 6229
+        },
+        "id": "c2ada20d-1e6c-4443-8b86-01700368f93a",
+        "createdAt": "2026-04-15T12:35:22.947Z"
+      },
+      {
+        "role": "user",
+        "content": "what should I do now?",
+        "id": "5645e20a-cccd-48f7-a2b2-1a21f43f6944",
+        "createdAt": "2026-04-15T12:52:20.104Z"
+      },
+      {
+        "role": "assistant",
+        "content": "To move forward with the matter, consider the following actions:\n\n1. **Draft a Formal Notice of Dispute**: This would formally document the discrepancies related to the waterproofing installation and other procedural lapses. It would also detail the issues raised in Raymond Castillo's deposition regarding documentation and awareness gaps.\n\n2. **Review and Analyze Key Evidence**: Examine flagged admissions and contradictions in the deposition of Raymond Castillo to frame the dispute context effectively. This will aid in refining your claims and preparing for any potential negotiations.\n\n3. **Pursue Further Document Collection**: If certain elements such as the concrete strength verification or specific approval dates for the change order are still missing, consider planning to gather this information. Tools such as a motion for discovery might be necessary.\n\nIf you decide on any of these actions, you can easily start the drafting process or review documents in the workspace. Let me know if you would like to draft the formal notice of dispute or need assistance with another specific task!",
+        "citations": [],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 5779,
+          "completion": 198,
+          "total": 5977
+        },
+        "id": "ff45202f-eaad-4331-8ff7-cd76a1380e33",
+        "createdAt": "2026-04-15T12:52:24.717Z"
+      },
+      {
+        "role": "user",
+        "content": "yes lets start the formal notice of dispute",
+        "id": "f2010479-0b96-4a41-9fff-477def7e84ff",
+        "createdAt": "2026-04-15T12:52:40.594Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I can't create drafts directly from this chat, but I can guide you on where to begin. Here's how you could proceed within the workspace:\n\n1. **Outline the Key Disputes**: Start with the primary issues you've identified, such as the improper waterproofing installation, discrepancies in documentation, and procedural lapses noted in Raymond Castillo's deposition.\n\n2. **Summarize the Supporting Evidence**: Include key admissions from the deposition, the change order details, and any documented non-compliance issues from Daily Logs or RFIs.\n\n3. **State the Claims and Relief Sought**: Clearly articulate what you are seeking as a resolution, whether it's rectification of the work, financial compensation, or another form of redress.\n\n4. **Attach Relevant Documents**: Reference or attach documents that support your claims, such as the Change Order, RFI, and key sections of the deposition.\n\nIf you have any specific aspects you want to start with or if you need assistance with gathering supporting information from the documents, feel free to ask!",
+        "citations": [],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 5994,
+          "completion": 210,
+          "total": 6204
+        },
+        "id": "c88942ac-4ed9-476c-99df-3519784e52a2",
+        "createdAt": "2026-04-15T12:52:44.664Z"
+      },
+      {
+        "role": "user",
+        "content": "lets make the formal notice of dispute",
+        "id": "7f03ab47-39b1-4c7e-9c11-4dbe881169fb",
+        "createdAt": "2026-04-15T12:53:16.386Z"
+      },
+      {
+        "role": "assistant",
+        "content": "I can't create drafts directly from this chat, but I can guide you on how to draft a Formal Notice of Dispute in the workspace. Here's a suggested structure and some key points you can include based on the documents:\n\n1. **Introduction and Parties**:\n   - Identify the parties involved in the dispute (Bayshore Tower Condominium vs. Meridian Construction Group, LLC).\n   - Briefly introduce the project context.\n\n2. **Description of Dispute**:\n   - Explain the waterproofing membrane issue, noting the premature application as documented in the Daily Log of August 12, 2022, and Raymond Castillo's acknowledgment of the underlying problems by August 2022 [cite:1][cite:2].\n   - Mention the details about the Change Order No. 11, highlighting the costs incurred and the non-compliance factor [cite:3].\n\n3. **Evidence of Issues**:\n   - Include key admissions from Raymond Castillo about documentation failures and schedule pressures.\n   - Reference the RFI No. 47 that outlines the waterproofing requirements and the conflict in the detail, which needed remediation [cite:4].\n\n4. **Claims and Corrective Actions**:\n   - Clearly state the relief or corrective actions you are seeking, such as reimbursement for additional costs, and assurance of compliance in future tasks.\n   - Demand for any missing approvals and verifications, particularly around concrete strength testing.\n\n5. **Conclusion**:\n   - Conclude with a formal request for cooperation in resolving the issue and invite an official response within a specified timeframe.\n\nIf you need to reference specific parts of the documents for direct quotes or additional clarity, you can extract snippets using the document excerpt tool. Once you have a draft, you can further refine it in the workspace.\n\nWould you like me to assist in retrieving specific excerpts from the documents to assist in this drafting process?",
+        "citations": [
+          {
+            "id": "cite:1",
+            "documentId": "c8e2cdd3-3712-482e-a2ff-6f04351980c6",
+            "documentName": "Daily_Log_2022-08-12.txt",
+            "excerpt": "Notably, the project is behind schedule, and there is an issue with Coastal applying a waterproofing membrane prematurely.",
+            "location": ""
+          },
+          {
+            "id": "cite:2",
+            "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+            "documentName": "Deposition_of_Raymond_Castillo.txt",
+            "excerpt": "Witness was aware of problems around August 2022 regarding membrane application before concrete cured.",
+            "location": ""
+          },
+          {
+            "id": "cite:3",
+            "documentId": "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32",
+            "documentName": "Change_Order_011.txt",
+            "excerpt": "The document is Change Order Number 11 for the Bayshore Tower Condominium project, issued by Meridian Construction Group, LLC.",
+            "location": ""
+          },
+          {
+            "id": "cite:4",
+            "documentId": "4c276f43-f81f-4dee-9c5e-362aecbc4160",
+            "documentName": "RFI_047_Waterproofing_Detail.txt",
+            "excerpt": "This document outlines a conflict in the waterproofing detail for balcony-to-wall transitions between architectural and manufacturer's requirements.",
+            "location": ""
+          }
+        ],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 6217,
+          "completion": 376,
+          "total": 6593
+        },
+        "id": "fb33de7d-d826-4c33-9db4-4033d3565302",
+        "createdAt": "2026-04-15T12:53:32.613Z"
+      },
+      {
+        "role": "user",
+        "content": "what should I do next?",
+        "id": "ea1edf55-e506-4dde-b3ca-77b5a98f249b",
+        "createdAt": "2026-04-15T13:17:33.734Z"
+      },
+      {
+        "role": "assistant",
+        "content": "To effectively proceed with this matter, here are some steps you could consider:\n\n1. **Draft the Formal Notice of Dispute**: Begin drafting the notice using the framework provided earlier. Make sure to include key issues, evidence, and the desired resolution.\n\n2. **Gather Supporting Documents**: Collect all relevant documents that will support your claims in the notice of dispute, such as Change Order No. 11, deposition excerpts from Raymond Castillo, and any daily logs that mention the waterproofing issues.\n\n3. **Review for Missing Information**: Identify any gaps or missing information in your evidence. For instance, you might need verification data for concrete strength or specific approval dates for the change order.\n\n4. **Consult with the Team**: Discuss your findings and approach with your legal team to align strategies and ensure all critical points are covered in the notice.\n\n5. **Prepare for Mediation or Negotiation**: If there is potential for resolving the dispute without litigation, you may want to prepare a mediation brief or outline negotiation points.\n\nIf you would like to start drafting the notice or need further assistance, please let me know!",
+        "citations": [],
+        "suggestedActions": [],
+        "tokenUsage": {
+          "prompt": 6914,
+          "completion": 227,
+          "total": 7141
+        },
+        "id": "2aebb8b8-5aea-4cd0-b294-bfcca3efe3cf",
+        "createdAt": "2026-04-15T13:17:39.128Z"
+      },
+      {
+        "role": "user",
+        "content": "lets do the formal notice of dispute",
+        "id": "2d6ed8ae-a11c-4eaf-9a0a-b3044ae13b29",
+        "createdAt": "2026-04-15T13:17:48.228Z"
+      },
+      {
+        "role": "assistant",
+        "content": "With the excerpts retrieved, you have key information to include in the Formal Notice of Dispute:\n\n1. **Change Order No. 11 Details**:\n   - The original contract sum for the Bayshore Tower project was $48,750,000, with a net change by previous Change Orders amounting to $1,247,000. The contract sum before this change order was $49,997,000, and the new contract sum after the Change Order No. 11 is $50,083,930 [cite:1].\n\n2. **Admissions from Raymond Castillo's Deposition**:\n   - During his deposition, Raymond Castillo admitted to observing waterproofing installation issues in August 2022. However, he stated that he is not a waterproofing expert and was relying on his general construction knowledge. He admitted it’s possible that what he observed might not have been an actual defect [cite:2].\n\nNow you can start drafting the Formal Notice of Dispute, incorporating these details:\n\n- **Introduction**: Clearly state the dispute surrounding waterproofing issues, noting financial implications due to Change Order No. 11.\n- **Issue Description**: Detail the admissions made by Mr. Castillo about the observed issues, emphasizing his lack of expertise in waterproofing.\n- **Financial Impact**: Include the figures from the Change Order to highlight the financial impact on the project.\n- **Resolution Sought**: Specify what actions or compensation are being requested to resolve these issues.\n\nI can guide you to the workspace to start this draft. Would you like to proceed with drafting?",
+        "citations": [
+          {
+            "id": "cite:1",
+            "documentId": "3abfbe35-79f4-40bb-9f2d-e1ac5b6dad32",
+            "documentName": "Change_Order_011.txt",
+            "excerpt": "Original Contract Sum: $ 48,750,000.00, Net change by previous Change Orders: $ 1,247,000.00, Contract Sum prior to this Change Order: $ 49,997,000.00, This Change Order: $ 86,930.00, New Contract Sum: $ 50,083,930.00",
+            "location": ""
+          },
+          {
+            "id": "cite:2",
+            "documentId": "dce6ae3d-54d7-4d7e-827e-00b57fde503c",
+            "documentName": "Deposition_of_Raymond_Castillo.txt",
+            "excerpt": "When you observed the waterproofing installation in August of 2022, you are not a waterproofing expert, correct?",
+            "location": ""
+          }
+        ],
+        "suggestedActions": [
+          {
+            "type": "draft_claim_letter",
+            "label": "Draft a Formal Notice of Dispute",
+            "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+            "prefill": "Prepare a notice detailing waterproofing issues, financial impacts of Change Order No. 11, and admissions from Raymond Castillo's deposition."
+          }
+        ],
+        "tokenUsage": {
+          "prompt": 7559,
+          "completion": 317,
+          "total": 7876
+        },
+        "id": "4005772b-0f24-4c0e-9ab1-9509ed20de8c",
+        "createdAt": "2026-04-15T13:18:01.979Z"
+      }
+    ],
+    "id": "17cdf67d-025f-48c7-aeb6-19e6b8685a23",
+    "createdAt": "2026-04-15T12:34:36.947Z",
+    "updatedAt": "2026-04-15T13:18:01.979Z"
   }
 ]

@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useImperativeHandle, useEffect } from "react";
+import { forwardRef, useImperativeHandle, useEffect, useRef } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import { BubbleMenu } from "@tiptap/react/menus";
 import StarterKit from "@tiptap/starter-kit";
@@ -9,17 +9,30 @@ import Placeholder from "@tiptap/extension-placeholder";
 export interface DraftEditorHandle {
   replaceRange: (from: number, to: number, text: string) => void;
   getPlainText: () => string;
+  /** Append a new paragraph at the end of the document. */
+  appendParagraph: (text: string) => void;
+  /** True if the editor currently has a non-empty selection. */
+  hasSelection: () => boolean;
+  /** Replace the current selection with text. Returns false if there is no selection. */
+  replaceSelection: (text: string) => boolean;
+  replaceCurrentParagraph: (text: string) => void;
+  appendAfterCurrentParagraph: (text: string) => void;
+  insertAtEndOfCurrentParagraph: (text: string) => void;
 }
 
 interface Props {
   value: string;
   onChange: (html: string) => void;
   onRegenerateParagraph?: (selectedText: string, from: number, to: number) => void;
+  onCursorChange?: (info: { paragraphText: string; hasSelection: boolean; selectionText: string }) => void;
   editable?: boolean;
 }
 
 const DraftEditor = forwardRef<DraftEditorHandle, Props>(
-  ({ value, onChange, onRegenerateParagraph, editable = true }, ref) => {
+  ({ value, onChange, onRegenerateParagraph, onCursorChange, editable = true }, ref) => {
+    const onCursorChangeRef = useRef(onCursorChange);
+    useEffect(() => { onCursorChangeRef.current = onCursorChange; });
+
     const editor = useEditor({
       immediatelyRender: false,
       extensions: [
@@ -30,6 +43,16 @@ const DraftEditor = forwardRef<DraftEditorHandle, Props>(
       editable,
       onUpdate: ({ editor }) => {
         onChange(editor.getHTML());
+      },
+      onSelectionUpdate: ({ editor }) => {
+        const cb = onCursorChangeRef.current;
+        if (!cb) return;
+        const { from, to } = editor.state.selection;
+        const { $from } = editor.state.selection;
+        const paragraphText = $from.parent.textContent ?? "";
+        const hasSelection = from !== to;
+        const selectionText = hasSelection ? editor.state.doc.textBetween(from, to, " ") : "";
+        cb({ paragraphText, hasSelection, selectionText });
       },
     });
 
@@ -54,6 +77,50 @@ const DraftEditor = forwardRef<DraftEditorHandle, Props>(
           .run();
       },
       getPlainText: () => editor?.getText() ?? "",
+      appendParagraph: (text: string) => {
+        if (!editor) return;
+        const end = editor.state.doc.content.size - 1;
+        editor.chain().focus().insertContentAt(end, `<p>${text}</p>`).run();
+      },
+      hasSelection: () => {
+        if (!editor) return false;
+        const { from, to } = editor.state.selection;
+        return from !== to;
+      },
+      replaceSelection: (text: string) => {
+        if (!editor) return false;
+        const { from, to } = editor.state.selection;
+        if (from === to) return false;
+        editor
+          .chain()
+          .focus()
+          .deleteRange({ from, to })
+          .insertContentAt(from, { type: "text", text })
+          .run();
+        return true;
+      },
+      replaceCurrentParagraph: (text: string) => {
+        if (!editor) return;
+        const { $from } = editor.state.selection;
+        const start = $from.start();
+        const end = $from.end();
+        editor.chain().focus()
+          .deleteRange({ from: start, to: end })
+          .insertContentAt(start, { type: "text", text })
+          .run();
+      },
+      appendAfterCurrentParagraph: (text: string) => {
+        if (!editor) return;
+        const { $from } = editor.state.selection;
+        const afterPos = $from.after();
+        editor.chain().focus().insertContentAt(afterPos, `<p>${text}</p>`).run();
+      },
+      insertAtEndOfCurrentParagraph: (text: string) => {
+        if (!editor) return;
+        const { $from } = editor.state.selection;
+        const end = $from.end();
+        editor.chain().focus().insertContentAt(end, { type: "text", text: ` ${text}` }).run();
+      },
     }));
 
     return (

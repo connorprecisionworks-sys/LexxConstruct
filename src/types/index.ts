@@ -46,6 +46,8 @@ export interface Matter {
   firmId: string;
   status: MatterStatus;
   notes: string;
+  representedParty?: string; // which party the attorney represents — anchors draft perspective
+  pinned?: boolean;          // pinned matters float to the top of the table
   caseIntelligence?: CaseIntelligenceResult;
   createdAt: string;
   updatedAt: string;
@@ -60,6 +62,7 @@ export interface Document {
   storageKey: string;
   extractionMethod?: "text" | "ocr" | "mixed" | "failed";
   ocrConfidence?: number; // 0–100, only populated when OCR was used
+  ocrQuality?: "low" | "high"; // present when OCR ran; low = confidence 60–75, high = >75
   status: DocumentStatus;
   processingStage?: ProcessingStage;
   documentKind?: "standard" | "deposition";
@@ -157,13 +160,16 @@ export interface WorkspaceThread { id: string; documentId: string; title: string
 
 export interface Draft {
   id: string;
-  documentId: string;
+  documentId: string | null; // null for matter-level drafts (no specific source document)
+  matterId?: string;         // set on all new drafts; lazily inferred for legacy records
   threadId?: string;
   title: string;
   content: string;
   contentFormat?: "html";
   draftType: WorkspaceActionType;
   disclaimer: string;
+  status: "draft" | "final";
+  finalizedAt?: string;      // ISO timestamp, set when status transitions to "final"
   createdAt: string;
   updatedAt: string;
 }
@@ -181,7 +187,7 @@ export interface Firm { id: string; name: string; plan: "trial" | "pro" | "enter
 
 export interface Activity {
   id: string;
-  action: "matter_created" | "document_uploaded" | "document_processed" | "draft_generated" | "note_added" | "flag_added" | "case_intelligence_built" | "chat_message_sent" | "matter_deleted";
+  action: "matter_created" | "document_uploaded" | "document_processed" | "draft_generated" | "note_added" | "flag_added" | "case_intelligence_built" | "chat_message_sent" | "matter_deleted" | "draft_deleted" | "draft_finalized" | "draft_assist_applied";
   entityName: string;
   matterId: string;
   timestamp: string;
@@ -196,6 +202,23 @@ export interface Citation {
   location?: string;
 }
 
+export type ChatAction = { label: string } & (
+  | { type: "draft_claim_letter"; matterId: string; prefill?: string }
+  | { type: "draft_mediation_brief"; matterId: string; prefill?: string }
+  | { type: "draft_motion_outline"; matterId: string; prefill?: string }
+  | { type: "draft_demand_letter"; matterId: string; prefill?: string }
+  | { type: "draft_case_summary"; matterId: string; prefill?: string }
+  | { type: "draft_client_update"; matterId: string; prefill?: string }
+  | { type: "draft_delay_narrative"; matterId: string; prefill?: string }
+  | { type: "draft_defect_summary"; matterId: string; prefill?: string }
+  | { type: "draft_deposition_outline"; matterId: string; documentId: string; prefill?: string }
+  | { type: "open_draft"; matterId: string; draftId: string }
+  | { type: "open_document"; matterId: string; documentId: string }
+  | { type: "open_workspace"; matterId: string }
+  | { type: "open_matter"; matterId: string }
+);
+
+/** @deprecated Use ChatAction */
 export interface SuggestedAction {
   label: string;
   actionType: "generate_draft" | "view_document" | "view_flag";
@@ -207,9 +230,33 @@ export interface ChatMessage {
   role: "user" | "assistant" | "system";
   content: string;
   citations?: Citation[];
-  suggestedActions?: SuggestedAction[];
+  suggestedActions?: ChatAction[];
   createdAt: string;
   tokenUsage?: { prompt: number; completion: number; total: number };
+}
+
+export interface SuggestedEdit {
+  id: string;
+  type: "add_paragraph" | "rewrite_paragraph" | "add_citation";
+  description: string;
+  proposedText: string;
+}
+
+export interface DraftAssistantMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  createdAt: string;
+  suggestedEdits?: SuggestedEdit[];
+}
+
+export interface DraftAssistantConversation {
+  id: string;
+  draftId: string;
+  matterId: string;
+  messages: DraftAssistantMessage[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ChatConversation {

@@ -24,6 +24,8 @@ import type {
   Activity,
   ChatConversation,
   ChatMessage,
+  DraftAssistantConversation,
+  DraftAssistantMessage,
 } from "@/types";
 
 export interface StorageAdapter {
@@ -64,9 +66,13 @@ export interface StorageAdapter {
   // Drafts
   getDraft(id: string): Promise<Draft | null>;
   listDrafts(documentId: string): Promise<Draft[]>;
+  listDraftsForMatter(matterId: string): Promise<Draft[]>;
   listAllDrafts(): Promise<Draft[]>;
   saveDraft(draft: Draft): Promise<Draft>;
   updateDraft(id: string, content: string, snapshotLabel?: string): Promise<{ draft: Draft; versionCount: number }>;
+  deleteDraft(draftId: string): Promise<void>;
+  renameDraft(draftId: string, title: string): Promise<Draft>;
+  setDraftStatus(draftId: string, status: "draft" | "final"): Promise<Draft>;
 
   // Draft Versions
   saveDraftVersion(version: DraftVersion): Promise<DraftVersion>;
@@ -84,4 +90,9 @@ export interface StorageAdapter {
   appendChatMessage(conversationId: string, message: Omit<ChatMessage, "id" | "createdAt">): Promise<ChatMessage>;
   renameConversation(conversationId: string, name: string): Promise<ChatConversation>;
   deleteConversation(conversationId: string): Promise<void>;
+
+  // Draft Assistant Conversations
+  getDraftAssistantConversation(draftId: string): Promise<DraftAssistantConversation | null>;
+  saveDraftAssistantMessage(draftId: string, matterId: string, message: DraftAssistantMessage): Promise<DraftAssistantConversation>;
+  clearDraftAssistantConversation(draftId: string): Promise<void>;
 }

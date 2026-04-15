@@ -37,10 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (req.method === "PATCH") {
-    const { id, status, notes } = req.body;
+    const { id, status, notes, representedParty } = req.body;
     if (!id) return res.status(400).json({ error: "id is required" });
     if (status) await db.updateMatterStatus(id, status);
     if (notes !== undefined) await db.updateMatterNotes(id, notes);
+    if (representedParty !== undefined) {
+      const m = await db.getMatter(id);
+      if (m) await db.saveMatter({ ...m, representedParty: representedParty || undefined, updatedAt: new Date().toISOString() });
+    }
     const matter = await db.getMatter(id);
     return res.status(200).json(matter);
   }

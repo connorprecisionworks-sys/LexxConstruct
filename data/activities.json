@@ -1,61 +1,5 @@
 [
   {
-    "id": "95d2e162-0fc7-4c0b-a599-64e1626007e1",
-    "action": "matter_created",
-    "entityName": "Maria Gonzalez V Thomas",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:04:23.344Z"
-  },
-  {
-    "id": "697cdc0f-8a8f-487e-9d0c-07d38ed55480",
-    "action": "document_uploaded",
-    "entityName": "lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:04:35.615Z"
-  },
-  {
-    "id": "eeee89d3-531f-41d3-93f6-247e51731f0b",
-    "action": "document_processed",
-    "entityName": "lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:04:45.293Z"
-  },
-  {
-    "id": "c35af072-d722-46ad-b638-6424d8fc5a6e",
-    "action": "flag_added",
-    "entityName": "lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:05:26.296Z"
-  },
-  {
-    "id": "993084e3-a2ad-4f4d-8a3f-f07ab90beb91",
-    "action": "flag_added",
-    "entityName": "lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:06:10.235Z"
-  },
-  {
-    "id": "549cd5c3-7c50-41f9-8941-6edd4a4b8287",
-    "action": "draft_generated",
-    "entityName": "Draft Demand Letter — lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:07:19.189Z"
-  },
-  {
-    "id": "370e91e1-fc8e-4ca6-9ea7-161c14581cf1",
-    "action": "draft_generated",
-    "entityName": "Draft Demand Letter — lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T12:11:33.363Z"
-  },
-  {
-    "id": "515e5ba8-d75e-4761-8873-c427898aaa50",
-    "action": "draft_generated",
-    "entityName": "Draft Demand Letter — lexx_test_demand_letter.docx",
-    "matterId": "8cc9d981-6d9f-49cb-b68e-574d7a9be6d8",
-    "timestamp": "2026-04-09T13:01:31.836Z"
-  },
-  {
     "id": "aba3d49e-67d5-442a-806f-1e65d0916c78",
     "action": "matter_created",
     "entityName": "Acme Construction V bayside school district",
@@ -397,5 +341,295 @@
     "meta": {
       "conversationId": "97c13031-f788-464b-8049-09b11d45c423"
     }
+  },
+  {
+    "id": "5f670e6d-aa8f-465b-8f9d-78f5d19b3e61",
+    "action": "case_intelligence_built",
+    "entityName": "Palmetto Ridge v. Keystone",
+    "matterId": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "timestamp": "2026-04-14T15:46:38.563Z"
+  },
+  {
+    "id": "b95a2374-8a85-4e36-a8ea-e9c94ac59c29",
+    "action": "case_intelligence_built",
+    "entityName": "Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T15:47:51.578Z"
+  },
+  {
+    "id": "4b119020-0795-4595-a428-5e10e6039b94",
+    "action": "draft_generated",
+    "entityName": "Draft Claim Letter — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T16:21:20.634Z"
+  },
+  {
+    "id": "860a146a-cfc5-42e6-932a-28d7eb723908",
+    "action": "draft_generated",
+    "entityName": "Draft Claim Letter — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T16:29:14.698Z"
+  },
+  {
+    "id": "0f42e14a-909e-4994-9789-cf9ce7e5486a",
+    "action": "matter_created",
+    "entityName": "Test PDF OCR",
+    "matterId": "89b3c2c3-1d53-4104-b36a-7e5851ce206f",
+    "timestamp": "2026-04-14T16:37:33.388Z"
+  },
+  {
+    "id": "4a1e57f0-ffe9-457c-8de7-8ee8767fc986",
+    "action": "document_uploaded",
+    "entityName": "2629824.pdf",
+    "matterId": "89b3c2c3-1d53-4104-b36a-7e5851ce206f",
+    "timestamp": "2026-04-14T16:45:46.314Z"
+  },
+  {
+    "id": "68b414c8-532e-4629-90d0-0cd570973b2f",
+    "action": "document_processed",
+    "entityName": "2629824.pdf",
+    "matterId": "89b3c2c3-1d53-4104-b36a-7e5851ce206f",
+    "timestamp": "2026-04-14T16:45:59.883Z"
+  },
+  {
+    "id": "f94be701-c4e8-451e-96c7-d99e0ce9d8ef",
+    "action": "case_intelligence_built",
+    "entityName": "Acme Construction V bayside school district",
+    "matterId": "66079567-0951-44e7-8bfb-df5ebeed978b",
+    "timestamp": "2026-04-14T18:16:37.910Z"
+  },
+  {
+    "id": "15f648bd-bd6f-40f9-8330-3e4ca6e4375a",
+    "action": "draft_generated",
+    "entityName": "Draft Deposition Outline — Acme Construction V bayside school district",
+    "matterId": "66079567-0951-44e7-8bfb-df5ebeed978b",
+    "timestamp": "2026-04-14T18:17:42.134Z"
+  },
+  {
+    "id": "e79ecdc2-5168-42bf-bc4a-340e7c9f672a",
+    "action": "draft_generated",
+    "entityName": "Draft Deposition Outline — Palmetto Ridge v. Keystone",
+    "matterId": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "timestamp": "2026-04-14T18:37:46.725Z"
+  },
+  {
+    "id": "9d221f19-3fe5-4b7d-971e-1ae4a7ec1899",
+    "action": "draft_finalized",
+    "entityName": "Draft Deposition Outline",
+    "matterId": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "timestamp": "2026-04-14T18:38:31.739Z"
+  },
+  {
+    "id": "176d62c7-5ea4-4760-832d-729e15df47a2",
+    "action": "draft_generated",
+    "entityName": "Draft Summary — Palmetto Ridge v. Keystone",
+    "matterId": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "timestamp": "2026-04-14T18:38:48.654Z"
+  },
+  {
+    "id": "70746dab-9850-4ead-9925-1b0ca0034a40",
+    "action": "draft_finalized",
+    "entityName": "Draft Summary",
+    "matterId": "c1863f80-f898-454d-b37d-e96d2e6357d3",
+    "timestamp": "2026-04-14T18:40:03.861Z"
+  },
+  {
+    "id": "e8154af6-4d39-48fb-a948-53820035c18b",
+    "action": "draft_generated",
+    "entityName": "Witness Prep Outline — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:44:30.274Z"
+  },
+  {
+    "id": "aefa2111-8159-492f-8ebf-cbfd033c3173",
+    "action": "draft_finalized",
+    "entityName": "Witness Prep Outline",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:54:04.909Z"
+  },
+  {
+    "id": "6a891bac-9a5a-4ec7-a7d7-d772f6c07b72",
+    "action": "draft_finalized",
+    "entityName": "Witness Prep Outline",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:54:23.652Z"
+  },
+  {
+    "id": "05ac9eaa-db52-4958-a2cc-80067e53e31b",
+    "action": "draft_finalized",
+    "entityName": "Witness Prep Outline",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:54:46.722Z"
+  },
+  {
+    "id": "fd09d338-8c7b-49a0-b7eb-59a0cd0cd122",
+    "action": "draft_deleted",
+    "entityName": "Witness Prep Outline",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:54:48.998Z"
+  },
+  {
+    "id": "340dbccb-c15a-4daa-8be3-34ad104dd85a",
+    "action": "draft_deleted",
+    "entityName": "Draft Claim Letter",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T18:54:52.975Z"
+  },
+  {
+    "id": "4556f807-57ca-4d2d-8e77-bd10ad911057",
+    "action": "draft_generated",
+    "entityName": "Draft Claim Letter — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T19:11:23.120Z"
+  },
+  {
+    "id": "ef186d46-08f2-4c5b-b3d0-2bbe94f0cb70",
+    "action": "draft_generated",
+    "entityName": "Draft Client Update — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T19:11:31.711Z"
+  },
+  {
+    "id": "84691d6b-2a40-4369-8de6-56c8fd727a47",
+    "action": "draft_finalized",
+    "entityName": "Draft Client Update",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T19:11:36.447Z"
+  },
+  {
+    "id": "d7add768-d70c-4ab1-a6b0-28f242bd71a2",
+    "action": "draft_generated",
+    "entityName": "Draft Claim Letter — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-14T19:11:54.486Z"
+  },
+  {
+    "id": "99233385-8ed4-4279-bed2-ac7679ee6f8a",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:34:41.779Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "80b78b88-be1c-4fd7-8001-496116d4915a",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:34:54.391Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "5f751bb3-5c98-4e82-9dad-eb8c247ba673",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:35:22.948Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "06229eed-dab4-4f2b-a972-ac65ca6bc1b6",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:52:24.717Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "3aad6f8f-69b9-4e5c-bb01-f928affcbc92",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:52:44.665Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "acc38182-8ef2-4db9-b573-6cea1fd7f452",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T12:53:32.614Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "35cef714-c347-4b61-bfb8-deab6b448fec",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T13:17:39.129Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "dd65a4ce-32f9-431d-bb3a-37a304081683",
+    "action": "chat_message_sent",
+    "entityName": "New conversation",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T13:18:01.980Z",
+    "meta": {
+      "conversationId": "17cdf67d-025f-48c7-aeb6-19e6b8685a23"
+    }
+  },
+  {
+    "id": "49145c5f-f7d1-4901-951a-37aa57d3dbfb",
+    "action": "draft_generated",
+    "entityName": "Draft Claim Letter — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T13:18:13.300Z"
+  },
+  {
+    "id": "add99d4b-3237-4a06-b775-454567d50de1",
+    "action": "draft_generated",
+    "entityName": "Cross Examination Outline — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T14:09:27.359Z"
+  },
+  {
+    "id": "a25f9603-ca8a-45c2-8f1a-6ca232ef74d7",
+    "action": "draft_assist_applied",
+    "entityName": "Cross-Examination Outline",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T14:12:19.877Z"
+  },
+  {
+    "id": "ce48b5a5-9eb5-4c8c-807a-29670afc792c",
+    "action": "draft_generated",
+    "entityName": "Draft Defect Summary — Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T14:26:26.996Z"
+  },
+  {
+    "id": "6fb2e35a-148c-4c7b-bdf2-9629ea85c3a1",
+    "action": "draft_assist_applied",
+    "entityName": "Defect Summary",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T14:29:24.129Z"
+  },
+  {
+    "id": "dbaa1942-f675-4bd9-8005-9302883b7ec3",
+    "action": "case_intelligence_built",
+    "entityName": "Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T17:11:56.241Z"
+  },
+  {
+    "id": "fbe72230-7c63-4c61-af42-f8c137fbac83",
+    "action": "case_intelligence_built",
+    "entityName": "Bayshore Tower V meridian Construction",
+    "matterId": "fff554d1-b7c4-4c4e-b4bf-ee6be0f7351c",
+    "timestamp": "2026-04-15T17:18:16.141Z"
   }
 ]

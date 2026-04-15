@@ -1,8 +1,9 @@
 import OpenAI from "openai";
-import type { ProcessingResult, WorkspaceActionType, WorkspaceMessage } from "@/types";
+import type { ProcessingResult, WorkspaceActionType, WorkspaceMessage, Matter, Document, CaseIntelligenceResult } from "@/types";
+import { MODELS } from "@/lib/ai/models";
 
 const client = new OpenAI();
-const MODEL = "gpt-4o";
+const MODEL = MODELS.premium;
 const DISCLAIMER = "This output is not legal advice and requires attorney review before any action is taken.";
 
 // ── Q&A system prompt ─────────────────────────────────────────────────────────
@@ -21,7 +22,9 @@ RULES: Only answer based on the document. Use construction industry terminology 
 // ── Draft system prompt ───────────────────────────────────────────────────────
 // Base for all draft generation. The model writes as the attorney, never as an
 // assistant. Placeholders fill gaps — no narration of absence, no refusals.
-const DRAFT_SYSTEM_PROMPT = `You are drafting a construction litigation document on behalf of an attorney. Produce only the document itself — no commentary, no apologies, no disclaimers, no explanations of what you are doing. When specific information is not available in the source document, use bracketed placeholders like [Contract Number], [Attorney Name], or [Project Owner] — never narrate the absence or explain that information is missing. Write in the confident, direct voice of an experienced construction litigator. Do not hedge. Do not refuse. Do not add "this is not legal advice" to the output. Do not begin with "Here is a draft" or any other preamble — start immediately with the document content. The attorney will review and finalize before sending. Use construction industry terminology accurately: change order, RFI, pay application, substantial completion, notice to proceed, critical path, liquidated damages, retainage, differing site conditions.
+const DRAFT_SYSTEM_PROMPT = `You are drafting a construction litigation document on behalf of an attorney. You are drafting on behalf of the REPRESENTED PARTY identified in the matter context. Every draft must be written from their perspective. If they are a plaintiff, draft as the plaintiff. If they are a defendant, draft as the defendant. If they are a claimant, respondent, owner, contractor, or subcontractor — draft from that specific role. Never draft from the opposing party's perspective. If the represented party is unclear from the context, note this explicitly with a bracketed placeholder [REPRESENTED PARTY UNCLEAR — PLEASE VERIFY] rather than guessing.
+
+Produce only the document itself — no commentary, no apologies, no disclaimers, no explanations of what you are doing. When specific information is not available in the source document, use bracketed placeholders like [Contract Number], [Attorney Name], or [Project Owner] — never narrate the absence or explain that information is missing. Write in the confident, direct voice of an experienced construction litigator. Do not hedge. Do not refuse. Do not add "this is not legal advice" to the output. Do not begin with "Here is a draft" or any other preamble — start immediately with the document content. The attorney will review and finalize before sending. Use construction industry terminology accurately: change order, RFI, pay application, substantial completion, notice to proceed, critical path, liquidated damages, retainage, differing site conditions.
 
 FORMAT RULES — CRITICAL:
 - Output valid HTML using <p> tags for every paragraph and section block.
@@ -30,8 +33,11 @@ FORMAT RULES — CRITICAL:
 - Never output one continuous block of text. Never use plain newlines as paragraph separators — use <p> tags only.
 - Do not output any markdown, asterisks, or backticks. Output only HTML.`;
 
-function buildDraftContext(r: ProcessingResult): string {
-  let ctx = `SOURCE DOCUMENT FACTS:
+function buildDraftContext(r: ProcessingResult, representedParty?: string): string {
+  const partyLine = representedParty
+    ? `REPRESENTED PARTY: ${representedParty} — you are drafting on behalf of this party\n`
+    : "";
+  let ctx = `${partyLine}SOURCE DOCUMENT FACTS:
 Summary: ${r.summary}
 Key Issues: ${r.keyIssues.map((i) => `- [${i.severity.toUpperCase()}] ${i.title}: ${i.description}`).join("\n")}
 Extracted Facts: ${r.extractedFacts.map((f) => `- [${f.category.toUpperCase()}] ${f.fact}`).join("\n")}
@@ -140,6 +146,118 @@ Write in plain English the client can understand — no legal jargon. Be direct.
   witness_prep_outline: `Draft a witness preparation outline covering: background topics, key facts to remember, prior statements made, likely areas of attack by opposing counsel, and recommended framing for difficult questions. Coaching tone. Output HTML with <h3> for sections, <p> for narrative, <ul><li> for points.`,
 };
 
+// ── Matter-level draft context ────────────────────────────────────────────────
+
+/** Rough token estimator (4 chars ≈ 1 token). */
+function est(s: string): number { return Math.ceil(s.length / 4); }
+
+export function buildMatterDraftContext(
+  matter: Matter,
+  docsWithResults: Array<{ doc: Document; result: ProcessingResult | null }>,
+  caseIntelligence?: CaseIntelligenceResult | null
+): string {
+  const TOKEN_BUDGET = 10000;
+  let used = 0;
+
+  const caseTypeLabel = (matter.caseType ?? "construction_general").replace(/_/g, " ");
+
+  const partyLine = matter.representedParty
+    ? `REPRESENTED PARTY: ${matter.representedParty} — you are drafting on behalf of this party\n`
+    : `REPRESENTED PARTY: [NOT SET — use [REPRESENTED PARTY UNCLEAR — PLEASE VERIFY] placeholder if perspective is ambiguous]\n`;
+
+  const header = `MATTER: ${matter.name}
+CLIENT: ${matter.clientName}
+${partyLine}CASE TYPE: ${caseTypeLabel}
+STATUS: ${matter.status}
+DOCUMENTS IN SCOPE: ${docsWithResults.length}
+
+`;
+  used += est(header);
+  const sections: string[] = [header];
+
+  for (const { doc, result } of docsWithResults) {
+    if (!result) {
+      const stub = `DOCUMENT: "${doc.fileName}" (${doc.documentKind ?? "standard"}) — not yet processed\n\n`;
+      sections.push(stub);
+      used += est(stub);
+      continue;
+    }
+
+    const docHeader = `DOCUMENT: "${doc.fileName}" (${doc.documentKind ?? "standard"})\nSummary: ${result.summary}\n`;
+    used += est(docHeader);
+    let block = docHeader;
+
+    // Key issues
+    if (result.keyIssues.length > 0 && used < TOKEN_BUDGET * 0.75) {
+      const issues = `Key Issues:\n${result.keyIssues.map((i) => `- [${i.severity.toUpperCase()}] ${i.title}: ${i.description}`).join("\n")}\n`;
+      if (used + est(issues) < TOKEN_BUDGET * 0.8) { block += issues; used += est(issues); }
+    }
+
+    // Extracted facts (cap at 12 per doc)
+    if (result.extractedFacts.length > 0 && used < TOKEN_BUDGET * 0.82) {
+      const facts = `Extracted Facts:\n${result.extractedFacts.slice(0, 12).map((f) => `- [${f.category.toUpperCase()}] ${f.fact}`).join("\n")}\n`;
+      if (used + est(facts) < TOKEN_BUDGET * 0.86) { block += facts; used += est(facts); }
+    }
+
+    // Timeline (first to cut)
+    if (result.timeline.length > 0 && used < TOKEN_BUDGET * 0.87) {
+      const timeline = `Timeline:\n${result.timeline.slice(0, 8).map((t) => `- ${t.date}: ${t.description}`).join("\n")}\n`;
+      if (used + est(timeline) < TOKEN_BUDGET * 0.9) { block += timeline; used += est(timeline); }
+    }
+
+    // Missing info (second to cut)
+    if (result.missingInformation.length > 0 && used < TOKEN_BUDGET * 0.9) {
+      const missing = `Missing Information:\n${result.missingInformation.slice(0, 5).map((m) => `- [${m.importance.toUpperCase()}] ${m.description}`).join("\n")}\n`;
+      if (used + est(missing) < TOKEN_BUDGET * 0.92) { block += missing; used += est(missing); }
+    }
+
+    // Deposition analysis
+    if (result.depositionAnalysis && used < TOKEN_BUDGET * 0.92) {
+      const d = result.depositionAnalysis;
+      const admissions = d.keyAdmissions.slice(0, 5).map((a) => `- [${a.significance.toUpperCase()}] ${a.topic}: ${a.admission}${a.pageReference ? ` (${a.pageReference})` : ""}`).join("\n");
+      const inconsistencies = d.inconsistencies.slice(0, 3).map((i) => `- ${i.topic}: ${i.description}`).join("\n") || "None identified";
+      const depo = `Deposition — ${d.witnessName} (${d.witnessRole}), ${d.depositionDate}\nKey Admissions:\n${admissions}\nInconsistencies:\n${inconsistencies}\n`;
+      if (used + est(depo) < TOKEN_BUDGET * 0.94) { block += depo; used += est(depo); }
+    }
+
+    sections.push(block + "\n");
+  }
+
+  // Case intelligence if available
+  if (caseIntelligence && used < TOKEN_BUDGET * 0.93) {
+    let ci = `\nCASE INTELLIGENCE:\nOverview: ${caseIntelligence.caseOverview}\n`;
+    if (caseIntelligence.factConsistency.length > 0) {
+      ci += `Contradictions:\n${caseIntelligence.factConsistency.slice(0, 3).map((f) => `- ${f.topic}: "${f.documentA.statement}" vs "${f.documentB.statement}"`).join("\n")}\n`;
+    }
+    if (used + est(ci) < TOKEN_BUDGET * 0.96) { sections.push(ci); used += est(ci); }
+  }
+
+  return sections.join("");
+}
+
+export async function generateMatterDraft(
+  actionType: WorkspaceActionType,
+  matter: Matter,
+  docsWithResults: Array<{ doc: Document; result: ProcessingResult | null }>,
+  caseIntelligence?: CaseIntelligenceResult | null,
+  additionalContext?: string
+): Promise<string> {
+  const instruction = DRAFT_INSTRUCTIONS[actionType] || "Draft a professional construction litigation document summarizing the key facts, parties, and issues from the matter documents. Use bracketed placeholders for any missing information.";
+  const context = additionalContext ? `\nAdditional context from attorney: ${additionalContext}` : "";
+  const matterContext = buildMatterDraftContext(matter, docsWithResults, caseIntelligence);
+
+  const response = await client.chat.completions.create({
+    model: MODEL,
+    max_completion_tokens: 4096,
+    messages: [
+      { role: "system", content: DRAFT_SYSTEM_PROMPT },
+      { role: "user", content: `${matterContext}\n\n${instruction}${context}` },
+    ],
+  });
+
+  return (response.choices[0].message.content || "").trim();
+}
+
 export async function askQuestion(
   question: string,
   processingResult: ProcessingResult,
@@ -150,24 +268,25 @@ export async function askQuestion(
     ...history.map((m) => ({ role: m.role as "user" | "assistant", content: m.content })),
     { role: "user", content: question },
   ];
-  const response = await client.chat.completions.create({ model: MODEL, max_tokens: 1024, messages });
+  const response = await client.chat.completions.create({ model: MODEL, max_completion_tokens: 1024, messages });
   return (response.choices[0].message.content || "").trim();
 }
 
 export async function generateDraft(
   actionType: WorkspaceActionType,
   processingResult: ProcessingResult,
-  additionalContext?: string
+  additionalContext?: string,
+  representedParty?: string
 ): Promise<string> {
   const instruction = DRAFT_INSTRUCTIONS[actionType] || "Draft a professional construction litigation document summarizing the key facts, parties, and issues from the source document. Use bracketed placeholders for any missing information.";
   const context = additionalContext ? `\nAdditional context from attorney: ${additionalContext}` : "";
 
   const response = await client.chat.completions.create({
     model: MODEL,
-    max_tokens: 4096,
+    max_completion_tokens: 4096,
     messages: [
       { role: "system", content: DRAFT_SYSTEM_PROMPT },
-      { role: "user", content: `${buildDraftContext(processingResult)}\n\n${instruction}${context}` },
+      { role: "user", content: `${buildDraftContext(processingResult, representedParty)}\n\n${instruction}${context}` },
     ],
   });
 
